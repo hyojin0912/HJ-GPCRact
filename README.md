@@ -56,6 +56,7 @@ GPCRact/
     ├── data_loader.py
     ├── model.py
     ├── modules.py
+    ├── train.py
     └── utils.py
 ```
 
