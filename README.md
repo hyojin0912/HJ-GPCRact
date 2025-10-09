@@ -33,6 +33,7 @@ We recommend using Conda to manage the environment.
 
 ---
 ## 📁 Repository Structure
+```plaintext
 GPCRact/
 ├── .gitignore
 ├── LICENSE
@@ -46,12 +47,15 @@ GPCRact/
 ├── data/
 │   ├── README.md             # Description of data format and sources
 │   ├── raw/                  # Raw data from ChEMBL, GPCRdb
-│   └── processed/            # Processed data for training and analysis
+│   └── processed/            # Processed graph data for training
 │
 ├── models/                 # Pre-trained model checkpoints
 │   └── GPCRact_pretrained.pth
 │
-└── src/                    # Source code
+├── notebooks/              # Jupyter notebooks for tutorials and analysis
+│   └── 1_inference_tutorial.ipynb
+│
+└── src/                    # Source code for the GPCRact model and utilities
     ├── data_loader.py
     ├── model.py
     ├── modules.py
