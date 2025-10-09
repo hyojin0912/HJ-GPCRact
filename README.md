@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 
-This repository provides the official implementation and data for the paper: **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"** (Son & Yi, *Briefings in Bioinformatics*, 2025).
+This repository provides the official implementation and data for the paper: **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"** .
 
 [Link to Paper] ---
 
@@ -15,7 +15,8 @@ Accurate prediction of ligand-induced activity for G-protein-coupled receptors (
 
 <p align="center">
   <img src="httpse-Based Graph Modeling**
-<img width="800" alt="Figure: The hierarchical architecture of the GPCRact framework" src="https://github.com/user-attachments/assets/92c35049-996f-4643-ad93-32b26be9fc4f" />
+img width="2055" height="2209" alt="Figure2" src="https://github.com/user-attachments/assets/72ca9f60-2823-48f1-839b-75bf3bc4f79a
+" />
   <br>
   <em>Figure: The hierarchical architecture of the GPCRact framework, which models ligand binding and subsequent allosteric signal propagation in two distinct stages.</em>
 </p>
