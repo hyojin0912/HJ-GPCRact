@@ -17,8 +17,8 @@ We recommend using Conda to manage the environment.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/your-username/GPCRact.git](https://github.com/your-username/GPCRact.git)
-    cd GPCRact
+    git clone [https://github.com/hyojin0912/HJ-GPCRact.git](https://github.com/hyojin0912/HJ-GPCRact.git)
+    cd HJ-GPCRact
     ```
 
 2.  **Create and activate the Conda environment:**
