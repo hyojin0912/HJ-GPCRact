@@ -1,0 +1,34 @@
+# --- Experiment Setup ---
+SEED: 0
+DEVICE: "cuda"  # "cuda" if torch.cuda.is_available() else "cpu"
+PROTEIN_GRAPH_TYPE: "ca_furthest_enhanced"
+EPOCHS: 200 # Max epochs, will be stopped by EarlyStopping
+
+# --- Data Paths ---
+DATA_DIR: "/home/hyojin0912/Activity/Final/input/activity/"
+PROTEIN_GRAPH_DIR: "../Data/Protein_Graphs_PyG/"
+LIGAND_GRAPH_DIR: "../Data/Ligand_Graphs_PyG/"
+CACHE_DIR: "./data/activity/cache/"
+
+# --- Model Hyperparameters ---
+HIDDEN_DIM: 128
+PROTEIN_LAYERS: 4
+PROPAGATION_ATTENTION_LAYERS: 3
+ATTENTION_HEADS: 4
+PROTEIN_TYPE: "gated_residual"
+LIGAND_LAYERS: 4
+LIGAND_TYPE: "gated_residual"
+ELEMENT_EMBEDDING_DIM: 8
+
+# --- Training Parameters ---
+LEARNING_RATE: 0.0001
+DROPOUT: 0.4
+WEIGHT_DECAY: 0.00001
+GPU_BATCH_SIZE: 16
+ACCUMULATION_STEPS: 32
+EARLY_STOPPING_PATIENCE: 15
+W_FN_BIND: 1.5
+
+# --- Output Paths ---
+RESULTS_DIR: "./results/activity/"
+MODEL_SAVE_DIR: "./models/activity/"
