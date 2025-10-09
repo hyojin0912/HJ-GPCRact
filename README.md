@@ -34,7 +34,6 @@ We recommend using Conda to manage the environment.
 ---
 ## 📁 Repository Structure
 ```markdown
-```plaintext
 GPCRact/
 ├── .gitignore
 ├── LICENSE
