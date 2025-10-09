@@ -1,0 +1,1478 @@
+Entry,PDB_ID,n_ligand,n_agonist,n_antagonist,Classification
+O00222,6BT5,4,0,2,w antagonist
+O00590,8GO9,0,0,0,Apo
+O00590,8J8V,0,0,0,Apo
+O00590,8J8Z,0,0,0,Apo
+O14842,4PHU,3,1,0,w agonist
+O14842,8EJC,1,1,0,w agonist
+O14842,8EJK,1,1,0,w agonist
+O14843,8J20,2,2,0,w agonist
+O15552,8J23,0,0,0,Apo
+O15552,8J24,0,0,0,Apo
+O43193,8IBV,0,0,0,Apo
+O43603,7XBD,0,0,0,Apo
+O43603,7XJK,0,0,0,Apo
+O43603,7XJL,0,0,0,Apo
+O43613,6TQ9,5,0,2,w antagonist
+O43614,5WQC,3,0,1,w antagonist
+O43614,5WS3,3,0,1,w antagonist
+O43614,6TPG,4,0,1,w antagonist
+O43614,6TPN,4,0,1,w antagonist
+O43614,7L1U,0,0,0,Apo
+O43614,7L1V,1,1,0,w agonist
+O75084,5T44,0,0,0,Apo
+O75084,5WBS,0,0,0,Apo
+O75084,6NE4,0,0,0,Apo
+O75084,8QEO,0,0,0,Apo
+O75084,8YY8,0,0,0,Apo
+O75899,4F11,0,0,0,Apo
+O75899,6M8R,0,0,0,Apo
+O75899,6OCP,0,0,0,Apo
+O95838,7D68,0,0,0,Apo
+O95977,2DCO,0,0,0,Apo
+P07550,1GQ4,0,0,0,Apo
+P07550,2R4R,0,0,0,Apo
+P07550,2R4S,0,0,0,Apo
+P07550,3KJ6,0,0,0,Apo
+P07550,3NY8,5,0,1,w antagonist
+P07550,3NYA,2,0,1,w antagonist
+P07550,3P0G,1,1,0,w agonist
+P07550,3SN6,1,1,0,w agonist
+P07550,4LDE,2,1,0,w agonist
+P07550,6E67,2,2,0,w agonist
+P07550,6KR8,0,0,0,Apo
+P07550,6MXT,6,1,0,w agonist
+P07550,6N48,3,1,0,w agonist
+P07550,6NI3,1,1,0,w agonist
+P07550,6PRZ,4,0,1,w antagonist
+P07550,6PS2,4,0,1,w antagonist
+P07550,6PS3,4,0,1,w antagonist
+P07550,6PS4,4,0,1,w antagonist
+P07550,6PS5,4,0,1,w antagonist
+P07550,7BZ2,1,1,0,w agonist
+P07550,7DHI,1,1,0,w agonist
+P07550,7DHR,1,1,0,w agonist
+P07550,8JJ8,1,1,0,w agonist
+P07550,8JJL,1,1,0,w agonist
+P07550,8JJO,1,0,1,w antagonist
+P08100,4ZWJ,0,0,0,Apo
+P08100,5DGY,0,0,0,Apo
+P08172,4MQS,1,1,0,w agonist
+P08172,4MQT,2,1,0,w agonist
+P08172,5ZKB,1,0,1,w antagonist
+P08172,6OIK,2,1,0,w agonist
+P08172,7T8X,1,1,0,w agonist
+P08172,7T90,1,1,0,w agonist
+P08172,7T94,2,1,0,w agonist
+P08172,7T96,2,1,0,w agonist
+P08172,8J8R,0,0,0,Apo
+P08172,8J97,0,0,0,Apo
+P08172,8JAF,0,0,0,Apo
+P08173,6KP6,0,0,0,Apo
+P08173,7TRS,1,1,0,w agonist
+P08173,7V69,0,0,0,Apo
+P08173,8FX5,1,1,0,w agonist
+P08588,2LSQ,0,0,0,Apo
+P08588,7BU7,7,1,0,w agonist
+P08588,7BVQ,9,2,0,w agonist
+P08908,7E2Y,3,1,0,w agonist
+P08908,8FY8,3,1,0,w agonist
+P08908,8FYL,3,1,0,w agonist
+P08908,8FYX,3,1,0,w agonist
+P08908,8PKM,3,1,0,w agonist
+P08913,1HLL,0,0,0,Apo
+P08913,1HO9,0,0,0,Apo
+P08913,1HOD,0,0,0,Apo
+P08913,1HOF,0,0,0,Apo
+P08913,7EJA,1,0,1,w antagonist
+P08913,7EJK,1,1,0,w agonist
+P11229,6OIJ,2,1,0,w agonist
+P11229,6ZFZ,5,1,0,w agonist
+P13501,1EQT,0,0,0,Apo
+P13501,1HRJ,0,0,0,Apo
+P13501,1RTN,0,0,0,Apo
+P13501,1RTO,0,0,0,Apo
+P13501,1U4P,0,0,0,Apo
+P13501,1U4R,0,0,0,Apo
+P13501,2L9H,0,0,0,Apo
+P13501,2VXW,0,0,0,Apo
+P13501,5CMD,0,0,0,Apo
+P13501,6AEZ,0,0,0,Apo
+P13501,6C6D,0,0,0,Apo
+P13501,6LOG,0,0,0,Apo
+P13501,6STK,0,0,0,Apo
+P14416,5AER,0,0,0,Apo
+P14416,6CM4,2,0,1,w antagonist
+P14416,6LUQ,2,0,1,w antagonist
+P14416,7DFP,1,0,1,w antagonist
+P14416,8IRS,1,1,0,w agonist
+P16473,7XW5,6,1,0,w agonist
+P16473,7XW6,4,1,0,w agonist
+P16473,7XW7,0,0,0,Apo
+P18089,6K41,1,0,1,w antagonist
+P20309,2CSA,0,0,0,Apo
+P21452,7XWO,0,0,0,Apo
+P21453,7EO2,1,1,0,w agonist
+P21453,7EW7,1,1,0,w agonist
+P21453,7VIF,1,1,0,w agonist
+P21453,7VIG,1,1,0,w agonist
+P21453,7VIH,1,1,0,w agonist
+P21453,8G94,0,0,0,Apo
+P21554,1LVQ,0,0,0,Apo
+P21554,1LVR,0,0,0,Apo
+P21554,2B0Y,0,0,0,Apo
+P21554,2KOE,0,0,0,Apo
+P21554,2MZ2,0,0,0,Apo
+P21554,2MZ3,0,0,0,Apo
+P21554,2MZA,0,0,0,Apo
+P21554,5TGZ,3,0,1,w antagonist
+P21554,5U09,1,0,1,w antagonist
+P21554,6KQI,4,0,1,w antagonist
+P21554,7V3Z,2,0,1,w antagonist
+P21728,7CKW,2,1,0,w agonist
+P21728,7CKY,2,1,0,w agonist
+P21728,7JOZ,2,1,0,w agonist
+P21728,7JV5,3,1,0,w agonist
+P21728,7LJC,4,1,0,w agonist
+P21728,7X2C,2,1,0,w agonist
+P21730,7Y64,0,0,0,Apo
+P21730,8GO8,0,0,0,Apo
+P21730,8GOO,0,0,0,Apo
+P21730,8I0N,0,0,0,Apo
+P21730,8I0Z,0,0,0,Apo
+P21730,8IA2,0,0,0,Apo
+P21730,8JZZ,0,0,0,Apo
+P21917,5WIU,2,0,1,w antagonist
+P21917,5WIV,2,0,1,w antagonist
+P22888,7FII,0,0,0,Apo
+P22888,7FIJ,0,0,0,Apo
+P23945,8I2H,0,0,0,Apo
+P24530,5GLH,0,0,0,Apo
+P24530,5X93,3,0,1,w antagonist
+P24530,5XPR,1,0,1,w antagonist
+P24530,6LRY,0,0,0,Apo
+P24530,8HBD,0,0,0,Apo
+P24530,8HCX,0,0,0,Apo
+P24530,8IY5,0,0,0,Apo
+P24530,8IY6,0,0,0,Apo
+P24530,8XGR,0,0,0,Apo
+P25021,8YUT,2,1,0,w agonist
+P25024,2LNL,0,0,0,Apo
+P25024,6XMN,0,0,0,Apo
+P25024,8IC0,0,0,0,Apo
+P25025,4Q3H,0,0,0,Apo
+P25025,5TYT,0,0,0,Apo
+P25025,6KVA,0,0,0,Apo
+P25025,6KVF,0,0,0,Apo
+P25090,7T6S,1,1,0,w agonist
+P25090,7WVY,0,0,0,Apo
+P25101,8HCQ,0,0,0,Apo
+P25103,2KS9,0,0,0,Apo
+P25103,2KSA,0,0,0,Apo
+P25103,2KSB,0,0,0,Apo
+P25103,6HLP,5,0,1,w antagonist
+P25103,7RMG,0,0,0,Apo
+P25103,7RMH,0,0,0,Apo
+P25103,7RMI,0,0,0,Apo
+P25103,8U26,0,0,0,Apo
+P25105,5ZKP,1,0,1,w antagonist
+P25106,6K3F,0,0,0,Apo
+P25106,7SK6,0,0,0,Apo
+P25116,1NRN,0,0,0,Apo
+P25116,1NRO,0,0,0,Apo
+P28221,7E32,2,1,0,w agonist
+P28223,6A93,6,0,2,w antagonist
+P28223,6A94,7,0,2,w antagonist
+P28223,6WH4,10,0,3,w antagonist
+P28223,6WHA,1,1,0,w agonist
+P28223,7VOE,4,0,1,w antagonist
+P28223,7WC4,4,1,0,w agonist
+P28223,7WC5,3,1,0,w agonist
+P28223,7WC8,4,0,1,w antagonist
+P28335,6BQH,3,0,1,w antagonist
+P28335,8DPF,2,1,0,w agonist
+P28335,8DPG,2,1,0,w agonist
+P28335,8DPH,2,1,0,w agonist
+P28335,8DPI,2,1,0,w agonist
+P28336,8H0P,0,0,0,Apo
+P28566,7E33,1,1,0,w agonist
+P29274,3REY,1,0,1,w antagonist
+P29274,3UZA,1,0,1,w antagonist
+P29274,3UZC,1,0,1,w antagonist
+P29274,5OLH,4,0,1,w antagonist
+P29274,5OLO,4,0,1,w antagonist
+P29274,5OLZ,6,0,1,w antagonist
+P29274,5OM1,4,0,1,w antagonist
+P29274,5OM4,4,0,1,w antagonist
+P29274,6GT3,4,0,1,w antagonist
+P29274,6ZDR,4,0,1,w antagonist
+P29274,8C9W,4,0,1,w antagonist
+P29274,8CIC,4,0,1,w antagonist
+P29274,8DU3,4,0,1,w antagonist
+P29274,8JWZ,4,0,1,w antagonist
+P29275,7XY6,1,1,0,w agonist
+P29275,8HDO,2,1,0,w agonist
+P29371,8JBF,0,0,0,Apo
+P30411,7F2O,0,0,0,Apo
+P30518,6NI2,0,0,0,Apo
+P30518,7BB6,0,0,0,Apo
+P30518,7BB7,0,0,0,Apo
+P30518,7DF9,0,0,0,Apo
+P30518,7DFA,0,0,0,Apo
+P30518,7DFB,0,0,0,Apo
+P30518,7DFC,0,0,0,Apo
+P30518,7KH0,0,0,0,Apo
+P30518,7R0C,0,0,0,Apo
+P30518,7R0J,0,0,0,Apo
+P30518,8GOC,0,0,0,Apo
+P30518,8I10,0,0,0,Apo
+P30542,5N2S,1,0,1,w antagonist
+P30542,5UEN,4,0,2,w antagonist
+P30550,7W3Z,0,0,0,Apo
+P30556,4ZUD,1,0,1,w antagonist
+P30559,7QVM,0,0,0,Apo
+P30559,7RYC,0,0,0,Apo
+P30874,7WIC,0,0,0,Apo
+P30874,7WJ5,0,0,0,Apo
+P30874,7XAT,0,0,0,Apo
+P30874,7XMR,0,0,0,Apo
+P30874,7YAC,1,1,0,w agonist
+P30939,7EXD,1,1,0,w agonist
+P30988,5UZ7,0,0,0,Apo
+P30988,6NIY,0,0,0,Apo
+P30988,7TYH,0,0,0,Apo
+P30988,7TYL,0,0,0,Apo
+P30989,6OS9,0,0,0,Apo
+P30989,6OSA,0,0,0,Apo
+P30989,6PWC,0,0,0,Apo
+P31391,7XMS,0,0,0,Apo
+P32238,1D6G,0,0,0,Apo
+P32238,1HZN,0,0,0,Apo
+P32238,7F8U,1,0,1,w antagonist
+P32238,7F8Y,1,0,1,w antagonist
+P32238,7XOV,1,1,0,w agonist
+P32239,1L4T,0,0,0,Apo
+P32241,1OF2,0,0,0,Apo
+P32241,1OGT,0,0,0,Apo
+P32241,5DEF,0,0,0,Apo
+P32241,5DEG,0,0,0,Apo
+P32241,5IB1,0,0,0,Apo
+P32241,5IB2,0,0,0,Apo
+P32241,5IB3,0,0,0,Apo
+P32241,5IB4,0,0,0,Apo
+P32241,5IB5,0,0,0,Apo
+P32241,8E3Y,0,0,0,Apo
+P32241,8E3Z,0,0,0,Apo
+P32245,7F53,0,0,0,Apo
+P33032,8INR,0,0,0,Apo
+P34969,7XTC,2,1,0,w agonist
+P34972,2KI9,0,0,0,Apo
+P34972,5ZTY,5,0,1,w antagonist
+P34972,6PT0,3,1,0,w agonist
+P34972,8GUR,1,0,1,w antagonist
+P34998,2L27,0,0,0,Apo
+P34998,4K5Y,9,0,3,w antagonist
+P34998,4Z9G,6,0,3,w antagonist
+P34998,6P9X,0,0,0,Apo
+P34998,8GTM,0,0,0,Apo
+P35346,8X8L,0,0,0,Apo
+P35348,7YM8,2,1,0,w agonist
+P35348,8HN1,0,0,0,Apo
+P35348,8THL,1,1,0,w agonist
+P35367,3RZE,2,0,1,w antagonist
+P35372,8EF5,4,2,0,w agonist
+P35408,5YWY,1,0,1,w antagonist
+P35414,2LOT,0,0,0,Apo
+P35414,2LOU,0,0,0,Apo
+P35414,2LOV,0,0,0,Apo
+P35414,2LOW,0,0,0,Apo
+P35414,6KNM,0,0,0,Apo
+P35414,7W0N,0,0,0,Apo
+P35414,7W0O,0,0,0,Apo
+P35414,7W0P,0,0,0,Apo
+P35414,8XZH,0,0,0,Apo
+P41145,7Y1F,0,0,0,Apo
+P41145,8DZR,1,1,0,w agonist
+P41145,8DZS,1,1,0,w agonist
+P41146,5DHH,5,2,0,w agonist
+P41146,8F7X,0,0,0,Apo
+P41180,7E6U,0,0,0,Apo
+P41587,2X57,0,0,0,Apo
+P41587,7VQX,0,0,0,Apo
+P41587,7WBJ,0,0,0,Apo
+P41594,8T6J,2,0,2,w antagonist
+P41594,8TAO,3,0,1,w antagonist
+P41597,2MLO,0,0,0,Apo
+P41597,2MLQ,0,0,0,Apo
+P41597,7XA3,0,0,0,Apo
+P41968,8IOC,0,0,0,Apo
+P43115,7WU9,0,0,0,Apo
+P43116,7CX3,1,1,0,w agonist
+P43116,7CX4,1,1,0,w agonist
+P43119,8X79,1,1,0,w agonist
+P43220,5E94,0,0,0,Apo
+P43220,5OTX,0,0,0,Apo
+P43220,6B3J,0,0,0,Apo
+P43220,6X18,0,0,0,Apo
+P43220,7LLL,0,0,0,Apo
+P43220,7LLY,0,0,0,Apo
+P43220,7RG9,0,0,0,Apo
+P43220,7S15,1,1,0,w agonist
+P43220,7S3I,0,0,0,Apo
+P43220,7X8R,1,1,0,w agonist
+P43220,7X8S,1,1,0,w agonist
+P43220,8JIS,0,0,0,Apo
+P43220,8WG7,0,0,0,Apo
+P46663,7EIB,0,0,0,Apo
+P47211,7XJJ,0,0,0,Apo
+P47775,7Y3G,0,0,0,Apo
+P47871,2A83,0,0,0,Apo
+P47871,3CZF,0,0,0,Apo
+P47871,4L6R,0,0,0,Apo
+P47871,4LF3,0,0,0,Apo
+P47871,5EE7,4,0,1,w antagonist
+P47871,6LMK,0,0,0,Apo
+P47871,6LML,0,0,0,Apo
+P47871,6WHC,0,0,0,Apo
+P47871,6WPW,0,0,0,Apo
+P47871,8FU6,0,0,0,Apo
+P47871,8JIQ,0,0,0,Apo
+P47871,8WG8,0,0,0,Apo
+P47872,6WI9,0,0,0,Apo
+P47872,6WZG,0,0,0,Apo
+P47872,7D3S,0,0,0,Apo
+P47898,7UM5,1,1,0,w agonist
+P47898,7X5H,1,1,0,w agonist
+P47900,4XNV,5,0,1,w antagonist
+P48039,6ME4,2,1,0,w agonist
+P48039,7VGY,2,1,0,w agonist
+P48546,4HJ0,0,0,0,Apo
+P48546,6DKJ,0,0,0,Apo
+P48546,7RA3,0,0,0,Apo
+P48546,8ITL,0,0,0,Apo
+P48546,8ITM,0,0,0,Apo
+P48546,8WA3,0,0,0,Apo
+P48960,7YDH,0,0,0,Apo
+P48960,7YDJ,0,0,0,Apo
+P48960,7YDM,0,0,0,Apo
+P48960,7YDP,0,0,0,Apo
+P48960,8IKL,0,0,0,Apo
+P49019,8IHJ,1,1,0,w agonist
+P49019,8IHK,1,1,0,w agonist
+P49286,6ME6,3,2,0,w agonist
+P49286,6ME7,3,2,0,w agonist
+P49286,6ME8,2,2,0,w agonist
+P50052,5UNF,2,0,2,w antagonist
+P50052,5UNG,3,0,1,w antagonist
+P50052,5UNH,2,0,2,w antagonist
+P50052,6JOD,0,0,0,Apo
+P50406,7XTB,1,1,0,w agonist
+P50406,7YS6,1,1,0,w agonist
+P50406,8JLZ,1,1,0,w agonist
+P51677,7X9Y,0,0,0,Apo
+P51681,2MZX,0,0,0,Apo
+P51681,2RRS,0,0,0,Apo
+P51681,5YD3,0,0,0,Apo
+P51681,5YD4,0,0,0,Apo
+P51681,5YD5,0,0,0,Apo
+P51681,7F1Q,0,0,0,Apo
+P51681,7F1S,0,0,0,Apo
+P51681,7NJZ,0,0,0,Apo
+P51681,7NW3,0,0,0,Apo
+P51681,8AS2,0,0,0,Apo
+P51681,8AS3,0,0,0,Apo
+P51684,6WWZ,0,0,0,Apo
+P51685,8KFZ,0,0,0,Apo
+P51685,8TLM,0,0,0,Apo
+P51686,5LWE,7,0,2,w antagonist
+P55085,5NJ6,0,0,0,Apo
+P59540,7XP4,0,0,0,Apo
+P59540,7XP5,0,0,0,Apo
+P61073,2K04,0,0,0,Apo
+P61073,2N55,0,0,0,Apo
+P61073,4RWS,0,0,0,Apo
+P61073,8GP3,0,0,0,Apo
+P61073,8I0Q,0,0,0,Apo
+Q01718,8GY7,0,0,0,Apo
+Q01726,7F4D,0,0,0,Apo
+Q02643,2XDG,0,0,0,Apo
+Q03431,1BL1,0,0,0,Apo
+Q03431,4Z8J,0,0,0,Apo
+Q03431,5EMB,0,0,0,Apo
+Q03431,7VVJ,0,0,0,Apo
+Q03431,7VVK,0,0,0,Apo
+Q03431,7VVL,0,0,0,Apo
+Q03431,7VVM,0,0,0,Apo
+Q03431,7VVN,0,0,0,Apo
+Q03431,7VVO,0,0,0,Apo
+Q03431,7Y36,0,0,0,Apo
+Q03431,8BIA,0,0,0,Apo
+Q03431,8BJ0,0,0,0,Apo
+Q03431,8FLQ,0,0,0,Apo
+Q03431,8FLR,0,0,0,Apo
+Q03431,8FLU,0,0,0,Apo
+Q03431,8GW8,1,1,0,w agonist
+Q03431,8HAO,0,0,0,Apo
+Q03431,8JR9,1,1,0,w agonist
+Q13255,7DGD,0,0,0,Apo
+Q13304,7Y89,0,0,0,Apo
+Q13324,7TRY,0,0,0,Apo
+Q13324,7TS0,0,0,0,Apo
+Q13467,6WW2,0,0,0,Apo
+Q13639,5EM9,0,0,0,Apo
+Q13639,7XT8,3,1,0,w agonist
+Q13639,7XT9,3,1,0,w agonist
+Q13639,7XTA,1,1,0,w agonist
+Q14332,7N95,0,0,0,Apo
+Q14332,7N97,0,0,0,Apo
+Q14332,7N9S,0,0,0,Apo
+Q14416,7EPA,0,0,0,Apo
+Q14831,7EPC,0,0,0,Apo
+Q14832,5CNK,0,0,0,Apo
+Q14833,7E9H,0,0,0,Apo
+Q14833,8JD6,1,1,0,w agonist
+Q16570,4NUU,0,0,0,Apo
+Q16570,4NUV,0,0,0,Apo
+Q16581,8HK3,0,0,0,Apo
+Q16581,8I97,0,0,0,Apo
+Q16581,8I9L,0,0,0,Apo
+Q16581,8I9S,0,0,0,Apo
+Q16581,8IA8,0,0,0,Apo
+Q16581,8J6D,0,0,0,Apo
+Q16581,8JA3,0,0,0,Apo
+Q16602,3AQF,0,0,0,Apo
+Q16602,3N7P,0,0,0,Apo
+Q16602,6E3Y,0,0,0,Apo
+Q16602,6UMG,0,0,0,Apo
+Q16602,6UUN,0,0,0,Apo
+Q16602,6UUS,0,0,0,Apo
+Q16602,6UVA,0,0,0,Apo
+Q16602,7KNT,0,0,0,Apo
+Q16602,7KNU,0,0,0,Apo
+Q5NUL3,8G59,1,1,0,w agonist
+Q5NUL3,8H4K,1,1,0,w agonist
+Q5NUL3,8ID8,1,1,0,w agonist
+Q5NUL3,8IYS,1,1,0,w agonist
+Q5NUL3,8T3O,3,1,0,w agonist
+Q5T601,7WU3,0,0,0,Apo
+Q5T601,7WXU,0,0,0,Apo
+Q5T601,7WXW,0,0,0,Apo
+Q5T601,7WY0,0,0,0,Apo
+Q5T601,7WZ7,0,0,0,Apo
+Q5T601,7X2V,0,0,0,Apo
+Q5T848,7EWL,0,0,0,Apo
+Q5T848,7EWP,0,0,0,Apo
+Q5T848,7EWR,0,0,0,Apo
+Q6QNK2,7WU2,0,0,0,Apo
+Q86Y34,7QU8,0,0,0,Apo
+Q8IZF4,7EQ1,0,0,0,Apo
+Q8TDS4,7XK2,1,1,0,w agonist
+Q8TDS4,8IHF,2,1,0,w agonist
+Q8TDS4,8IHH,2,1,0,w agonist
+Q8TDS4,8IHI,2,1,0,w agonist
+Q8TDS4,8IJ3,0,0,0,Apo
+Q8TDS4,8IJD,1,1,0,w agonist
+Q8TDS4,8J6I,1,1,0,w agonist
+Q8TDS4,8J6P,4,1,0,w agonist
+Q8TDS4,8J6Q,4,1,0,w agonist
+Q8TDS4,8J6R,2,1,0,w agonist
+Q8TDS4,8JHY,2,1,0,w agonist
+Q8TDS4,8JII,3,1,0,w agonist
+Q8TDS4,8JZ7,1,1,0,w agonist
+Q8TDU6,7BW0,0,0,0,Apo
+Q8TDU6,7CFM,2,1,0,w agonist
+Q8TDU6,7XTQ,1,1,0,w agonist
+Q8TDU9,7YJ4,0,0,0,Apo
+Q8TDV5,7WCM,1,1,0,w agonist
+Q8TDV5,7WCN,1,1,0,w agonist
+Q8TDV5,7XZ6,1,1,0,w agonist
+Q8TDV5,8ZRK,1,1,0,w agonist
+Q8WXD0,2M96,0,0,0,Apo
+Q969F8,7YQE,0,0,0,Apo
+Q969V1,8WST,0,0,0,Apo
+Q96LB1,7S8L,0,0,0,Apo
+Q96LB1,7S8M,0,0,0,Apo
+Q96LB1,7VDH,2,1,0,w agonist
+Q96LB1,7VV5,2,1,0,w agonist
+Q96LB1,7VV6,2,1,0,w agonist
+Q96LB2,8DWC,0,0,0,Apo
+Q96LB2,8DWH,1,1,0,w agonist
+Q96LB2,8HJ5,1,1,0,w agonist
+Q96LB2,8JGB,0,0,0,Apo
+Q96LB2,8JGF,0,0,0,Apo
+Q96LB2,8JGG,0,0,0,Apo
+Q96P65,8WZ2,0,0,0,Apo
+Q96P66,8W8Q,0,0,0,Apo
+Q96RI0,3QDZ,0,0,0,Apo
+Q96RJ0,8JLN,1,1,0,w agonist
+Q96RJ0,8JLO,1,1,0,w agonist
+Q96RJ0,8JSO,1,1,0,w agonist
+Q96RJ0,8W88,2,1,0,w agonist
+Q96RJ0,8WC8,1,1,0,w agonist
+Q99500,7EW2,1,1,0,w agonist
+Q99527,8XOG,0,0,0,Apo
+Q99527,8XOH,0,0,0,Apo
+Q99527,8XOI,0,0,0,Apo
+Q99527,8XOJ,0,0,0,Apo
+Q99678,8HS2,0,0,0,Apo
+Q99678,8HS3,0,0,0,Apo
+Q99678,8HSC,0,0,0,Apo
+Q99679,8HIX,0,0,0,Apo
+Q99679,8HJ0,0,0,0,Apo
+Q99679,8HJ1,0,0,0,Apo
+Q99679,8HJ2,0,0,0,Apo
+Q99679,8HMV,0,0,0,Apo
+Q99705,8WSS,0,0,0,Apo
+Q99835,4JKV,8,0,2,w antagonist
+Q99835,4QIM,1,0,1,w antagonist
+Q99835,5L7I,4,0,2,w antagonist
+Q9BXA5,8JPP,1,1,0,w agonist
+Q9BXA5,8YKW,1,1,0,w agonist
+Q9BXC1,7XV3,0,0,0,Apo
+Q9BZJ8,8KGK,0,0,0,Apo
+Q9BZJ8,8TB0,0,0,0,Apo
+Q9GZN0,7WZ4,0,0,0,Apo
+Q9GZQ4,7W55,0,0,0,Apo
+Q9GZQ4,7W57,0,0,0,Apo
+Q9GZQ4,7XK8,0,0,0,Apo
+Q9H244,4NTJ,3,0,1,w antagonist
+Q9H3N8,7YFC,2,1,0,w agonist
+Q9H3N8,7YFD,2,1,0,w agonist
+Q9H3N8,8HN8,1,1,0,w agonist
+Q9H3N8,8HOC,1,1,0,w agonist
+Q9H3N8,8JXT,1,1,0,w agonist
+Q9H3N8,8JXV,1,0,1,w antagonist
+Q9H3N8,8JXW,1,0,1,w antagonist
+Q9H3N8,8JXX,1,1,0,w agonist
+Q9H461,5UN5,0,0,0,Apo
+Q9H461,5UN6,0,0,0,Apo
+Q9H461,6NDZ,0,0,0,Apo
+Q9H461,8X0T,0,0,0,Apo
+Q9HB89,7W53,0,0,0,Apo
+Q9HB89,7W56,0,0,0,Apo
+Q9HBW0,4P0C,0,0,0,Apo
+Q9HBX9,2JM4,0,0,0,Apo
+Q9HBX9,2M7P,0,0,0,Apo
+Q9HBX9,7TMW,0,0,0,Apo
+Q9HC97,8H8J,2,1,0,w agonist
+Q9NQS5,8J19,1,1,0,w agonist
+Q9NQS5,8J1A,0,0,0,Apo
+Q9NYV8,8VY7,2,1,0,w agonist
+Q9NYV8,8VY9,2,1,0,w agonist
+Q9UBS5,6HKC,0,0,0,Apo
+Q9UKP6,6HVK,0,0,0,Apo
+Q9ULW2,7X8Q,0,0,0,Apo
+Q9ULW2,7X8T,0,0,0,Apo
+Q9UNW8,8HQE,0,0,0,Apo
+Q9UNW8,8HVI,1,1,0,w agonist
+Q9UP38,8J9N,0,0,0,Apo
+Q9UP38,8J9O,0,0,0,Apo
+Q9UPC5,8IYX,1,0,1,w antagonist
+Q9Y271,6RZ4,3,0,1,w antagonist
+Q9Y271,6RZ5,7,0,2,w antagonist
+Q9Y2T5,6LI0,3,1,0,w agonist
+Q9Y2T5,6LI3,0,0,0,Apo
+Q9Y2T5,8HMP,1,1,0,w agonist
+Q9Y5N1,7F61,2,0,1,w antagonist
+Q9Y5N1,8YUU,2,1,0,w agonist
+Q9Y5N1,8YUV,2,1,0,w agonist
+Q9Y5Y4,6D26,6,0,1,w antagonist
+Q9Y5Y4,6D27,6,0,1,w antagonist
+Q9Y653,7SF8,0,0,0,Apo
+O00222,6BSZ,2,0,0,w agonist
+O00222,6E5V,2,0,0,w agonist
+O14842,5KW2,1,0,0,still_unknown
+O14842,5TZR,4,0,0,w agonist
+O14842,5TZY,3,0,0,w agonist
+O14842,8EIT,1,0,0,still_unknown
+O14842,8T3V,2,0,0,w agonist
+O14843,8J21,1,0,0,still_unknown
+O15552,8J22,1,0,0,still_unknown
+O15552,8T3S,3,0,0,w agonist
+O43193,8IBU,1,0,0,still_unknown
+O43603,7WQ4,1,0,0,still_unknown
+O43613,4ZJ8,2,0,0,w antagonist
+O43613,4ZJC,2,0,0,w antagonist
+O43613,6TO7,9,0,0,still_unknown
+O43613,6TOD,9,0,0,still_unknown
+O43613,6TOS,7,0,0,still_unknown
+O43613,6TOT,6,0,0,still_unknown
+O43613,6TP3,6,0,0,still_unknown
+O43613,6TP4,5,0,0,still_unknown
+O43613,6TP6,8,0,0,still_unknown
+O43613,6TQ4,6,0,0,still_unknown
+O43613,6TQ6,8,0,0,still_unknown
+O43613,6TQ7,6,0,0,still_unknown
+O43613,6V9S,3,0,0,w antagonist
+O43614,4S0V,2,0,0,w agonist
+O43614,6TPJ,8,0,0,still_unknown
+O43614,7SQO,2,0,0,still_unknown
+O43614,7SR8,2,0,0,still_unknown
+O43614,7XRR,1,0,0,w antagonist
+O75084,4Z33,1,0,0,still_unknown
+O75084,5URV,4,0,0,still_unknown
+O75084,6NE2,1,0,0,still_unknown
+O75084,6O3A,3,0,0,still_unknown
+O75084,6O3B,2,0,0,still_unknown
+O75899,4F12,3,0,0,w agonist
+O95136,7T6B,1,0,0,still_unknown
+P04000,8IU2,1,0,0,still_unknown
+P07550,2RH1,6,0,0,still_unknown
+P07550,3D4S,3,0,0,w agonist
+P07550,3NY9,3,0,0,w antagonist
+P07550,3PDS,2,0,0,w agonist
+P07550,4GBR,1,0,0,still_unknown
+P07550,4LDL,2,0,0,w agonist
+P07550,4LDO,2,0,0,w agonist
+P07550,4QKX,1,0,0,still_unknown
+P07550,5D5A,6,0,0,still_unknown
+P07550,5D5B,5,0,0,still_unknown
+P07550,5D6L,6,0,0,still_unknown
+P07550,5JQH,4,0,0,still_unknown
+P07550,5X7D,5,0,0,still_unknown
+P07550,6PS0,4,0,0,still_unknown
+P07550,6PS1,4,0,0,still_unknown
+P07550,6PS6,4,0,0,still_unknown
+P07550,7XK9,1,0,0,still_unknown
+P07550,7XKA,1,0,0,still_unknown
+P07550,8GDZ,1,0,0,still_unknown
+P07550,8GE1,1,0,0,still_unknown
+P07550,8GE2,1,0,0,still_unknown
+P07550,8GE3,1,0,0,still_unknown
+P07550,8GE4,1,0,0,still_unknown
+P07550,8GE5,1,0,0,still_unknown
+P07550,8GE6,1,0,0,still_unknown
+P07550,8GE7,1,0,0,still_unknown
+P07550,8GE8,1,0,0,still_unknown
+P07550,8GE9,1,0,0,still_unknown
+P07550,8GEA,1,0,0,still_unknown
+P07550,8GEB,1,0,0,still_unknown
+P07550,8GEC,1,0,0,still_unknown
+P07550,8GED,1,0,0,still_unknown
+P07550,8GEE,1,0,0,still_unknown
+P07550,8GEF,1,0,0,still_unknown
+P07550,8GEG,1,0,0,still_unknown
+P07550,8GEH,1,0,0,still_unknown
+P07550,8GEI,1,0,0,still_unknown
+P07550,8GEJ,1,0,0,still_unknown
+P07550,8GFV,1,0,0,still_unknown
+P07550,8GFW,1,0,0,still_unknown
+P07550,8GFX,1,0,0,still_unknown
+P07550,8GFY,1,0,0,still_unknown
+P07550,8GFZ,1,0,0,still_unknown
+P07550,8GG0,1,0,0,still_unknown
+P07550,8GG1,1,0,0,still_unknown
+P07550,8GG2,1,0,0,still_unknown
+P07550,8GG3,1,0,0,still_unknown
+P07550,8GG4,1,0,0,still_unknown
+P07550,8GG5,1,0,0,still_unknown
+P07550,8GG6,1,0,0,still_unknown
+P07550,8GG7,1,0,0,still_unknown
+P07550,8GG8,1,0,0,still_unknown
+P07550,8GG9,1,0,0,still_unknown
+P07550,8GGA,1,0,0,still_unknown
+P07550,8GGB,1,0,0,still_unknown
+P07550,8GGC,1,0,0,still_unknown
+P07550,8GGE,1,0,0,still_unknown
+P07550,8GGF,1,0,0,still_unknown
+P07550,8GGI,1,0,0,still_unknown
+P07550,8GGJ,1,0,0,still_unknown
+P07550,8GGK,1,0,0,still_unknown
+P07550,8GGL,1,0,0,still_unknown
+P07550,8GGM,1,0,0,still_unknown
+P07550,8GGN,1,0,0,still_unknown
+P07550,8GGO,1,0,0,still_unknown
+P07550,8GGP,1,0,0,still_unknown
+P07550,8GGQ,1,0,0,still_unknown
+P07550,8GGR,1,0,0,still_unknown
+P07550,8GGS,1,0,0,still_unknown
+P07550,8GGT,1,0,0,still_unknown
+P07550,8GGU,1,0,0,still_unknown
+P07550,8GGV,1,0,0,still_unknown
+P07550,8GGW,1,0,0,still_unknown
+P07550,8GGX,1,0,0,still_unknown
+P07550,8GGY,1,0,0,still_unknown
+P07550,8GGZ,1,0,0,still_unknown
+P07550,8GH0,1,0,0,still_unknown
+P07550,8GH1,1,0,0,still_unknown
+P07550,8UNL,1,0,0,still_unknown
+P07550,8UNM,1,0,0,still_unknown
+P07550,8UNN,1,0,0,still_unknown
+P07550,8UNO,1,0,0,still_unknown
+P07550,8UNP,1,0,0,still_unknown
+P07550,8UNQ,1,0,0,still_unknown
+P07550,8UNR,1,0,0,still_unknown
+P07550,8UNS,1,0,0,still_unknown
+P07550,8UNT,1,0,0,still_unknown
+P07550,8UNU,1,0,0,still_unknown
+P07550,8UNV,1,0,0,still_unknown
+P07550,8UNW,1,0,0,still_unknown
+P07550,8UNX,1,0,0,still_unknown
+P07550,8UNY,1,0,0,still_unknown
+P07550,8UNZ,1,0,0,still_unknown
+P07550,8UO0,1,0,0,still_unknown
+P07550,8UO1,1,0,0,still_unknown
+P07550,8UO2,1,0,0,still_unknown
+P07550,8UO3,1,0,0,still_unknown
+P07550,8UO4,1,0,0,still_unknown
+P08100,5W0P,4,0,0,still_unknown
+P08100,6CMO,1,0,0,still_unknown
+P08172,3UON,2,0,0,w antagonist
+P08172,5YC8,1,0,0,still_unknown
+P08172,5ZK3,1,0,0,still_unknown
+P08172,5ZK8,1,0,0,still_unknown
+P08172,5ZKC,1,0,0,still_unknown
+P08173,5DSG,10,0,0,inverse agonist
+P08173,7TRK,1,0,0,still_unknown
+P08173,7TRP,2,0,0,still_unknown
+P08173,7TRQ,2,0,0,still_unknown
+P08173,7V68,2,0,0,still_unknown
+P08173,7V6A,1,0,0,still_unknown
+P08173,8E9X,1,0,0,still_unknown
+P08588,7BTS,4,0,0,still_unknown
+P08588,7BU6,6,0,0,still_unknown
+P08908,7E2X,3,0,0,still_unknown
+P08908,7E2Z,3,0,0,still_unknown
+P08908,8FYE,3,0,0,still_unknown
+P08908,8FYT,3,0,0,still_unknown
+P08908,8JSP,1,0,0,still_unknown
+P08908,8JT6,4,0,0,still_unknown
+P08908,8PJK,3,0,0,still_unknown
+P08908,8W8B,3,0,0,w agonist
+P08912,6OL9,4,0,0,still_unknown
+P08913,6KUX,3,0,0,still_unknown
+P08913,6KUY,1,0,0,still_unknown
+P08913,7EJ0,1,0,0,still_unknown
+P08913,7EJ8,1,0,0,still_unknown
+P08913,7W6P,1,0,0,still_unknown
+P08913,7W7E,1,0,0,still_unknown
+P0DMS8,8X16,1,0,0,still_unknown
+P0DMS8,8X17,1,0,0,still_unknown
+P11229,5CXV,3,0,0,w antagonist
+P11229,6WJC,2,0,0,still_unknown
+P11229,6ZG4,3,0,0,w agonist
+P11229,6ZG9,3,0,0,w agonist
+P13501,1B3A,2,0,0,still_unknown
+P13501,1U4L,2,0,0,still_unknown
+P13501,1U4M,2,0,0,still_unknown
+P13501,5COY,2,0,0,still_unknown
+P13501,5DNF,15,0,0,still_unknown
+P13501,5L2U,3,0,0,still_unknown
+P14416,6VMS,1,0,0,still_unknown
+P14416,7JVR,1,0,0,still_unknown
+P16473,2XWT,4,0,0,still_unknown
+P16473,3G04,2,0,0,still_unknown
+P16473,7T9I,4,0,0,still_unknown
+P16473,7T9M,2,0,0,still_unknown
+P16473,7T9N,2,0,0,still_unknown
+P16473,7UTZ,4,0,0,still_unknown
+P18825,6KUW,7,0,0,still_unknown
+P20309,8E9W,1,0,0,still_unknown
+P20309,8E9Y,1,0,0,still_unknown
+P20309,8E9Z,2,0,0,still_unknown
+P20309,8EA0,2,0,0,still_unknown
+P21453,3V2W,2,0,0,w antagonist
+P21453,3V2Y,2,0,0,w antagonist
+P21453,7EO4,1,0,0,still_unknown
+P21453,7EVY,2,0,0,still_unknown
+P21453,7EVZ,2,0,0,still_unknown
+P21453,7EW0,1,0,0,still_unknown
+P21453,7TD3,2,0,0,still_unknown
+P21453,7TD4,2,0,0,still_unknown
+P21453,7VIE,1,0,0,w agonist
+P21453,7WF7,1,0,0,still_unknown
+P21462,7EUO,2,0,0,still_unknown
+P21462,7T6T,2,0,0,still_unknown
+P21462,7VFX,3,0,0,still_unknown
+P21462,7WVU,1,0,0,still_unknown
+P21554,5XR8,2,0,0,still_unknown
+P21554,5XRA,4,0,0,still_unknown
+P21554,6KPG,1,0,0,w agonist
+P21554,6N4B,2,0,0,still_unknown
+P21554,8GAG,1,0,0,still_unknown
+P21554,8GHV,1,0,0,still_unknown
+P21554,8IKG,1,0,0,still_unknown
+P21554,8IKH,1,0,0,still_unknown
+P21554,8K8J,1,0,0,still_unknown
+P21728,7CKX,2,0,0,w agonist
+P21728,7CKZ,3,0,0,w agonist
+P21728,7CRH,1,0,0,w agonist
+P21728,7F0T,1,0,0,w agonist
+P21728,7F1O,1,0,0,w agonist
+P21728,7F1Z,1,0,0,w agonist
+P21728,7F23,1,0,0,w agonist
+P21728,7F24,1,0,0,w agonist
+P21728,7JVP,3,0,0,still_unknown
+P21728,7JVQ,3,0,0,still_unknown
+P21728,7LJD,4,0,0,still_unknown
+P21728,7X2D,2,0,0,w agonist
+P21728,7X2F,3,0,0,w agonist
+P21728,8IRR,2,0,0,w agonist
+P21730,2K3U,1,0,0,still_unknown
+P21730,5O9H,7,0,0,w agonist
+P21730,6C1Q,4,0,0,w antagonist
+P21730,6C1R,8,0,0,w antagonist
+P21730,7Y65,3,0,0,w agonist
+P21730,7Y66,1,0,0,w agonist
+P21730,7Y67,3,0,0,w agonist
+P21730,8HK5,1,0,0,w agonist
+P21731,8XJN,1,0,0,still_unknown
+P21731,8XJO,1,0,0,still_unknown
+P21918,8IRV,3,0,0,w agonist
+P22888,7FIG,3,0,0,still_unknown
+P22888,7FIH,1,0,0,still_unknown
+P23945,1XWD,7,0,0,still_unknown
+P23945,4AY9,12,0,0,still_unknown
+P23945,4MQW,13,0,0,Apo
+P23945,8I2G,8,0,0,w agonist
+P24530,5GLI,2,0,0,w agonist
+P24530,6IGK,2,0,0,still_unknown
+P24530,6IGL,3,0,0,still_unknown
+P25021,8POK,1,0,0,still_unknown
+P25024,1ILP,1,0,0,still_unknown
+P25024,1ILQ,1,0,0,still_unknown
+P25025,6LFM,1,0,0,still_unknown
+P25025,6LFO,1,0,0,still_unknown
+P25090,6LW5,2,0,0,w agonist
+P25090,6OMM,3,0,0,still_unknown
+P25090,7T6U,2,0,0,still_unknown
+P25090,7T6V,2,0,0,still_unknown
+P25090,7WVV,1,0,0,still_unknown
+P25090,7WVW,1,0,0,still_unknown
+P25090,7WVX,1,0,0,still_unknown
+P25103,6.00E+59,1,0,0,still_unknown
+P25103,6HLL,1,0,0,still_unknown
+P25103,6HLO,5,0,0,still_unknown
+P25103,7P00,1,0,0,still_unknown
+P25103,7P02,1,0,0,still_unknown
+P25105,5ZKQ,4,0,0,w antagonist
+P25106,7SK3,1,0,0,w agonist
+P25106,7SK4,1,0,0,w agonist
+P25106,7SK5,2,0,0,w agonist
+P25106,7SK7,2,0,0,w agonist
+P25106,7SK8,3,0,0,w agonist
+P25106,7SK9,2,0,0,w agonist
+P25116,1NRP,1,0,0,still_unknown
+P25116,1NRQ,2,0,0,still_unknown
+P25116,1NRR,1,0,0,still_unknown
+P25116,3BEF,2,0,0,still_unknown
+P25116,3HKI,2,0,0,still_unknown
+P25116,3HKJ,2,0,0,still_unknown
+P25116,3LU9,2,0,0,still_unknown
+P25116,3VW7,2,0,0,w antagonist
+P25929,5ZBQ,1,0,0,still_unknown
+P25929,7VGX,1,0,0,still_unknown
+P25929,7X9A,1,0,0,still_unknown
+P28222,4IAQ,1,0,0,w agonist
+P28222,4IAR,2,0,0,w agonist
+P28222,5V54,2,0,0,still_unknown
+P28222,6G79,1,0,0,still_unknown
+P28222,7C61,1,0,0,still_unknown
+P28223,6WGT,7,0,0,still_unknown
+P28223,7RAN,1,0,0,still_unknown
+P28223,7VOD,3,0,0,w agonist
+P28223,7WC6,4,0,0,still_unknown
+P28223,7WC7,4,0,0,still_unknown
+P28223,7WC9,4,0,0,still_unknown
+P28223,8JT8,4,0,0,still_unknown
+P28223,8UWL,1,0,0,still_unknown
+P28223,8V6U,1,0,0,still_unknown
+P28335,6BQG,2,0,0,still_unknown
+P28566,8UGY,2,0,0,still_unknown
+P28566,8UH3,2,0,0,still_unknown
+P29274,2YDO,2,0,0,still_unknown
+P29274,2YDV,2,0,0,still_unknown
+P29274,3EML,2,0,0,w antagonist
+P29274,3PWH,1,0,0,w agonist
+P29274,3QAK,2,0,0,w agonist
+P29274,3RFM,1,0,0,w agonist
+P29274,3VG9,3,0,0,still_unknown
+P29274,3VGA,1,0,0,still_unknown
+P29274,4EIY,4,0,0,w antagonist
+P29274,4UG2,4,0,0,w agonist
+P29274,4UHR,1,0,0,w agonist
+P29274,5G53,3,0,0,still_unknown
+P29274,5IU4,4,0,0,still_unknown
+P29274,5IU7,4,0,0,still_unknown
+P29274,5IU8,5,0,0,still_unknown
+P29274,5IUA,4,0,0,still_unknown
+P29274,5IUB,4,0,0,still_unknown
+P29274,5JTB,4,0,0,still_unknown
+P29274,5K2A,4,0,0,still_unknown
+P29274,5K2B,4,0,0,still_unknown
+P29274,5K2C,4,0,0,still_unknown
+P29274,5K2D,4,0,0,still_unknown
+P29274,5MZJ,4,0,0,still_unknown
+P29274,5MZP,5,0,0,still_unknown
+P29274,5N2R,5,0,0,still_unknown
+P29274,5NLX,3,0,0,still_unknown
+P29274,5NM2,4,0,0,still_unknown
+P29274,5NM4,3,0,0,still_unknown
+P29274,5OLG,5,0,0,still_unknown
+P29274,5OLV,4,0,0,still_unknown
+P29274,5UIG,3,0,0,still_unknown
+P29274,5UVI,4,0,0,still_unknown
+P29274,5VRA,4,0,0,still_unknown
+P29274,5WF5,2,0,0,still_unknown
+P29274,5WF6,2,0,0,still_unknown
+P29274,6AQF,4,0,0,still_unknown
+P29274,6GDG,1,0,0,still_unknown
+P29274,6JZH,3,0,0,still_unknown
+P29274,6LPJ,11,0,0,still_unknown
+P29274,6LPK,11,0,0,still_unknown
+P29274,6LPL,11,0,0,still_unknown
+P29274,6MH8,1,0,0,still_unknown
+P29274,6PS7,4,0,0,still_unknown
+P29274,6S0L,4,0,0,still_unknown
+P29274,6S0Q,4,0,0,still_unknown
+P29274,6WQA,4,0,0,still_unknown
+P29274,6ZDV,4,0,0,w antagonist
+P29274,7ARO,3,0,0,still_unknown
+P29274,7EZC,2,0,0,still_unknown
+P29274,7PX4,4,0,0,still_unknown
+P29274,7PYR,4,0,0,still_unknown
+P29274,7RM5,2,0,0,still_unknown
+P29274,7T32,1,0,0,still_unknown
+P29274,8A2O,4,0,0,still_unknown
+P29274,8A2P,3,0,0,still_unknown
+P29274,8CU6,4,0,0,still_unknown
+P29274,8CU7,5,0,0,still_unknown
+P29274,8GNE,4,0,0,still_unknown
+P29274,8GNG,4,0,0,still_unknown
+P29274,8JWY,4,0,0,still_unknown
+P29274,8PWN,3,0,0,still_unknown
+P29274,8RQQ,3,0,0,still_unknown
+P29274,8WDT,1,0,0,still_unknown
+P29275,7XY7,1,0,0,still_unknown
+P29275,8HDP,2,0,0,still_unknown
+P30411,7F6H,1,0,0,still_unknown
+P30411,7F6I,1,0,0,still_unknown
+P30518,4JQI,1,0,0,still_unknown
+P30518,7DW9,1,0,0,still_unknown
+P30550,7W40,3,0,0,w antagonist
+P30550,7W41,1,0,0,w agonist
+P30550,8H0Q,1,0,0,still_unknown
+P30556,4YAY,1,0,0,w antagonist
+P30556,6DO1,6,0,0,still_unknown
+P30556,6OS0,1,0,0,w agonist
+P30556,6OS1,3,0,0,w agonist
+P30556,6OS2,4,0,0,w agonist
+P30559,6TPK,3,0,0,still_unknown
+P30874,7WIG,1,0,0,still_unknown
+P30874,7XAU,2,0,0,still_unknown
+P30874,7XAV,1,0,0,still_unknown
+P30874,7Y24,2,0,0,still_unknown
+P30874,7Y26,2,0,0,still_unknown
+P30874,7Y27,1,0,0,still_unknown
+P30874,7YAE,4,0,0,still_unknown
+P30968,7BR3,3,0,0,still_unknown
+P30988,5II0,5,0,0,still_unknown
+P30988,6PFO,4,0,0,still_unknown
+P30988,6PGQ,2,0,0,still_unknown
+P30988,7TYF,5,0,0,still_unknown
+P30988,7TYI,2,0,0,still_unknown
+P30988,7TYN,4,0,0,still_unknown
+P30988,7TYO,2,0,0,still_unknown
+P30988,7TYW,4,0,0,still_unknown
+P30988,7TYX,3,0,0,still_unknown
+P30988,7TYY,3,0,0,still_unknown
+P30988,7TZF,5,0,0,still_unknown
+P30988,8F0J,6,0,0,w agonist
+P30988,8F0K,6,0,0,w agonist
+P30988,8F2A,2,0,0,w agonist
+P30988,8F2B,5,0,0,w agonist
+P30988,9AUC,5,0,0,still_unknown
+P30989,2LYW,1,0,0,still_unknown
+P30989,6UP7,1,0,0,still_unknown
+P30989,8JPB,2,0,0,still_unknown
+P30989,8JPC,2,0,0,still_unknown
+P30989,8JPF,1,0,0,still_unknown
+P31391,7XMT,1,0,0,w agonist
+P32238,7EZH,1,0,0,still_unknown
+P32238,7EZK,1,0,0,still_unknown
+P32238,7EZM,1,0,0,still_unknown
+P32238,7F8X,4,0,0,still_unknown
+P32238,7MBX,2,0,0,still_unknown
+P32238,7MBY,2,0,0,still_unknown
+P32238,7XOU,1,0,0,still_unknown
+P32238,9BKJ,1,0,0,still_unknown
+P32238,9BKK,1,0,0,still_unknown
+P32239,7F8V,2,0,0,still_unknown
+P32239,7F8W,2,0,0,still_unknown
+P32239,7XOW,1,0,0,still_unknown
+P32239,8IA7,1,0,0,still_unknown
+P32241,3B3I,1,0,0,still_unknown
+P32241,3B6S,1,0,0,still_unknown
+P32241,3DTX,1,0,0,still_unknown
+P32241,3HCV,1,0,0,still_unknown
+P32241,6VN7,2,0,0,still_unknown
+P32241,7ALO,6,0,0,still_unknown
+P32245,6W25,4,0,0,w antagonist
+P32245,7AUE,3,0,0,still_unknown
+P32245,7F54,2,0,0,w agonist
+P32245,7F55,2,0,0,w agonist
+P32245,7F58,1,0,0,w agonist
+P32245,7PIU,2,0,0,w agonist
+P32245,7PIV,2,0,0,w agonist
+P32246,7VL8,1,0,0,still_unknown
+P32246,7VL9,1,0,0,still_unknown
+P32246,7VLA,1,0,0,still_unknown
+P32248,6QZH,3,0,0,still_unknown
+P32249,7TUY,1,0,0,still_unknown
+P32249,7TUZ,1,0,0,still_unknown
+P33032,8IOD,2,0,0,w agonist
+P34972,6KPC,1,0,0,w agonist
+P34972,6KPF,1,0,0,w agonist
+P34972,8GUQ,1,0,0,still_unknown
+P34972,8GUS,1,0,0,still_unknown
+P34972,8GUT,1,0,0,still_unknown
+P34981,7WKD,2,0,0,still_unknown
+P34981,7X1T,1,0,0,still_unknown
+P34981,7X1U,1,0,0,still_unknown
+P34981,7XW9,1,0,0,still_unknown
+P34998,3EHS,1,0,0,still_unknown
+P34998,3EHT,1,0,0,still_unknown
+P34998,3EHU,4,0,0,still_unknown
+P34998,6PB0,2,0,0,still_unknown
+P34998,8GTG,1,0,0,still_unknown
+P34998,8GTI,2,0,0,still_unknown
+P35346,8X8N,2,0,0,still_unknown
+P35348,7YMH,1,0,0,still_unknown
+P35348,8THK,1,0,0,still_unknown
+P35367,7DFL,1,0,0,still_unknown
+P35372,8EF6,4,0,0,still_unknown
+P35372,8EFB,1,0,0,still_unknown
+P35372,8EFL,4,0,0,still_unknown
+P35372,8EFO,4,0,0,still_unknown
+P35372,8EFQ,2,0,0,still_unknown
+P35372,8F7Q,2,0,0,still_unknown
+P35372,8F7R,2,0,0,still_unknown
+P35372,8K9K,2,0,0,still_unknown
+P35372,8K9L,3,0,0,still_unknown
+P35408,5YHL,1,0,0,w antagonist
+P35408,7D7M,1,0,0,still_unknown
+P35408,8GCM,1,0,0,still_unknown
+P35408,8GCP,1,0,0,still_unknown
+P35408,8GD9,1,0,0,still_unknown
+P35408,8GDA,1,0,0,still_unknown
+P35408,8GDB,1,0,0,still_unknown
+P35414,5VBL,6,0,0,w agonist
+P35414,7SUS,2,0,0,still_unknown
+P35414,7W0L,2,0,0,still_unknown
+P35414,7W0M,1,0,0,still_unknown
+P35414,8XZF,1,0,0,still_unknown
+P35414,8XZG,1,0,0,still_unknown
+P35414,8XZI,1,0,0,still_unknown
+P35414,8XZJ,1,0,0,still_unknown
+P35462,3PBL,4,0,0,w antagonist
+P35462,7CMU,1,0,0,w agonist
+P35462,7CMV,1,0,0,w agonist
+P35462,8IRT,1,0,0,w agonist
+P37288,1YTV,2,0,0,still_unknown
+P41143,4N6H,5,0,0,w antagonist
+P41143,4RWA,5,0,0,w antagonist
+P41143,4RWD,8,0,0,w antagonist
+P41143,6PT2,12,0,0,w agonist
+P41143,6PT3,2,0,0,w agonist
+P41143,8F7S,6,0,0,still_unknown
+P41145,4DJH,4,0,0,w antagonist
+P41145,6B73,5,0,0,w agonist
+P41145,6VI4,3,0,0,still_unknown
+P41145,7YIT,1,0,0,w agonist
+P41145,8DZP,1,0,0,still_unknown
+P41145,8DZQ,1,0,0,still_unknown
+P41145,8F7W,2,0,0,still_unknown
+P41145,8FEG,3,0,0,still_unknown
+P41146,4EA3,5,0,0,w antagonist
+P41146,5DHG,5,0,0,w antagonist
+P41180,5FBH,6,0,0,w agonist
+P41180,5FBK,6,0,0,w agonist
+P41180,5K5S,4,0,0,w agonist
+P41180,5K5T,1,0,0,w agonist
+P41180,7DTT,6,0,0,still_unknown
+P41180,7DTU,8,0,0,still_unknown
+P41180,7DTV,8,0,0,still_unknown
+P41180,7DTW,6,0,0,still_unknown
+P41180,7E6T,4,0,0,still_unknown
+P41180,7M3E,7,0,0,still_unknown
+P41180,7M3F,9,0,0,still_unknown
+P41180,7M3G,17,0,0,still_unknown
+P41180,7M3J,5,0,0,still_unknown
+P41180,7SIL,12,0,0,still_unknown
+P41180,7SIM,10,0,0,still_unknown
+P41180,7SIN,2,0,0,still_unknown
+P41180,8SZF,10,0,0,still_unknown
+P41180,8SZG,13,0,0,still_unknown
+P41180,8SZH,14,0,0,still_unknown
+P41180,8SZI,10,0,0,still_unknown
+P41180,8WPG,10,0,0,still_unknown
+P41180,8WPU,9,0,0,still_unknown
+P41180,9ASB,12,0,0,still_unknown
+P41180,9AVG,12,0,0,still_unknown
+P41180,9AVL,12,0,0,still_unknown
+P41180,9AXF,15,0,0,still_unknown
+P41180,9AYF,11,0,0,still_unknown
+P41594,3LMK,2,0,0,still_unknown
+P41594,4OO9,4,0,0,still_unknown
+P41594,5CGC,3,0,0,still_unknown
+P41594,5CGD,2,0,0,still_unknown
+P41594,6N4X,2,0,0,w agonist
+P41594,6N4Y,15,0,0,w agonist
+P41594,6N50,6,0,0,w agonist
+P41594,6N51,4,0,0,w agonist
+P41594,6N52,2,0,0,w agonist
+P41594,7FD8,6,0,0,w agonist
+P41594,7FD9,4,0,0,w agonist
+P41594,8T7H,2,0,0,still_unknown
+P41594,8T8M,2,0,0,still_unknown
+P41595,4IB4,5,0,0,still_unknown
+P41595,4NC3,7,0,0,still_unknown
+P41595,5TUD,2,0,0,still_unknown
+P41595,5TVN,3,0,0,still_unknown
+P41595,6DRX,3,0,0,still_unknown
+P41595,6DRY,4,0,0,still_unknown
+P41595,6DRZ,4,0,0,still_unknown
+P41595,6DS0,3,0,0,still_unknown
+P41595,7SRQ,2,0,0,still_unknown
+P41595,7SRR,1,0,0,still_unknown
+P41595,7SRS,2,0,0,still_unknown
+P41597,5T1A,4,0,0,still_unknown
+P41597,7P8X,2,0,0,still_unknown
+P43088,8IQ4,1,0,0,still_unknown
+P43088,8IQ6,1,0,0,still_unknown
+P43088,8IUK,1,0,0,still_unknown
+P43088,8IUL,1,0,0,still_unknown
+P43088,8IUM,1,0,0,still_unknown
+P43088,8XJK,1,0,0,still_unknown
+P43088,8XJL,1,0,0,still_unknown
+P43088,8XJM,1,0,0,still_unknown
+P43115,6AK3,4,0,0,still_unknown
+P43115,6M9T,3,0,0,still_unknown
+P43115,8GDC,1,0,0,still_unknown
+P43116,7CX2,1,0,0,still_unknown
+P43119,8X7A,1,0,0,still_unknown
+P43220,3C59,1,0,0,w antagonist
+P43220,3C5T,1,0,0,w antagonist
+P43220,3IOL,1,0,0,w agonist
+P43220,4ZGM,2,0,0,still_unknown
+P43220,5NX2,8,0,0,w agonist
+P43220,5OTT,1,0,0,still_unknown
+P43220,5OTU,2,0,0,still_unknown
+P43220,5OTV,2,0,0,still_unknown
+P43220,5OTW,1,0,0,still_unknown
+P43220,5VEW,7,0,0,still_unknown
+P43220,5VEX,4,0,0,still_unknown
+P43220,6GB1,3,0,0,still_unknown
+P43220,6ORV,1,0,0,still_unknown
+P43220,6VCB,1,0,0,still_unknown
+P43220,6X19,1,0,0,still_unknown
+P43220,6X1A,1,0,0,still_unknown
+P43220,6XOX,1,0,0,w agonist
+P43220,7C2E,1,0,0,still_unknown
+P43220,7DUQ,2,0,0,still_unknown
+P43220,7DUR,2,0,0,still_unknown
+P43220,7.00E+14,3,0,0,still_unknown
+P43220,7EVM,2,0,0,still_unknown
+P43220,7FIM,1,0,0,w agonist
+P43220,7KI0,2,0,0,still_unknown
+P43220,7KI1,1,0,0,still_unknown
+P43220,7LCI,1,0,0,still_unknown
+P43220,7LCJ,1,0,0,still_unknown
+P43220,7LCK,1,0,0,still_unknown
+P43220,7RGP,1,0,0,w agonist
+P43220,7RTB,1,0,0,w agonist
+P43220,7S1M,1,0,0,w agonist
+P43220,7VBH,2,0,0,w agonist
+P43220,7VBI,1,0,0,w agonist
+P43220,8JIP,1,0,0,still_unknown
+P43220,8JIR,1,0,0,still_unknown
+P46089,8U8F,1,0,0,still_unknown
+P46089,8WW2,3,0,0,still_unknown
+P46089,8X2K,1,0,0,still_unknown
+P47211,7WQ3,1,0,0,still_unknown
+P47871,4ERS,1,0,0,still_unknown
+P47871,5XEZ,9,0,0,still_unknown
+P47871,7V35,2,0,0,w agonist
+P47871,8JIT,1,0,0,still_unknown
+P47871,8JIU,2,0,0,still_unknown
+P47898,7UM4,4,0,0,still_unknown
+P47898,7UM6,1,0,0,still_unknown
+P47898,7UM7,1,0,0,still_unknown
+P47900,4XNW,2,0,0,still_unknown
+P47900,7XXH,1,0,0,still_unknown
+P48039,6ME2,3,0,0,still_unknown
+P48039,6ME3,3,0,0,still_unknown
+P48039,6ME5,3,0,0,still_unknown
+P48039,7DB6,1,0,0,still_unknown
+P48039,7VGZ,2,0,0,still_unknown
+P48546,2QKH,6,0,0,w agonist
+P48546,7DTY,1,0,0,still_unknown
+P48546,7FIN,3,0,0,w agonist
+P48546,7FIY,2,0,0,w agonist
+P48546,7RBT,2,0,0,w agonist
+P48546,7VAB,2,0,0,w agonist
+P48960,2BOU,1,0,0,still_unknown
+P48960,7DO4,2,0,0,still_unknown
+P48960,8IKJ,1,0,0,w antagonist
+P49146,7X9B,1,0,0,still_unknown
+P49146,7YON,1,0,0,still_unknown
+P49146,7YOO,1,0,0,still_unknown
+P49190,7F16,2,0,0,still_unknown
+P49238,7XBW,1,0,0,still_unknown
+P49238,7XBX,2,0,0,still_unknown
+P49286,6ME9,2,0,0,still_unknown
+P49286,7VH0,1,0,0,still_unknown
+P49682,8HNK,1,0,0,still_unknown
+P49682,8HNL,2,0,0,still_unknown
+P49682,8HNM,2,0,0,still_unknown
+P49682,8K2X,1,0,0,still_unknown
+P50052,5XJM,1,0,0,still_unknown
+P50052,7C6A,1,0,0,still_unknown
+P50052,7JNI,8,0,0,still_unknown
+P50391,7X9C,1,0,0,still_unknown
+P51681,2L87,1,0,0,still_unknown
+P51681,2RLL,1,0,0,still_unknown
+P51681,4MBS,4,0,0,still_unknown
+P51681,5YY4,1,0,0,still_unknown
+P51681,6MEO,16,0,0,still_unknown
+P51681,6MET,15,0,0,still_unknown
+P51685,8KFX,1,0,0,still_unknown
+P51685,8KFY,1,0,0,still_unknown
+P51685,8U1U,1,0,0,w agonist
+P55085,5NDD,1,0,0,still_unknown
+P55085,5NDZ,1,0,0,still_unknown
+P59540,7XP6,1,0,0,still_unknown
+P61073,2K03,2,0,0,w agonist
+P61073,2K05,2,0,0,w agonist
+P61073,3ODU,6,0,0,w antagonist
+P61073,3OE0,3,0,0,w antagonist
+P61073,3OE6,2,0,0,w antagonist
+P61073,3OE8,3,0,0,w antagonist
+P61073,3OE9,2,0,0,w antagonist
+P61073,8U4N,1,0,0,still_unknown
+P61073,8U4O,1,0,0,still_unknown
+P61073,8U4P,2,0,0,still_unknown
+P61073,8U4Q,1,0,0,still_unknown
+P61073,8U4R,1,0,0,still_unknown
+P61073,8U4S,6,0,0,still_unknown
+P61073,8U4T,8,0,0,still_unknown
+Q01726,7F4F,2,0,0,w agonist
+Q01726,7F4H,2,0,0,w agonist
+Q01726,7F4I,2,0,0,w agonist
+Q02643,7CZ5,3,0,0,still_unknown
+Q03431,3C4M,2,0,0,still_unknown
+Q03431,3H3G,1,0,0,still_unknown
+Q03431,3L2J,2,0,0,still_unknown
+Q03431,6NBF,2,0,0,still_unknown
+Q03431,6NBH,2,0,0,still_unknown
+Q03431,6NBI,1,0,0,still_unknown
+Q03431,7UZO,1,0,0,w agonist
+Q03431,7UZP,3,0,0,w agonist
+Q03431,7Y35,1,0,0,still_unknown
+Q03431,8D51,1,0,0,still_unknown
+Q03431,8D52,1,0,0,still_unknown
+Q03431,8FLS,1,0,0,w agonist
+Q03431,8FLT,2,0,0,w agonist
+Q03431,8HA0,2,0,0,still_unknown
+Q03431,8HAF,2,0,0,still_unknown
+Q13255,3KS9,3,0,0,still_unknown
+Q13255,4OR2,7,0,0,still_unknown
+Q13255,7DGE,1,0,0,still_unknown
+Q13324,3N93,2,0,0,still_unknown
+Q13324,3N95,4,0,0,still_unknown
+Q13324,3N96,4,0,0,still_unknown
+Q13324,6PB1,2,0,0,still_unknown
+Q13467,5URY,4,0,0,still_unknown
+Q13467,5URZ,3,0,0,still_unknown
+Q13467,6O39,1,0,0,still_unknown
+Q14332,6C0B,3,0,0,still_unknown
+Q14332,7X8P,3,0,0,still_unknown
+Q14416,4XAQ,2,0,0,w agonist
+Q14416,4XAS,2,0,0,w agonist
+Q14416,5CNI,2,0,0,w agonist
+Q14416,5CNJ,3,0,0,w agonist
+Q14416,5KZN,1,0,0,still_unknown
+Q14416,5KZQ,2,0,0,still_unknown
+Q14416,7E9G,3,0,0,still_unknown
+Q14416,7EPB,2,0,0,still_unknown
+Q14416,7MTQ,4,0,0,still_unknown
+Q14416,7MTR,3,0,0,still_unknown
+Q14416,7MTS,3,0,0,still_unknown
+Q14831,3MQ4,1,0,0,still_unknown
+Q14831,5C5C,1,0,0,still_unknown
+Q14832,3SM9,1,0,0,still_unknown
+Q14832,4XAR,1,0,0,w agonist
+Q14832,5CNM,1,0,0,w agonist
+Q14832,6B7H,4,0,0,still_unknown
+Q14832,7WI6,4,0,0,still_unknown
+Q14832,7WI8,4,0,0,still_unknown
+Q14832,7WIH,4,0,0,still_unknown
+Q15722,7K15,6,0,0,w antagonist
+Q15722,7VKT,3,0,0,still_unknown
+Q16570,7P93,2,0,0,still_unknown
+Q16570,8A44,1,0,0,still_unknown
+Q16581,8HK2,2,0,0,still_unknown
+Q16581,8I95,1,0,0,w agonist
+Q16581,8I9A,1,0,0,w agonist
+Q16602,3N7R,2,0,0,still_unknown
+Q16602,3N7S,2,0,0,still_unknown
+Q16602,4RWF,1,0,0,still_unknown
+Q16602,4RWG,3,0,0,still_unknown
+Q16602,5V6Y,4,0,0,still_unknown
+Q16602,6D1U,3,0,0,still_unknown
+Q16602,6V2E,1,0,0,w antagonist
+Q16602,6ZHO,3,0,0,still_unknown
+Q16602,6ZIS,3,0,0,still_unknown
+Q16602,7P0F,3,0,0,still_unknown
+Q16602,7P0I,3,0,0,still_unknown
+Q16602,8AX5,3,0,0,still_unknown
+Q16602,8AX6,3,0,0,still_unknown
+Q16602,8AX7,3,0,0,still_unknown
+Q5NUL3,8H4I,1,0,0,still_unknown
+Q5NUL3,8H4L,1,0,0,still_unknown
+Q5NUL3,8ID3,1,0,0,still_unknown
+Q5NUL3,8ID4,1,0,0,still_unknown
+Q5NUL3,8ID6,1,0,0,still_unknown
+Q5NUL3,8ID9,1,0,0,still_unknown
+Q5NUL3,8T3Q,1,0,0,w agonist
+Q5T601,7WU4,1,0,0,still_unknown
+Q5T601,7WU5,1,0,0,still_unknown
+Q5T601,8G2Y,1,0,0,w agonist
+Q5T848,7SHE,4,0,0,still_unknown
+Q5T848,7SHF,4,0,0,still_unknown
+Q6DWJ6,7VUG,1,0,0,still_unknown
+Q6DWJ6,7VUH,1,0,0,still_unknown
+Q6DWJ6,7VUI,1,0,0,still_unknown
+Q6DWJ6,7VUJ,1,0,0,still_unknown
+Q6QNK2,7EPT,1,0,0,still_unknown
+Q86Y34,7D76,5,0,0,still_unknown
+Q86Y34,7D77,5,0,0,still_unknown
+Q8N6U8,8KH4,1,0,0,still_unknown
+Q8N6U8,8SMV,1,0,0,still_unknown
+Q8NFN8,8IEB,2,0,0,still_unknown
+Q8NFN8,8IED,2,0,0,still_unknown
+Q8NFN8,8IEI,2,0,0,still_unknown
+Q8NFN8,8IEP,2,0,0,still_unknown
+Q8NFN8,8IEQ,4,0,0,still_unknown
+Q8TDS4,7ZL9,2,0,0,w agonist
+Q8TDS4,7ZLY,2,0,0,w agonist
+Q8TDS4,8H2G,1,0,0,still_unknown
+Q8TDS4,8I7V,1,0,0,w agonist
+Q8TDS4,8I7W,1,0,0,w agonist
+Q8TDS4,8IHB,2,0,0,w agonist
+Q8TDS4,8IJA,1,0,0,w agonist
+Q8TDS4,8IJB,1,0,0,w agonist
+Q8TDS4,8IY9,1,0,0,w agonist
+Q8TDS4,8J6J,1,0,0,w agonist
+Q8TDS4,8J6L,1,0,0,w agonist
+Q8TDS4,8JIL,2,0,0,still_unknown
+Q8TDS4,8JIM,2,0,0,still_unknown
+Q8TDS4,8K5B,1,0,0,still_unknown
+Q8TDS4,8K5C,1,0,0,still_unknown
+Q8TDS4,8K5D,1,0,0,still_unknown
+Q8TDS7,7Y12,2,0,0,still_unknown
+Q8TDS7,7Y13,1,0,0,still_unknown
+Q8TDS7,7Y14,2,0,0,still_unknown
+Q8TDS7,7Y15,1,0,0,still_unknown
+Q8TDU6,7CFN,3,0,0,still_unknown
+Q8TDU9,7YK6,1,0,0,w agonist
+Q8TDU9,7YK7,1,0,0,still_unknown
+Q8TDV5,7XZ5,1,0,0,still_unknown
+Q8TDV5,8ZR5,1,0,0,still_unknown
+Q92633,4Z34,2,0,0,w antagonist
+Q92633,4Z35,2,0,0,w antagonist
+Q92633,4Z36,2,0,0,w antagonist
+Q92633,7TD0,1,0,0,still_unknown
+Q92633,7TD1,1,0,0,still_unknown
+Q92633,7TD2,1,0,0,still_unknown
+Q92633,7YU3,1,0,0,still_unknown
+Q92633,7YU4,1,0,0,still_unknown
+Q92633,7YU5,1,0,0,still_unknown
+Q92633,7YU6,1,0,0,still_unknown
+Q92633,7YU7,1,0,0,still_unknown
+Q92633,7YU8,1,0,0,still_unknown
+Q92847,6KO5,1,0,0,w antagonist
+Q92847,7F9Y,2,0,0,still_unknown
+Q92847,7F9Z,5,0,0,still_unknown
+Q92847,7NA7,2,0,0,still_unknown
+Q92847,7NA8,2,0,0,still_unknown
+Q92847,7W2Z,2,0,0,w agonist
+Q96LA9,7S8P,1,0,0,still_unknown
+Q96LA9,8YRG,1,0,0,still_unknown
+Q96LB1,7S8N,1,0,0,still_unknown
+Q96LB1,7S8O,1,0,0,still_unknown
+Q96LB1,7VDL,1,0,0,still_unknown
+Q96LB1,7VDM,1,0,0,still_unknown
+Q96LB1,7VUY,1,0,0,still_unknown
+Q96LB1,7VUZ,1,0,0,still_unknown
+Q96LB1,7VV0,1,0,0,still_unknown
+Q96LB1,7VV3,1,0,0,still_unknown
+Q96LB1,7VV4,1,0,0,still_unknown
+Q96LB2,8DWG,1,0,0,w agonist
+Q96P66,8W8R,1,0,0,still_unknown
+Q96P66,8W8S,1,0,0,still_unknown
+Q96RI0,2ZPK,3,0,0,still_unknown
+Q96RJ0,8JLP,1,0,0,still_unknown
+Q96RJ0,8JLQ,1,0,0,still_unknown
+Q96RJ0,8JLR,1,0,0,still_unknown
+Q96RJ0,8W87,1,0,0,still_unknown
+Q96RJ0,8W89,1,0,0,still_unknown
+Q96RJ0,8W8A,1,0,0,still_unknown
+Q96RJ0,8WCA,1,0,0,still_unknown
+Q99500,7C4S,2,0,0,w agonist
+Q99500,7EW3,2,0,0,still_unknown
+Q99500,7EW4,2,0,0,still_unknown
+Q99527,8XOF,1,0,0,still_unknown
+Q99788,7YKD,1,0,0,still_unknown
+Q99788,8SG1,2,0,0,w agonist
+Q99835,4N4W,5,0,0,w agonist
+Q99835,4O9R,1,0,0,still_unknown
+Q99835,4QIN,1,0,0,w agonist
+Q99835,5L7D,2,0,0,w antagonist
+Q99835,5V56,3,0,0,w antagonist
+Q99835,5V57,3,0,0,w antagonist
+Q99835,6OT0,1,0,0,still_unknown
+Q99835,6XBJ,1,0,0,still_unknown
+Q99835,6XBK,1,0,0,still_unknown
+Q99835,6XBL,2,0,0,still_unknown
+Q99835,6XBM,1,0,0,still_unknown
+Q99835,7ZI0,6,0,0,w agonist
+Q9BXA5,8JPN,1,0,0,w agonist
+Q9BXA5,8YKV,1,0,0,w agonist
+Q9BXA5,8YKX,1,0,0,w agonist
+Q9BXC1,8IZB,3,0,0,w agonist
+Q9BXC1,8KH5,2,0,0,still_unknown
+Q9BZJ8,8TB7,1,0,0,still_unknown
+Q9GZN0,7EJX,2,0,0,still_unknown
+Q9H228,7EW1,1,0,0,still_unknown
+Q9H228,7YXA,6,0,0,still_unknown
+Q9H244,4PXZ,3,0,0,w agonist
+Q9H244,4PY0,2,0,0,w agonist
+Q9H244,7PP1,2,0,0,w agonist
+Q9H244,7XXI,1,0,0,still_unknown
+Q9H255,8F76,1,0,0,still_unknown
+Q9NQS5,8G05,2,0,0,w agonist
+Q9NQS5,8J18,1,0,0,still_unknown
+Q9UBS5,6W2Y,8,0,0,still_unknown
+Q9ULV1,5BPB,3,0,0,still_unknown
+Q9ULV1,5BPQ,4,0,0,still_unknown
+Q9ULV1,5BQC,3,0,0,still_unknown
+Q9ULV1,5BQE,5,0,0,still_unknown
+Q9ULV1,5CL1,2,0,0,still_unknown
+Q9ULV1,5CM4,3,0,0,still_unknown
+Q9ULV1,5UWG,3,0,0,still_unknown
+Q9ULV1,6BD4,2,0,0,still_unknown
+Q9ULV1,6NE1,1,0,0,still_unknown
+Q9UNW8,8HQM,1,0,0,w antagonist
+Q9UNW8,8HQN,1,0,0,w antagonist
+Q9UPC5,8IZ4,3,0,0,still_unknown
+Q9UPC5,8K4N,1,0,0,still_unknown
+Q9UPC5,8SAI,1,0,0,w agonist
+Q9UPC5,8WRB,3,0,0,w agonist
+Q9UPC5,8XBE,1,0,0,w agonist
+Q9UPC5,8XBG,1,0,0,w agonist
+Q9UPC5,8XBH,1,0,0,w agonist
+Q9UPC5,8XBI,1,0,0,w agonist
+Q9Y2T5,6LI1,2,0,0,still_unknown
+Q9Y2T5,6LI2,1,0,0,still_unknown
+Q9Y5Y4,7M8W,3,0,0,still_unknown
