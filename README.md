@@ -5,21 +5,12 @@
 
 This repository provides the official implementation and data for the paper: **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"** .
 
-[Link to Paper] ---
-
 ## Abstract
 
 Accurate prediction of ligand-induced activity for G-protein-coupled receptors (GPCRs) is a cornerstone of drug discovery, yet it is challenged by the need to model allosteric communication—the long-range signaling linking ligand binding to distal conformational changes. To address this, we introduce GPCRact, a novel framework that models the biophysical principles of allosteric modulation in GPCR activation. It first constructs a high-resolution, three-dimensional structure-aware graph from the heavy-atom coordinates of functionally critical residues at binding and allosteric sites. A dual attention architecture then captures the activation process... (*이하 생략*)
 
 <br>
-
-<p align="center">
-  <img src="httpse-Based Graph Modeling**
-img width="2055" height="2209" alt="Figure2" src="https://github.com/user-attachments/assets/72ca9f60-2823-48f1-839b-75bf3bc4f79a
-" />
-  <br>
-  <em>Figure: The hierarchical architecture of the GPCRact framework, which models ligand binding and subsequent allosteric signal propagation in two distinct stages.</em>
-</p>
+<img width="2055" height="2209" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
 
 ---
 
@@ -44,16 +35,28 @@ We recommend using Conda to manage the environment.
     ```
 
 ---
+## 📁 Repository Structure
+GPCRact/
+├── .gitignore
+├── LICENSE
+├── README.md
+├── environment.yml         # Conda environment file
+├── requirements.txt        # Pip requirements file
+│
+├── configs/                # Configuration files for training/evaluation
+│   └── training_config.yaml
+│
+├── data/
+│   ├── README.md             # Description of data format and sources
+│   ├── raw/                  # Raw data from ChEMBL, GPCRdb
+│   └── processed/            # Processed data for training and analysis
+│
+├── models/                 # Pre-trained model checkpoints
+│   └── GPCRact_pretrained.pth
+│
+└── src/                    # Source code
+    ├── data_loader.py
+    ├── model.py
+    ├── modules.py
+    └── utils.py
 
-## ▶️ Usage
-
-### 1. Quick Start: Inference with a Pre-trained Model
-
-To predict the activity for a new ligand-GPCR pair using our pre-trained model:
-
-```bash
-python scripts/predict.py \
-    --model_checkpoint 'models/GPCRact_pretrained.pth' \
-    --pdb_file 'path/to/your/gpcr_structure.pdb' \
-    --ligand_smiles 'SMILES_STRING_OF_YOUR_LIGAND' \
-    --output_dir 'results/'
