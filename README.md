@@ -7,7 +7,7 @@ This repository provides the official implementation and data for the paper: **"
 
 
 <br>
-<img width="2055" height="2209" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
+<img width="1500" height="1600" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
 
 ---
 
