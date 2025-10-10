@@ -7,13 +7,14 @@ This repository provides the official implementation and data for the paper: **"
 
 
 <br>
-<img width="1500" height="1600" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
-
+<p align="center">
+ <img width="700" height="800" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
+</p>
 ---
 
-## ⚙️ Installation
+## Installation ⚙️ 
 
-We recommend using Conda to manage the environment.
+We recommend using Conda to manage the environment for full reproducibility.
 
 1.  **Clone the repository:**
     ```bash
@@ -31,7 +32,7 @@ We recommend using Conda to manage the environment.
     pip install -r requirements.txt
     ```
 
-## 🔬 Protocol Overview
+## Protocol Overview 🔬
 
 This repository provides a complete protocol, from data construction to model training.
 
@@ -39,7 +40,7 @@ This repository provides a complete protocol, from data construction to model tr
 2.  **Model Training & Inference:** To train the model using our pre-processed data or make predictions with a pre-trained model, see the `Usage` section below.
 
 
-## ▶️ Usage
+## Usage ▶️
 
 This section provides instructions on how to use the pre-trained model for inference and how to train a new model from scratch.
 
