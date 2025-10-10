@@ -80,6 +80,6 @@ GPCRact/
 ## 🎓 Citation
 Our manuscript is currently under review. If you use GPCRact in your research, we would appreciate it if you could cite our work upon its publication. 
 
----
+
 ## 📬 Contact
 For questions, bug reports, or feedback, please contact Hyojin Son at hyojin0912@kaist.ac.kr.
