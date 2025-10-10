@@ -29,12 +29,12 @@ from scipy.spatial import KDTree
 warnings.filterwarnings("ignore")
 
 # --- Input file paths (Using Heavy-Atom based definitions) ---
-BS_RESIDUES_FILE = "../Output/Region_Definitions/Binding_Sites_Heavy_Atom_based.csv"
-DR_RESIDUES_FILE = "../Output/DA_Analysis/Differential_Residues_Heavy_Atom_based.csv"
-REP_APO_FILE = "../Output/Final/Representative_Apo_Structures.csv"
-REP_CHAIN_FILE = "../Output/Binding_Residue/Rep_GPCR_chain.csv"
-SEQUENCE_INFO_FILE = "../Input/Human_GPCR_PDB_Info.csv"
-GPCR_INFO_FILE = "../Input/ChEMBL_GPCR_Info.csv"
+BS_RESIDUES_FILE = "../data/processed/Binding_Sites_Heavy_Atom_based.csv"
+DR_RESIDUES_FILE = "../data/processed/Differential_Residues_Heavy_Atom_based.csv"
+REP_APO_FILE = "../data/processed/Representative_Apo_Structures_v2.csv"
+REP_CHAIN_FILE = "../data/processed/Rep_GPCR_chain.csv"
+SEQUENCE_INFO_FILE = "../data/processed/Human_GPCR_PDB_Info.csv"
+GPCR_INFO_FILE = "../data/processed/ChEMBL_GPCR_Info.csv"
 
 DATA_DIR = Path("../Data")
 CIF_DIR = DATA_DIR / "CIF_Files"
