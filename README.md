@@ -61,7 +61,8 @@ GPCRact/
 │
 ├── preprocessing/          # Scripts to build the dataset from scratch
 │   ├── README.md             # Guide for the preprocessing pipeline
-│   ├── 01_parse_raw_data.py
+│   ├── 01_parse_pubchem_bioassay.py 
+│   ├── 01_parse_other_databases.py
 │   ├── 02_generate_protein_graphs.py
 │   ├── 03_generate_ligand_graphs.py
 │   └── 04_create_final_dataset.py
