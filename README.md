@@ -12,7 +12,7 @@ This repository provides the official implementation and data for the paper: **"
 </p>
 ---
 
-## Installation ⚙️ 
+## ⚙️ Installation 
 
 We recommend using Conda to manage the environment for full reproducibility.
 
@@ -32,7 +32,7 @@ We recommend using Conda to manage the environment for full reproducibility.
     pip install -r requirements.txt
     ```
 
-## Protocol Overview 🔬
+## 🔬 Protocol Overview 
 
 This repository provides a complete protocol, from data construction to model training.
 
@@ -40,7 +40,7 @@ This repository provides a complete protocol, from data construction to model tr
 2.  **Model Training & Inference:** To train the model using our pre-processed data or make predictions with a pre-trained model, see the `Usage` section below.
 
 
-## Usage ▶️
+## ▶️ Usage 
 
 This section provides instructions on how to use the pre-trained model for inference and how to train a new model from scratch.
 
