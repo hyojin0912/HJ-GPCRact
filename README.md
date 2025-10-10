@@ -77,15 +77,7 @@ GPCRact/
 ```
 
 ## 🎓 Citation
-Our manuscript is currently under review. If you use GPCRact in your research, we would appreciate it if you could cite our work upon its publication. A preliminary BibTeX entry is provided below.
-@article{Son2025GPCRact,
-  title={{GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling}},
-  author={Son, Hyojin and Yi, Gwan-Su},
-  journal={Briefings in Bioinformatics},
-  year={2025},
-  note={Under Review}
-}
-
+Our manuscript is currently under review. If you use GPCRact in your research, we would appreciate it if you could cite our work upon its publication. 
 
 ---
 ## 📬 Contact
