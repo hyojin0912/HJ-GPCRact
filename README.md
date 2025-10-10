@@ -30,35 +30,61 @@ We recommend using Conda to manage the environment.
     ```bash
     pip install -r requirements.txt
     ```
+---
+
+## 🔬 Protocol Overview
+
+This repository provides a complete protocol, from data construction to model training.
+
+1.  **Data Construction (Optional):** To reconstruct the GPCRactDB from scratch, follow the detailed steps in [`preprocessing/README.md`](preprocessing/README.md).
+2.  **Model Training & Inference:** To train the model using our pre-processed data or make predictions with a pre-trained model, see the `Usage` section below.
 
 ---
 ## 📁 Repository Structure
-```markdown
+```plaintext
 GPCRact/
 ├── .gitignore
 ├── LICENSE
 ├── README.md
-├── environment.yml         # Conda environment file
-├── requirements.txt        # Pip requirements file
+├── environment.yml
+├── requirements.txt
 │
-├── configs/                # Configuration files for training/evaluation
+├── configs/                # Configuration files for experiments
 │   └── training_config.yaml
 │
 ├── data/
-│   ├── README.md             # Description of data format and sources
-│   ├── raw/                  # Raw data from ChEMBL, GPCRdb ...
-│   └── processed/            # Processed graph data for training
+│   ├── raw/                  # Raw data collected from public databases
+│   └── processed/            # Processed data for model training
 │
 ├── models/                 # Pre-trained model checkpoints
 │   └── GPCRact_pretrained.pt
 │
-└── src/                    # Source code for the GPCRact model and utilities
+├── preprocessing/          # Scripts to build the dataset from scratch
+│   ├── README.md             # Guide for the preprocessing pipeline
+│   ├── 01_parse_raw_data.py
+│   ├── 02_generate_protein_graphs.py
+│   ├── 03_generate_ligand_graphs.py
+│   └── 04_create_final_dataset.py
+│
+├── scripts/                # Executable scripts for training and inference
+│   └── train.py
+│
+└── src/                    # Source code for the GPCRact library
     ├── data_loader.py
     ├── model.py
     ├── modules.py
-    ├── train.py
     └── utils.py
 ```
+
+## 🎓 Citation
+Our manuscript is currently under review. If you use GPCRact in your research, we would appreciate it if you could cite our work upon its publication. A preliminary BibTeX entry is provided below.
+@article{Son2025GPCRact,
+  title={{GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling}},
+  author={Son, Hyojin and Yi, Gwan-Su},
+  journal={Briefings in Bioinformatics},
+  year={2025},
+  note={Under Review}
+}
 
 
 ---
