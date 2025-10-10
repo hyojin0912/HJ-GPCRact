@@ -75,7 +75,7 @@ GPCRact/
     ├── model.py
     ├── modules.py
     └── utils.py
-
+```
 
 ## 🎓 Citation
 Our manuscript is currently under review. If you use GPCRact in your research, we would appreciate it if you could cite our work upon its publication. 
