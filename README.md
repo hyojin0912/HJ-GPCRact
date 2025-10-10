@@ -30,7 +30,7 @@ We recommend using Conda to manage the environment.
     ```bash
     pip install -r requirements.txt
     ```
----
+
 
 ## 🔬 Protocol Overview
 
@@ -39,7 +39,7 @@ This repository provides a complete protocol, from data construction to model tr
 1.  **Data Construction (Optional):** To reconstruct the GPCRactDB from scratch, follow the detailed steps in [`preprocessing/README.md`](preprocessing/README.md).
 2.  **Model Training & Inference:** To train the model using our pre-processed data or make predictions with a pre-trained model, see the `Usage` section below.
 
----
+
 ## 📁 Repository Structure
 ```plaintext
 GPCRact/
@@ -74,7 +74,7 @@ GPCRact/
     ├── model.py
     ├── modules.py
     └── utils.py
-```
+
 
 ## 🎓 Citation
 Our manuscript is currently under review. If you use GPCRact in your research, we would appreciate it if you could cite our work upon its publication. 
