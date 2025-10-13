@@ -98,7 +98,8 @@ GPCRact/
 │   └── 04_create_final_dataset.py
 │
 ├── scripts/                # Executable scripts for training and inference
-│   └── train.py
+│   ├── train.py
+│   └── predict.py
 │
 └── src/                    # Source code for the GPCRact library
     ├── data_loader.py
