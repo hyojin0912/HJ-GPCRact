@@ -98,7 +98,7 @@ GPCRact/
 │   └── processed/            # Processed data for model training and analysis
 │
 ├── preprocessing/          # Scripts to build the dataset from scratch
-│   ├── README.md             # Guide for the preprocessing pipeline
+│   ├── README.md           
 │   ├── 01_parse_pubchem_bioassay.py 
 │   ├── 01_parse_other_databases.py
 │   ├── 02_generate_protein_graphs.py
