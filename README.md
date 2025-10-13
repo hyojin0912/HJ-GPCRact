@@ -35,8 +35,8 @@ We recommend using Conda to manage the environment for full reproducibility.
 
 This repository provides a complete protocol, from data construction to figure generation.
 
-1.  **Data Construction:** To reconstruct the GPCRactDB from scratch, follow the detailed steps in [`preprocessing/README.md`](preprocessing/README.md).
-2.  **Model Training & Inference:** To train the model using our pre-processed data or make predictions with a pre-trained model, see the `Usage` section below.
+1.  **Data Construction:** To reconstruct the GPCRactDB from scratch, follow the detailed steps in [`preprocessing/`](preprocessing/) directory.
+2.  **Model Training & Inference:** To train the model or make predictions, see the below section.
 3.  **Analysis & Figure Generation:** To reproduce the analyses and figures from our paper, please see the Jupyter Notebooks in the [`analysis/`](analysis/) directory.
 
 ### Step 1: Training the Model 🏋️‍♂️
