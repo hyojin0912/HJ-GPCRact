@@ -95,7 +95,7 @@ GPCRact/
 │
 ├── data/
 │   ├── raw/                  # Raw data collected from public databases
-│   └── processed/            # Processed data for model training
+│   └── processed/            # Processed data for model training and analysis
 │
 ├── preprocessing/          # Scripts to build the dataset from scratch
 │   ├── README.md             # Guide for the preprocessing pipeline
