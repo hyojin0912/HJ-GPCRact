@@ -31,39 +31,14 @@ We recommend using Conda to manage the environment for full reproducibility.
     pip install -r requirements.txt
     ```
 
-## 🔬 Protocol Overview 
+## 🔬 Usage Protocol
 
 This repository provides a complete protocol, from data construction to model training.
 
 1.  **Data Construction:** To reconstruct the GPCRactDB from scratch, follow the detailed steps in [`preprocessing/README.md`](preprocessing/README.md).
 2.  **Model Training & Inference:** To train the model using our pre-processed data or make predictions with a pre-trained model, see the `Usage` section below.
 
-
-## ▶️ Usage 
-
-This section provides instructions on how to use the pre-trained model for inference and how to train a new model from scratch.
-
-### 1. Inference with a Pre-trained Model (Quick Start) 🚀
-
-We provide a script (`scripts/predict.py`) to easily predict the activity of a novel GPCR-ligand pair. This script will generate the necessary graphs on-the-fly from a PDB file and a SMILES string.
-
-**Command:**
-```bash
-python scripts/predict.py \
-    --pdb "path/to/your_receptor.pdb" \
-    --chain "A" \
-    --smiles "OCCOCC" \
-    --model_checkpoint "models/GPCRact_pretrained.pt"
-```
---pdb: Path to the receptor's PDB structure file.
---chain: Chain ID of the receptor in the PDB file (default: 'A').
---smiles: The SMILES string of the ligand.
---model_checkpoint: Path to the pre-trained model file (included in this repository).
-
-### 2. Training a New Model 🏋️‍♂️
-
-To train or fine-tune the GPCRact model on your own data, follow these steps:
-
+### Step 1: Training the Model 🏋️‍♂️
 1. Get the Data
 Reconstruct the entire dataset from raw files by following the guide in [`preprocessing/README.md`](preprocessing/README.md).
 
@@ -76,6 +51,26 @@ Execute the training script from the project root directory:
 python scripts/train.py
 ```
 The script will use the configuration specified in the YAML file. Progress will be logged, and the best model will be saved in the directory defined in the config.
+
+### Step 2: Inference with Your Trained Model 🚀
+
+After training is complete, you can use your own trained model checkpoint to predict the activity of novel GPCR-ligand pairs.
+
+**Command:**
+```bash
+python scripts/predict.py \
+    --pdb "path/to/your_receptor.pdb" \
+    --chain "A" \
+    --smiles "OCCOCC" \
+    --model_checkpoint "path/to/your/trained_model.pt"
+```
+--pdb: Path to the receptor's PDB structure file.
+
+--chain: Chain ID of the receptor in the PDB file (default: 'A').
+
+--smiles: The SMILES string of the ligand.
+
+--model_checkpoint: Path to the model checkpoint file you generated in Step 1.
 
 
 ## 📁 Repository Structure
@@ -93,9 +88,6 @@ GPCRact/
 ├── data/
 │   ├── raw/                  # Raw data collected from public databases
 │   └── processed/            # Processed data for model training
-│
-├── models/                 # Pre-trained model checkpoints
-│   └── GPCRact_pretrained.pt
 │
 ├── preprocessing/          # Scripts to build the dataset from scratch
 │   ├── README.md             # Guide for the preprocessing pipeline
