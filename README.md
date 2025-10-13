@@ -33,10 +33,11 @@ We recommend using Conda to manage the environment for full reproducibility.
 
 ## 🔬 Usage Protocol
 
-This repository provides a complete protocol, from data construction to model training.
+This repository provides a complete protocol, from data construction to figure generation.
 
 1.  **Data Construction:** To reconstruct the GPCRactDB from scratch, follow the detailed steps in [`preprocessing/README.md`](preprocessing/README.md).
 2.  **Model Training & Inference:** To train the model using our pre-processed data or make predictions with a pre-trained model, see the `Usage` section below.
+3.  **Analysis & Figure Generation:** To reproduce the analyses and figures from our paper, please see the Jupyter Notebooks in the [`analysis/`](analysis/) directory.
 
 ### Step 1: Training the Model 🏋️‍♂️
 1. Get the Data
@@ -81,6 +82,13 @@ GPCRact/
 ├── README.md
 ├── environment.yml
 ├── requirements.txt
+│
+├── analysis/               # Analysis and Figure Generation Notebooks
+│   ├── README.md
+│   ├── 01_receptor_dynamics_analysis.ipynb
+│   ├── 02_MSA_3D_correlation_analysis.ipynb
+│   ├── 02_MSA_Ca_correlation_analysis.ipynb
+│   └── 03_activity_decision_tree.ipynb
 │
 ├── configs/                # Configuration files for experiments
 │   └── training_config.yaml
