@@ -1,11 +1,4 @@
 # scripts/predict.py
-"""
-This script provides a command-line interface to predict GPCR-ligand activity
-using a pre-trained GPCRact model. It takes a protein PDB file and a ligand
-SMILES string as input, generates the necessary molecular graphs on-the-fly,
-and outputs the predicted binding and activity class.
-"""
-
 import argparse
 import sys
 import os
@@ -178,10 +171,7 @@ def pdb_to_pyg_graph(pdb_path: Path, chain_id: str) -> Data:
         pos=pos,
         edge_index=torch.empty((2, 0), dtype=torch.long), # The model's EGNN layers build edges implicitly
         node_roles=torch.tensor(node_roles_numeric, dtype=torch.long),
-        bs_mask=torch.tensor(bs_mask_list, dtype=torch.bool),
-        # Dummy attributes to match training data structure
-        gpcr_class_id=torch.tensor([[-1]]),
-        gpcr_family_id=torch.tensor([[-1]])
+        bs_mask=torch.tensor(bs_mask_list, dtype=torch.bool)
     )
 
 def main(args):
@@ -196,10 +186,6 @@ def main(args):
     # 2. Initialize model architecture from config
     print("Initializing model architecture...")
     model_params = config['model']
-    # You may need to manually get num_classes and num_families if not in config
-    # For this example, we hardcode them, but ideally they'd be in the config or a separate file.
-    num_classes = 7 
-    num_families = 32
     model = DAGN_HybridModel(
         protein_in_dim_clean=model_params['protein_in_dim_clean'],
         protein_in_dim_full=model_params['protein_in_dim_full'],
@@ -210,9 +196,7 @@ def main(args):
         element_embedding_dim=model_params['element_embedding_dim'],
         dropout=model_params['dropout'],
         n_attn_heads=model_params['attention_heads'],
-        propagation_attention_layers=model_params['propagation_attention_layers'],
-        num_gpcr_classes=num_classes,
-        num_gpcr_families=num_families
+        propagation_attention_layers=model_params['propagation_attention_layers']
     ).to(device)
 
     # 3. Load pre-trained weights
@@ -263,4 +247,5 @@ if __name__ == "__main__":
     parser.add_argument("--device", type=str, default="cuda", choices=["cuda", "cpu"], help="Device to run inference on.")
     
     args = parser.parse_args()
+
     main(args)
