@@ -50,8 +50,6 @@ class DAGN_HybridModel(nn.Module):
         self.l_to_p_attention = nn.MultiheadAttention(embed_dim=hidden_dim, num_heads=n_attn_heads, dropout=dropout, batch_first=True)
 
         # --- ✅ Module 2: Local Propagation via EGNN ---
-        # This EGNN is now responsible for the initial, structure-aware propagation.
-        # We rename it for clarity. propagation_layers should be defined in CONFIG.
         propagation_config = {"type": protein_config['type'], "n_layers": protein_config['n_layers']} # Use PROTEIN_LAYERS for this
         self.local_propagation_encoder = create_encoder(propagation_config, hidden_dim, hidden_dim)
 
@@ -59,7 +57,6 @@ class DAGN_HybridModel(nn.Module):
         self.hidden_dim = hidden_dim
 
         # ✅ REPLACE single embedding layer with role-specific layers
-        # self.protein_embedding_in = nn.Linear(protein_in_dim_full, hidden_dim) # DELETE this line
         self.protein_embedding_ca = nn.Linear(protein_in_dim_full, hidden_dim)
         self.protein_embedding_sc = nn.Linear(protein_in_dim_full, hidden_dim)
 
@@ -75,16 +72,6 @@ class DAGN_HybridModel(nn.Module):
         self.global_integration_transformer = nn.TransformerEncoder(
             encoder_layer,
             num_layers=propagation_attention_layers
-        )
-        self.gpcr_class_embedding = nn.Embedding(
-            num_embeddings=num_gpcr_classes + 1, 
-            embedding_dim=hidden_dim, 
-            padding_idx=num_gpcr_classes # Assuming default ID -1 is mapped to index num_classes
-        )
-        self.gpcr_family_embedding = nn.Embedding(
-            num_embeddings=num_gpcr_families + 1, 
-            embedding_dim=hidden_dim, 
-            padding_idx=num_gpcr_families
         )
         self.final_norm = nn.LayerNorm(hidden_dim)
 
@@ -145,7 +132,7 @@ class DAGN_HybridModel(nn.Module):
         # =========================================================================
         # STAGE 2: ALLOSTERIC PROPAGATION (✅ REVISED LOGIC FOR CORRECT INFO FLOW)
         # =========================================================================
-        with torch.no_grad(): # Gate 계산은 역전파에 영향을 주지 않음
+        with torch.no_grad():
             gate_weight = torch.sigmoid(binding_logit).squeeze(-1)
             node_gate_weight = gate_weight[protein_batch.batch].unsqueeze(-1)
         
@@ -182,26 +169,15 @@ class DAGN_HybridModel(nn.Module):
         final_h_p = final_padded_h[padding_mask]
 
         # =========================================================================
-        # STAGE 3: ACTIVITY PREDICTION (MODIFIED WITH NEW LOGIC)
+        # STAGE 3: ACTIVITY PREDICTION
         # =========================================================================
         # 1. Pool the node features to get a graph-level protein representation
         pooled_protein_vector = scatter_mean(final_h_p, protein_batch.batch, dim=0)
-
-        class_ids = protein_batch.gpcr_class_id.squeeze(-1).clone()
-        class_ids[class_ids == -1] = self.gpcr_class_embedding.padding_idx
-        
-        family_ids = protein_batch.gpcr_family_id.squeeze(-1).clone()
-        family_ids[family_ids == -1] = self.gpcr_family_embedding.padding_idx
-        
-        # Get graph-level embeddings (Shape: [batch_size, hidden_dim])
-        class_emb = self.gpcr_class_embedding(class_ids)
-        family_emb = self.gpcr_family_embedding(family_ids)
-
-        pooled_protein_vector = pooled_protein_vector + class_emb + family_emb
 
         # 2. Pool the final ligand representation from Stage 1
         final_combined_vector = torch.cat([pooled_protein_vector, ligand_interaction_vector], dim=1)
         # 3. Feed the combined vector to the modified activity head
         activity_type_logit = self.activity_type_head(final_combined_vector)
         
+
         return binding_logit, activity_type_logit, predicted_coords
