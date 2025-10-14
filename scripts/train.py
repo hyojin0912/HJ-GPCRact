@@ -165,8 +165,8 @@ if __name__ == '__main__':
     
     # --- Load and Prepare Data ---
     print("--- Loading and preparing datasets ---")
-    train_full_df = pd.read_csv(CONFIG["DATA_DIR"] / "train_set_scaf_noconflict.csv")
-    test_df = pd.read_csv(CONFIG["DATA_DIR"] / "test_set_scaf_noconflict.csv")
+    train_full_df = pd.read_csv(CONFIG["DATA_DIR"] / "train_set_scaf.csv")
+    test_df = pd.read_csv(CONFIG["DATA_DIR"] / "test_set_scaf.csv")
 
     # Filter the training and test sets
     train_valid_mask = get_valid_indices(train_full_df, CONFIG['PROTEIN_GRAPH_DIR'], CONFIG['LIGAND_GRAPH_DIR'])
@@ -219,16 +219,6 @@ if __name__ == '__main__':
     p_sample, l_sample = next(item for item in train_dataset if item[0] is not None)
     protein_input_dim_clean = p_sample.x_float_clean.shape[1] + CONFIG['ELEMENT_EMBEDDING_DIM']
     protein_input_dim_full = p_sample.x_float_full.shape[1] + CONFIG['ELEMENT_EMBEDDING_DIM']
-    
-    try:
-        with open(CONFIG['PROTEIN_GRAPH_DIR'] / 'class_to_id.json', 'r') as f:
-            num_classes = len(json.load(f))
-        with open(CONFIG['PROTEIN_GRAPH_DIR'] / 'family_to_id.json', 'r') as f:
-            num_families = len(json.load(f))
-        print(f"Found {num_classes} GPCR classes and {num_families} families for embedding layers.")
-    except FileNotFoundError:
-        print("Error: class_to_id.json or family_to_id.json not found!")
-        sys.exit(1)
 
     model = DAGN_HybridModel(
         protein_in_dim_clean=protein_input_dim_clean,
@@ -240,9 +230,7 @@ if __name__ == '__main__':
         element_embedding_dim=CONFIG['ELEMENT_EMBEDDING_DIM'],
         dropout=CONFIG['DROPOUT'],
         n_attn_heads=CONFIG['ATTENTION_HEADS'],
-        propagation_attention_layers=CONFIG['PROPAGATION_ATTENTION_LAYERS'],
-        num_gpcr_classes=num_classes,
-        num_gpcr_families=num_families
+        propagation_attention_layers=CONFIG['PROPAGATION_ATTENTION_LAYERS']
     ).to(CONFIG['DEVICE'])
 
     # Binary classification for binding (Binder vs Non-binder)
@@ -255,7 +243,7 @@ if __name__ == '__main__':
     model_save_path = CONFIG["MODEL_SAVE_DIR"] / "dagn_hierarchical_head.pt"
     early_stopper = EarlyStopping(patience=CONFIG['EARLY_STOPPING_PATIENCE'], verbose=True, path=model_save_path, mode='max')
     
-    print("DAGN Hierarchical Head v3 Model initialized. Starting training...")
+    print("DAGN Hierarchical Head Model initialized. Starting training...")
     
     # --- Training Loop ---
     for epoch in range(1, CONFIG["EPOCHS"] + 1):
@@ -307,4 +295,5 @@ if __name__ == '__main__':
     print(f"Prediction CSVs saved in: {CONFIG['RESULTS_DIR']}")
 
 if __name__ == '__main__':
+
     main()
