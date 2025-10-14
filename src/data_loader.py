@@ -34,7 +34,6 @@ class GraphDataset(PyGDataset):
             
             original_x = protein_graph.x
             
-            # --- START OF MODIFICATION ---
             # The new 'x' format from graph generation is:
             # AA(20)|is_bs(1)|ago(1)|ant(1)|elem_idx(1)|rel_pos(3)|dist(1)|rdkit(7)
             # Total dimensions = 20+1+2+1+3+1+7 = 35
@@ -69,8 +68,6 @@ class GraphDataset(PyGDataset):
             # The data is already a tensor, so no conversion is needed.
             protein_graph.node_roles = protein_graph.node_role
             del protein_graph.node_role
-
-            # --- END OF MODIFICATION ---
 
             # Add labels and identifiers (this part is unchanged)
             protein_graph.binding_label = torch.tensor([binding_label], dtype=torch.float)
@@ -108,14 +105,11 @@ def get_valid_indices(df, protein_dir, ligand_dir):
             ligand_graph = torch.load(l_path, map_location='cpu', weights_only=False)
             if ligand_graph.num_nodes <= 1 or ligand_graph.num_edges == 0:
                 return False
-
-            # --- ✅ NEW VALIDATION STEP ---
+                
             # 3. Load protein graph and check for essential attributes for the model
             protein_graph = torch.load(p_path, map_location='cpu', weights_only=False)
             # Check if attributes required by the model's forward pass exist
-            if not hasattr(protein_graph, 'gpcr_class_id') or \
-               not hasattr(protein_graph, 'gpcr_family_id') or \
-               not hasattr(protein_graph, 'node_role'): # or any other essential attribute
+            if not hasattr(protein_graph, 'node_role'):
                 # This graph is missing critical metadata, mark as invalid
                 return False
         except Exception as e:
@@ -137,4 +131,5 @@ def collate_fn(data_list):
     ligand_batch = Batch.from_data_list(l)
     
     # Identifiers are already in the protein_graph object from the Dataset
+
     return protein_batch, ligand_batch
