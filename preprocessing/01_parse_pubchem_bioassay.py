@@ -235,7 +235,7 @@ def main():
     download_pubchem_json_files()
 
     # Step 2: Load AID mapping and process metadata
-    df = pd.read_csv('./DB/PubChem/tb_aid_act_gpcr.csv', dtype={'GENE_ID': str})
+    df = pd.read_csv('./data/raw/tb_aid_act_gpcr.csv', dtype={'GENE_ID': str})
     aid_to_uniprot_gene_name = df.dropna(subset=['UNIPROT_GENE_NAME']).set_index('AID')['UNIPROT_GENE_NAME'].str.lower().to_dict()
     aids = df['AID'].unique().tolist()
 
@@ -263,4 +263,5 @@ def main():
     print(f"Activity data extracted for {len(activity_df)} entries. Failed AIDs: {len(failed_aids)}")
 
 if __name__ == "__main__":
+
     main()
