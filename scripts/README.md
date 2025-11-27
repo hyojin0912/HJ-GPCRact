@@ -2,11 +2,6 @@
 
 This directory contains the executable scripts to train the GPCRact model, perform inference on new data, and run hyperparameter optimization (HPO).
 
-## Table of Contents
-1. [Train the Model]
-2. [Run Inference]
-3. [Hyperparameter Optimization]
-
 
 ## 1. Train the Model
 
