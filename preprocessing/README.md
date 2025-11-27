@@ -34,11 +34,13 @@ This script processes ligand SMILES strings to generate molecular graphs.
 python preprocessing/03_generate_ligand_graphs.py
 ```
 
-### Step 4: Create Final Dataset Splits
+### Step 4: Create Final Dataset & Scaffold Splits (Key Step)
+This notebook merges all information and performs the Scaffold-based clustering and splitting. It generates the final train.csv, val.csv, and test.csv files used for model training.
 
-This final script merges all information and creates the final training, validation, and test sets using a scaffold split.
+Note: This is provided as a Jupyter Notebook (.ipynb) to visualize the scaffold clustering distribution and validate the train-test separation (sanity check).
+Open the notebook in Jupyter and Run all cells to generate the splits in `data/splits/.`
 
 ```bash
-python preprocessing/04_create_final_dataset.py
+jupyter notebook preprocessing/04_create_final_dataset.ipynb
 ```
 
