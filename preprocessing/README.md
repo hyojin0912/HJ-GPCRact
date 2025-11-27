@@ -37,7 +37,8 @@ python preprocessing/03_generate_ligand_graphs.py
 ### Step 4: Create Final Dataset & Scaffold Splits (Key Step)
 This notebook merges all information and performs the Scaffold-based clustering and splitting. It generates the final train.csv, val.csv, and test.csv files used for model training.
 
-Note: This is provided as a Jupyter Notebook (.ipynb) to visualize the scaffold clustering distribution and validate the train-test separation (sanity check).
+* Note: This is provided as a Jupyter Notebook (.ipynb) to visualize the scaffold clustering distribution and validate the train-test separation (sanity check).
+
 Open the notebook in Jupyter and Run all cells to generate the splits in `data/splits/.`
 
 ```bash
