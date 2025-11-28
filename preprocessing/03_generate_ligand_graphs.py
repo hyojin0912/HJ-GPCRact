@@ -16,7 +16,7 @@ from torch_geometric.data import Data
 
 # --- Configuration ---
 # Input file with SMILES data
-LIGAND_DATABASE_FILE = "../Input/data.csv"
+LIGAND_DATABASE_FILE = "../data/raw/GPCRactDB_v1.csv"
 
 # Output directories
 SDF_OUTPUT_DIR = "../Data/Ligand_SDF/"
@@ -44,7 +44,6 @@ print(f"{len(sdf_to_process_df)} ligands need 3D conformer generation.")
 existing_graph_ikeys = {f.split('.')[0] for f in os.listdir(GRAPH_OUTPUT_DIR) if f.endswith('.pt')}
 graphs_to_process_df = unique_ligands_df[~unique_ligands_df['Ikey'].isin(existing_graph_ikeys)]
 print(f"{len(graphs_to_process_df)} ligands need graph conversion.")
-
 
 # 3D Conformer Generation (SMILES → SDF)
 def generate_3d_sdf_from_smiles(smiles: str, output_path: str, random_seed: int = 42) -> bool:
@@ -90,7 +89,6 @@ if not sdf_to_process_df.empty:
     print(f"\nSuccessfully generated {successful_count} new SDF files.")
 else:
     print("\n--- All SDF files already exist. Skipping generation. ---")
-
 
 # 3D Graph Featurization (SDF → PyG Data)
 def get_atom_features(atom):
