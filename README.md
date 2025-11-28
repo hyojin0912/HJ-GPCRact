@@ -16,7 +16,7 @@ We provide the complete source code, preprocessed datasets, training scripts, an
 
 ## 📋 Table of Contents
 - [Repository Structure](#-repository-structure)
-- [Installation](#-installation)
+- [Installation](#installation)
 - [Reproducibility Workflow](#-reproducibility-workflow)
   - [Step 1: Data Construction](#step-1-data-construction)
   - [Step 2: Model Training](#step-2-training-the-model-)
