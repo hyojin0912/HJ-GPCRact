@@ -29,18 +29,18 @@ from scipy.spatial import KDTree
 warnings.filterwarnings("ignore")
 
 # --- Input file paths (Using Heavy-Atom based definitions) ---
-BS_RESIDUES_FILE = "../data/processed/Binding_Sites_Heavy_Atom_based.csv"
-DR_RESIDUES_FILE = "../data/processed/Differential_Residues_Heavy_Atom_based.csv"
-REP_APO_FILE = "../data/processed/Representative_Apo_Structures_v2.csv"
-REP_CHAIN_FILE = "../data/processed/Rep_GPCR_chain.csv"
-SEQUENCE_INFO_FILE = "../data/processed/Human_GPCR_PDB_Info.csv"
-GPCR_INFO_FILE = "../data/processed/ChEMBL_GPCR_Info.csv"
+BS_RESIDUES_FILE = "../data/resources/Binding_Sites_Heavy_Atom_based.csv"
+DR_RESIDUES_FILE = "../data/resources/Differential_Residues_Heavy_Atom_based.csv"
+REP_APO_FILE = "../data/resources/Representative_Apo_Structures_v2.csv"
+REP_CHAIN_FILE = "../data/resources/Rep_GPCR_chain.csv"
+SEQUENCE_INFO_FILE = "../data/resources/Human_GPCR_PDB_Info.csv"
+GPCR_INFO_FILE = "../data/resources/ChEMBL_GPCR_Info.csv"
 
 DATA_DIR = Path("../Data")
 CIF_DIR = DATA_DIR / "CIF_Files"
 AF_DIR = DATA_DIR / "AF_PDB"
 
-K_NEIGHBORS = 128 
+K_NEIGHBORS = 64 
 DATA_DIR = Path("../Data")
 OUTPUT_DIR = Path("../Data/Protein_Graphs_PyG/") # New output dir
 OUTPUT_DIR.mkdir(exist_ok=True)
@@ -187,7 +187,6 @@ def create_uniprot_to_pdb_res_map(chain_obj, uniprot_seq):
 
 print("Helper functions are ready.")
 
-
 # Function based atom selection
 KEY_ATOMS_MAP = {
     # --- Aliphatic ---
@@ -264,35 +263,6 @@ gpcr_info_df = pd.read_csv(GPCR_INFO_FILE)
 # This makes the code more robust.
 gpcr_info_df['UniProt Accessions'] = gpcr_info_df['UniProt Accessions'].str.split('; ')
 gpcr_info_df = gpcr_info_df.explode('UniProt Accessions').dropna(subset=['UniProt Accessions'])
-
-# Create unique integer IDs for 'Class'
-all_classes = sorted(gpcr_info_df['Class'].unique())
-class_to_id = {name: i for i, name in enumerate(all_classes)}
-gpcr_info_df['class_id'] = gpcr_info_df['Class'].map(class_to_id)
-
-# Create unique integer IDs for 'Receptor Family'
-all_families = sorted(gpcr_info_df['Receptor Family'].unique())
-family_to_id = {name: i for i, name in enumerate(all_families)}
-gpcr_info_df['family_id'] = gpcr_info_df['Receptor Family'].map(family_to_id)
-
-# Create the final lookup dictionaries from UniProt ID to integer ID
-uniprot_to_class_id = pd.Series(
-    gpcr_info_df.class_id.values, 
-    index=gpcr_info_df['UniProt Accessions']
-).to_dict()
-
-uniprot_to_family_id = pd.Series(
-    gpcr_info_df.family_id.values, 
-    index=gpcr_info_df['UniProt Accessions']
-).to_dict()
-
-# Save the mappings for later use in model training
-import json
-with open(OUTPUT_DIR / 'class_to_id.json', 'w') as f:
-    json.dump(class_to_id, f, indent=4)
-with open(OUTPUT_DIR / 'family_to_id.json', 'w') as f:
-    json.dump(family_to_id, f, indent=4)
-
 
 # --- 3. Main Graph Construction Loop ---
 for uniprot_id, apo_info in tqdm(rep_apo_map.items(), desc="Generating Enhanced Protein Graphs"):
