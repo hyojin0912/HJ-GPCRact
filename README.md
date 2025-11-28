@@ -13,22 +13,22 @@ We provide the complete source code, preprocessed datasets, training scripts, an
  <img width="700" height="800" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
 </p>
 
-
 ## 📋 Table of Contents
-- [Repository Structure](#-repository-structure)
+- [Repository Structure](#repository-structure)
 - [Installation](#installation)
-- [Reproducibility Workflow](#-reproducibility-workflow)
+- [Reproducibility Workflow](#reproducibility-workflow)
   - [Step 1: Data Construction](#step-1-data-construction)
-  - [Step 2: Model Training](#step-2-training-the-model-)
-  - [Step 3: Inference](#step-3-inference-)
-  - [Step 4: Benchmarking](#step-4-benchmarking-)
-  - [Step 5: Analysis & Figure Generation](#step-5-analysis--figure-generation-)
-- [Citation](#-citation)
-- [Contact](#-contact)
+  - [Step 2: Model Training](#step-2-training)
+  - [Step 3: Inference](#step-3-inference)
+  - [Step 4: Benchmarking](#step-4-benchmarking)
+  - [Step 5: Analysis & Figure Generation](#step-5-analysis)
+- [Citation](#citation)
+- [Contact](#contact)
 
 ---
 
-## 📁 Repository Structure
+
+## <a id="repository-structure"></a>📁 Repository Structure
 
 We have unified all resources into a single structured repository to facilitate full reproducibility.
 
@@ -49,7 +49,7 @@ GPCRact/
 └── README.md           # Master documentation
 ```
 
-## ⚙️ Installation 
+## <a id="installation"></a>⚙️ Installation 
 
 We recommend using **Conda** to manage the environment for full reproducibility.
 
