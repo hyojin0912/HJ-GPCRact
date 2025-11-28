@@ -72,8 +72,7 @@ We recommend using **Conda** to manage the environment for full reproducibility.
 ## <a id="reproducibility-workflow"></a>🔬 Reproducibility Workflow
 
 This section explicitly delineates the steps to reproduce the results reported in our study.
-
-<a id="step-1-data-construction"></a>Step 1: Data Construction
+**<a id="step-1-data-construction"></a>Step 1: Data Construction**
 
 Users can reconstruct the GPCRactDB from raw public data or use the pre-generated splits provided in `data/splits/`. To build from scratch, follow the pipeline in the `preprocessing/` directory:
 ```bash
