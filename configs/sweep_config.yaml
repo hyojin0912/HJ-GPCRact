@@ -1,0 +1,25 @@
+program: scripts/hyperparam_opt.py
+method: bayes
+metric:
+  name: val_bacc
+  goal: maximize
+
+parameters:
+  k_nn:
+    values: [32, 64, 128]
+  propagation_attn_layers:
+    values: [2, 3, 4, 5]
+  attention_heads:
+    values: [2, 4, 8]
+  hidden_dim:
+    value: 128
+  learning_rate:
+    value: 0.0001
+  dropout:
+    value: 0.4
+  weight_decay:
+    value: 0.00001
+  batch_size:
+    value: 16
+  epochs:
+    value: 50
