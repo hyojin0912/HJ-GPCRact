@@ -2,18 +2,55 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
+[![Dataset](https://img.shields.io/badge/Dataset-GPCRactDB-green.svg)](data/)
 
-This repository provides the official implementation and data for the paper: **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"** .
+This repository serves as the official implementation and reproducibility package for the paper **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"**.
 
+We provide the complete source code, preprocessed datasets, training scripts, and analysis notebooks required to reproduce the findings presented in the manuscript.
 
 <br>
 <p align="center">
  <img width="700" height="800" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
 </p>
 
+## 📋 Table of Contents
+- [Repository Structure](#-repository-structure)
+- [Installation](#-installation)
+- [Reproducibility Workflow](#-reproducibility-workflow)
+  - [Step 1: Data Construction](#step-1-data-construction)
+  - [Step 2: Model Training](#step-2-model-training)
+  - [Step 3: Inference](#step-3-inference)
+  - [Step 4: Benchmarking](#step-4-benchmarking)
+  - [Step 5: Analysis & Figure Generation](#step-5-analysis--figure-generation)
+- [Citation](#-citation)
+- [Contact](#-contact)
+
+---
+
+## 📁 Repository Structure
+
+We have unified all resources into a single structured repository to facilitate full reproducibility.
+
+```plaintext
+GPCRact/
+├── analysis/           # Jupyter Notebooks for reproducing figures and statistical analyses
+├── benchmarks/         # Implementation of baseline models (DeepREAL, AiGPro, 3D-GNN)
+├── configs/            # Configuration files (YAML) for training and HPO
+├── data/               # Datasets
+│   ├── raw/            # Raw data files
+│   ├── processed/      # Graph tensors and intermediate files
+│   ├── resources/      # Auxiliary bio-info files (PDB info, MSA, etc.)
+│   └── splits/         # Exact Train/Val/Test scaffold splits used in the paper
+├── preprocessing/      # Scripts to reconstruct the dataset from scratch
+├── scripts/            # Executable scripts for Training, Inference, and HPO
+├── src/                # Core library code (Model architecture, Layers, Dataloaders)
+├── environment.yml     # Conda environment file
+└── README.md           # Master documentation
+```
+
 ## ⚙️ Installation 
 
-We recommend using Conda to manage the environment for full reproducibility.
+We recommend using **Conda** to manage the environment for full reproducibility.
 
 1.  **Clone the repository:**
     ```bash
@@ -31,90 +68,69 @@ We recommend using Conda to manage the environment for full reproducibility.
     pip install -r requirements.txt
     ```
 
-## 🔬 Usage Protocol
+## 🔬 Reproducibility Workflow
 
-This repository provides a complete protocol, from data construction to figure generation.
+This section explicitly delineates the steps to reproduce the results reported in our study.
 
-1.  **Data Construction:** To reconstruct the GPCRactDB from scratch, follow the detailed steps in [`preprocessing/`](preprocessing/) directory.
-2.  **Model Training & Inference:** To train the model or make predictions, see the below section.
-3.  **Analysis & Figure Generation:** To reproduce the analyses and figures from our paper, please see the Jupyter Notebooks in the [`analysis/`](analysis/) directory.
+**Step 1: Data Construction**
 
-### Step 1: Training the Model 🏋️‍♂️
-1. Get the Data
-Reconstruct the entire dataset from raw files by following the guide in [`preprocessing/README.md`](preprocessing/README.md).
-
-2. Configure Training:
-Modify the parameters in `configs/training_config.yaml` to fit your experiment (e.g., learning rate, batch size, data paths).
-
-3. Run Training:
-Execute the training script from the project root directory:
+Users can reconstruct the GPCRactDB from raw public data or use the pre-generated splits provided in `data/splits/`. To build from scratch, follow the pipeline in the `preprocessing/` directory:
 ```bash
-python scripts/train.py
+# Example: Running the final dataset creation step
+jupyter notebook preprocessing/04_create_final_dataset.ipynb
 ```
-The script will use the configuration specified in the YAML file. Progress will be logged, and the best model will be saved in the directory defined in the config.
+- Note: The exact scaffold-based split files (`scaffold_train.csv`, `scaffold_val.csv`, `scaffold_test.csv`) used in our study are already provided in `data/splits/` to ensure fair benchmarking.
 
-### Step 2: Inference with Your Trained Model 🚀
+### Step 2: Training the Model 🏋️‍♂️
 
-After training is complete, you can use your own trained model checkpoint to predict the activity of novel GPCR-ligand pairs.
+To train the GPCRact model from scratch using the provided splits:
 
-**Command:**
+1. **Configure**: Modify `configs/training_config.yaml` if necessary.
+2. **Run**: Execute the training script.
+
 ```bash
-python scripts/predict.py \
-    --pdb "path/to/your_receptor.pdb" \
-    --chain "A" \
-    --smiles "OCCOCC" \
-    --model_checkpoint "path/to/your/trained_model.pt"
+python scripts/train.py \
+    --data_dir data/splits \
+    --save_dir checkpoints/ \
+    --epochs 100
 ```
---pdb: Path to the receptor's PDB structure file.
-
---chain: Chain ID of the receptor in the PDB file (default: 'A').
-
---smiles: The SMILES string of the ligand.
-
---model_checkpoint: Path to the model checkpoint file you generated in Step 1.
+For detailed arguments, see `scripts/README.md`.
 
 
-## 📁 Repository Structure
-```plaintext
-GPCRact/
-├── .gitignore
-├── LICENSE
-├── README.md
-├── environment.yml
-├── requirements.txt
-│
-├── analysis/               # Analysis and Figure Generation Notebooks
-│   ├── README.md
-│   ├── 01_receptor_dynamics_analysis.ipynb
-│   ├── 02_MSA_3D_correlation_analysis.ipynb
-│   ├── 02_MSA_Ca_correlation_analysis.ipynb
-│   └── 03_activity_decision_tree.ipynb
-│
-├── configs/                # Configuration files for experiments
-│   └── training_config.yaml
-│
-├── data/
-│   ├── raw/                  # Raw data collected from public databases
-│   └── processed/            # Processed data for model training and analysis
-│
-├── preprocessing/          # Scripts to build the dataset from scratch
-│   ├── README.md           
-│   ├── 01_parse_pubchem_bioassay.py 
-│   ├── 01_parse_other_databases.py
-│   ├── 02_generate_protein_graphs.py
-│   ├── 03_generate_ligand_graphs.py
-│   └── 04_create_final_dataset.py
-│
-├── scripts/                # Executable scripts for training and inference
-│   ├── train.py
-│   └── predict.py
-│
-└── src/                    # Source code for the GPCRact library
-    ├── data_loader.py
-    ├── model.py
-    ├── modules.py
-    └── utils.py
+### Step 3: Inference 🚀
+
+To predict the activity (Agonist/Antagonist/Non-binder) of novel GPCR-ligand pairs using a trained model:
+
+```bash
+python scripts/inference.py \
+    --data_dir data/splits \
+    --model_path checkpoints/best_model.pt \
+    --output_dir results/
 ```
+
+### Step 4: Benchmarking 📊
+We provide the full source code and execution scripts for the baseline models compared in the manuscript (**DeepREAL**, **AiGPro**, **3D-GNN**). All baselines were retrained on the identical GPCRact dataset.
+* **DeepREAL**: See `benchmarks/DeepREAL/`
+
+* **AiGPro**: See `benchmarks/AiGPro/` (Docker support included)
+
+* **3D-GNN Baseline**: See `benchmarks/3D-GNN/`
+
+
+### Step 5: Analysis & Figure Generation 📉
+
+To reproduce the statistical analyses, mechanistic interpretations, and main figures (Fig 1, 3, 4, 7), run the notebooks in the `analysis/` directory.
+
+* `01_receptor_dynamics_analysis.ipynb`: Structural ground truth analysis (Fig 1).
+
+* `02_sequence_structure_correlation.ipynb`: MSA vs. 3D dynamics (Fig 3).
+
+* `03_activity_decision_tree.ipynb`: Decision tree for activity rules (Fig 4).
+
+* `04_mechanistic_interpretability.ipynb`: Attention weight analysis (Fig 7).
+
+_Supplementary Validations_: PRS analysis, Sensitivity analysis, and Mutation studies are also included.
+
 
 ## 🎓 Citation
 Our manuscript is currently under review. If you use GPCRact in your research, we would appreciate it if you could cite our work upon its publication. 
