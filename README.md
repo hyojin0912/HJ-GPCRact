@@ -138,4 +138,5 @@ Our manuscript is currently under review. If you use GPCRact in your research, w
 
 
 ## <a id="contact"></a>📬 Contact
-For questions, bug reports, or feedback, please contact Hyojin Son at hyojin0912@kaist.ac.kr.
+For questions, bug reports, or feedback, please contact Hyojin Son at hyojin0912@kaist.ac.kr. <img width="65" height="60" alt="image" src="https://github.com/user-attachments/assets/318cf6f3-2c2a-4fad-906f-2f28293a1b62" />
+
