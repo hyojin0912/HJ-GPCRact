@@ -40,7 +40,7 @@ Some notebooks require trained model artifacts and processed graph datasets. Sin
 
 ### 3. Supplementary Validations
 
-* **[`05_supplementary_PRS_analysis.ipynb`](05_supplementary_PRS_analysis.ipynb)**
+* **[`05_PRS_analysis.ipynb`](05_PRS_analysis.ipynb)**
     * **Objective:** Comparison with classical biophysical methods.
     * **Content:** Implements Perturbation Response Scanning (PRS) using ProDy to compare intrinsic protein dynamics against the ligand-conditioned functional predictions of GPCRact.
 
