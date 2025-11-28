@@ -2,10 +2,10 @@
 SEED: 0
 DEVICE: "cuda"  # "cuda" if torch.cuda.is_available() else "cpu"
 PROTEIN_GRAPH_TYPE: "ca_furthest_enhanced"
-EPOCHS: 200 # Max epochs, will be stopped by EarlyStopping
+EPOCHS: 100 # Max epochs, will be stopped by EarlyStopping
 
 # --- Data Paths ---
-DATA_DIR: "/home/hyojin0912/Activity/Final/input/activity/"
+DATA_DIR: "/home/hyojin0912/Activity/data/"
 PROTEIN_GRAPH_DIR: "../Data/Protein_Graphs_PyG/"
 LIGAND_GRAPH_DIR: "../Data/Ligand_Graphs_PyG/"
 CACHE_DIR: "./data/activity/cache/"
@@ -26,7 +26,7 @@ DROPOUT: 0.4
 WEIGHT_DECAY: 0.00001
 GPU_BATCH_SIZE: 16
 ACCUMULATION_STEPS: 32
-EARLY_STOPPING_PATIENCE: 15
+EARLY_STOPPING_PATIENCE: 10
 W_FN_BIND: 1.5
 
 # --- Output Paths ---
