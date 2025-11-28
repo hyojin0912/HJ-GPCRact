@@ -38,8 +38,7 @@ GPCRact/
 ├── benchmarks/         # Implementation of baseline models (DeepREAL, AiGPro, 3D-GNN)
 ├── configs/            # Configuration files (YAML) for training and HPO
 ├── data/               # Datasets
-│   ├── raw/            # Raw data files
-│   ├── processed/      # Graph tensors and intermediate files
+│   ├── raw/            # Raw data files (GPCRactDB v1)
 │   ├── resources/      # Auxiliary bio-info files (PDB info, MSA, etc.)
 │   └── splits/         # Exact Train/Val/Test scaffold splits used in the paper
 ├── preprocessing/      # Scripts to reconstruct the dataset from scratch
