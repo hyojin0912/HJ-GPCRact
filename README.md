@@ -72,6 +72,7 @@ We recommend using **Conda** to manage the environment for full reproducibility.
 ## <a id="reproducibility-workflow"></a>🔬 Reproducibility Workflow
 
 This section explicitly delineates the steps to reproduce the results reported in our study.
+
 **<a id="step-1-data-construction"></a>Step 1: Data Construction**
 
 Users can reconstruct the GPCRactDB from raw public data or use the pre-generated splits provided in `data/splits/`. To build from scratch, follow the pipeline in the `preprocessing/` directory:
@@ -81,7 +82,7 @@ jupyter notebook preprocessing/04_create_final_dataset.ipynb
 ```
 - Note: The exact scaffold-based split files (`scaffold_train.csv`, `scaffold_val.csv`, `scaffold_test.csv`) used in our study are already provided in `data/splits/` to ensure fair benchmarking.
 
-### Step 2: Training the Model 🏋️‍♂️
+**<a id="step-2-training"></a>Step 2: Training the Model 🏋️‍♂️**
 
 To train the GPCRact model from scratch using the provided splits:
 
@@ -97,7 +98,7 @@ python scripts/train.py \
 For detailed arguments, see `scripts/README.md`.
 
 
-### Step 3: Inference 🚀
+**### <a id="step-3-inference"></a>Step 3: Inference 🚀**
 
 To predict the activity (Agonist/Antagonist/Non-binder) of novel GPCR-ligand pairs using a trained model:
 
