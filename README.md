@@ -18,12 +18,13 @@ We provide the complete source code, preprocessed datasets, training scripts, an
 - [Installation](#-installation)
 - [Reproducibility Workflow](#-reproducibility-workflow)
   - [Step 1: Data Construction](#step-1-data-construction)
-  - [Step 2: Model Training](#step-2-model-training)
-  - [Step 3: Inference](#step-3-inference)
-  - [Step 4: Benchmarking](#step-4-benchmarking)
-  - [Step 5: Analysis & Figure Generation](#step-5-analysis--figure-generation)
+  - [Step 2: Model Training](#step-2-training-the-model-)
+  - [Step 3: Inference](#step-3-inference-)
+  - [Step 4: Benchmarking](#step-4-benchmarking-)
+  - [Step 5: Analysis & Figure Generation](#step-5-analysis--figure-generation-)
 - [Citation](#-citation)
 - [Contact](#-contact)
+
 
 ---
 
