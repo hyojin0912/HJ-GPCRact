@@ -5,7 +5,7 @@ PROTEIN_GRAPH_TYPE: "ca_furthest_enhanced"
 EPOCHS: 100 # Max epochs, will be stopped by EarlyStopping
 
 # --- Data Paths ---
-DATA_DIR: "/home/hyojin0912/Activity/data/"
+DATA_DIR: "./Activity/data/" # "/home/hyojin0912/Activity/data/"
 PROTEIN_GRAPH_DIR: "../Data/Protein_Graphs_PyG/"
 LIGAND_GRAPH_DIR: "../Data/Ligand_Graphs_PyG/"
 CACHE_DIR: "./data/activity/cache/"
