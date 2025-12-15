@@ -371,7 +371,7 @@ for uniprot_id, apo_info in tqdm(rep_apo_map.items(), desc="Generating Enhanced 
         if not uniprot_to_pdb_res_map: continue
         
         # NEW: Pre-fetch RDKit features for the entire structure
-        rdkit_features = get_rdkit_features(structure_path, chain_id)
+        rdkit_features = get_rdkit_features(structure, chain_id)
 
         # --- NODE SELECTION (Ensemble: C-alpha + Furthest + Key Atoms) --- # UPDATED
         node_atoms = []
