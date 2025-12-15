@@ -1,0 +1,28 @@
+# =============================================================================
+# GPCRact (pip dependencies)
+# - Use with environment.yml (conda). This file installs the GPU/graph-DL stack.
+# - CUDA 12.1 build (matches the pinned PyTorch wheels below)
+# =============================================================================
+
+# PyTorch CUDA wheels
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+torch==2.5.1+cu121
+torchvision==0.20.1+cu121
+torchaudio==2.5.1+cu121
+
+# PyTorch Geometric (PyG) wheels (must match your torch+cuda)
+-f https://data.pyg.org/whl/torch-2.5.0+cu121.html
+
+torch-geometric==2.6.1
+pyg-lib==0.4.0+pt25cu121
+torch-scatter==2.1.2+pt25cu121
+torch-sparse==0.6.18+pt25cu121
+torch-cluster==1.6.3+pt25cu121
+torch-spline-conv==1.2.2+pt25cu121
+
+# Dataset tooling used in preprocessing (imported as `chembl_downloader`)
+chembl-downloader>=0.4.0
+
+# Optional experiment tracking (used in some scripts; safe to remove if unused)
+wandb>=0.17.0

@@ -1,0 +1,25 @@
+name: gpcract
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip>=23
+  # Core scientific stack
+  - numpy>=1.26
+  - pandas>=2.2
+  - scipy>=1.11
+  - scikit-learn>=1.4
+  - tqdm>=4.66
+  - requests>=2.32
+  - pyyaml>=6.0
+  # Bio/Chem
+  - biopython>=1.83
+  - rdkit>=2024.03
+  # Plotting / notebooks (analysis + reproducibility)
+  - matplotlib>=3.8
+  - seaborn>=0.13
+  - jupyterlab>=4.2
+  - ipykernel>=6.29
+  # Install GPU/graph-DL stack via pip for correct PyTorch-Geometric wheels
+  - pip:
+      - -r requirements.txt
