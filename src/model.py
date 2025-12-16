@@ -134,7 +134,7 @@ class DAGN_HybridModel(nn.Module):
 
         for i in range(self.local_propagation_encoder.n_layers):
             h[bs_mask] = h[bs_mask] + gated_ligand_signal
-            h, _, _ = self.local_propagation_encoder._modules[f"gcl_{i}"](h, protein_batch.edge_index, coord)
+            h, coord, _ = self.local_propagation_encoder._modules[f"gcl_{i}"](h, protein_batch.edge_index, coord)
         
         h = h + h_initial_for_residual
         h_after_egnn = self.local_propagation_encoder.embedding_out(h)
@@ -166,4 +166,5 @@ class DAGN_HybridModel(nn.Module):
         final_combined_vector = torch.cat([pooled_protein_vector, ligand_interaction_vector], dim=1)
         activity_type_logit = self.activity_type_head(final_combined_vector)
         
+
         return binding_logit, activity_type_logit
