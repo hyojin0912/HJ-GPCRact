@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.model import DAGN_HybridModel
+from src.model import GPCRact_Model
 from src.dataset import GraphDataset, collate_fn, get_valid_indices
 from scripts.train import evaluate # Reuse evaluate function
 
@@ -33,7 +33,7 @@ def main(args):
     p_dim_full = p_s.x_float_full.shape[1] + args.elem_emb_dim
     l_dim = l_s.x.shape[1]
     
-    model = DAGN_HybridModel(
+    model = GPCRact_Model(
         protein_in_dim_clean=p_dim_clean,
         protein_in_dim_full=p_dim_full,
         ligand_in_dim=l_dim,
@@ -81,4 +81,5 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
+
     main(args)
