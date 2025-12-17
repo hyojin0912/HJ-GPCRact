@@ -4,7 +4,7 @@ from torch_geometric.utils import subgraph, to_dense_batch
 from torch_scatter import scatter_mean
 from .layers import create_encoder
 
-class DAGN_HybridModel(nn.Module):
+class GPCRact_Model(nn.Module):
     """
     GPCRact Hierarchical Model.
     Features:
@@ -168,3 +168,4 @@ class DAGN_HybridModel(nn.Module):
         
 
         return binding_logit, activity_type_logit
+
