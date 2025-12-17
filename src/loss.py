@@ -3,7 +3,7 @@ import torch.nn as nn
 
 class FocalLoss(nn.Module):
     """
-    Implementation of Focal Loss for binary classification.
+    Additional implementation of Focal Loss for binary classification.
     """
     def __init__(self, alpha=0.25, gamma=2.0, reduction='mean'):
         super(FocalLoss, self).__init__()
@@ -25,4 +25,5 @@ class FocalLoss(nn.Module):
         elif self.reduction == 'sum':
             return focal_loss.sum()
         else:
+
             return focal_loss
