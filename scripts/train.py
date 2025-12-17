@@ -14,7 +14,7 @@ from torch import amp
 # Add parent directory to path to import src
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.model import DAGN_HybridModel
+from src.model import GPCRact_Model
 from src.dataset import GraphDataset, collate_fn, get_valid_indices
 from src.utils import set_seed, EarlyStopping
 
@@ -210,7 +210,7 @@ def main(args):
         with open(family_json, "r") as f:
             num_families = len(json.load(f))
     
-    model = DAGN_HybridModel(
+    model = GPCRact_Model(
         protein_in_dim_clean=p_dim_clean,
         protein_in_dim_full=p_dim_full,
         ligand_in_dim=l_dim,
@@ -278,4 +278,5 @@ if __name__ == "__main__":
     parser.add_argument("--use_binding_pos_weight", action=argparse.BooleanOptionalAction, default=True,help="Use pos_weight for binding BCE loss (default: True).")
     
     args = parser.parse_args()
+
     main(args)
