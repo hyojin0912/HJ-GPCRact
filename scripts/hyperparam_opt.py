@@ -11,7 +11,7 @@ from torch.utils.data import DataLoader
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from src.model import DAGN_HybridModel
+from src.model import GPCRact_Model
 from src.dataset import GraphDataset, collate_fn, get_valid_indices
 from src.utils import set_seed, EarlyStopping
 from scripts.train import train_epoch, evaluate
@@ -74,7 +74,7 @@ def run_trial():
         with open(family_json, "r") as f:
             num_families = len(json.load(f))
     
-    model = DAGN_HybridModel(
+    model = GPCRact_Model(
         protein_in_dim_clean=p_dim_clean,
         protein_in_dim_full=p_dim_full,
         ligand_in_dim=l_dim,
@@ -110,4 +110,5 @@ if __name__ == "__main__":
     if os.environ.get("WANDB_SWEEP_ID"):
         run_trial()
     else:
+
         print("Please run this script via wandb agent or initialize a sweep.")
