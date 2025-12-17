@@ -5,7 +5,7 @@ This directory contains the core implementation of the GPCRact framework. The co
 ## File Descriptions
 
 ### `model.py`
-Contains the definition of the **GPCRact Hierarchical Architecture** (`DAGN_HybridModel`). It implements:
+Contains the definition of the **GPCRact Hierarchical Architecture** (`GPCRact_Model`). It implements:
 - **Stage 1:** Protein-Ligand Interaction Module (Cross-Attention).
 - **Stage 2:** Allosteric Propagation Module (EGNN + Gating Mechanism).
 - **Stage 3:** Global Integration (Transformer Encoder) and Activity Prediction Heads.
