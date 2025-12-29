@@ -134,7 +134,7 @@ class GPCRact_Model(nn.Module):
 
         for i in range(self.local_propagation_encoder.n_layers):
             h[bs_mask] = h[bs_mask] + gated_ligand_signal
-            h, coord, _ = self.local_propagation_encoder._modules[f"gcl_{i}"](h, protein_batch.edge_index, coord)
+            h, _, _ = self.local_propagation_encoder._modules[f"gcl_{i}"](h, protein_batch.edge_index, coord)
         
         h = h + h_initial_for_residual
         h_after_egnn = self.local_propagation_encoder.embedding_out(h)
@@ -168,4 +168,5 @@ class GPCRact_Model(nn.Module):
         
 
         return binding_logit, activity_type_logit
+
 
