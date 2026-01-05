@@ -54,14 +54,14 @@ We recommend using **Conda** to manage the environment for full reproducibility.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/hyojin0912/HJ-GPCRact.git](https://github.com/hyojin0912/HJ-GPCRact.git)
+    git clone https://github.com/hyojin0912/HJ-GPCRact.git
     cd HJ-GPCRact
     ```
 
 2.  **Create and activate the Conda environment:**
     ```bash
     conda env create -f environment.yml
-    conda activate gpcr_act
+    conda activate gpcract
     ```
     Alternatively, you can install packages using pip:
     ```bash
