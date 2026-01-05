@@ -1,4 +1,4 @@
-name: gpcract
+name: GPCRact
 channels:
   - conda-forge
 dependencies:
