@@ -143,13 +143,16 @@ _Supplementary Validations_: PRS analysis, Sensitivity analysis, and Mutation st
 ## <a id="citation"></a>🎓 Citation
 If you use GPCRact in your research, please cite the following paper:
 ```bibtex
-@article{son2025gpcract,
+@article{son2026gpcract,
   title={GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling},
   author={Son, Hyojin and Yi, Gwan-Su},
   journal={Briefings in Bioinformatics},
-  year={2025},
-  note={In Press},
-  doi={10.1093/bib/bbaf719}
+  volume={27},
+  number={1},
+  pages={bbaf719},
+  year={2026},
+  doi={10.1093/bib/bbaf719},
+  url={[https://doi.org/10.1093/bib/bbaf719](https://doi.org/10.1093/bib/bbaf719)}
 }
 ```
 
