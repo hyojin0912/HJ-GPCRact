@@ -4,7 +4,7 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Dataset](https://img.shields.io/badge/Dataset-GPCRactDB-green.svg)](data/)
 
-This repository serves as the official implementation and reproducibility package for the paper **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"**.
+This repository serves as the official implementation and reproducibility package for the paper **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"** (*Briefings in Bioinformatics*, in press).
 
 We provide the complete source code, preprocessed datasets, training scripts, and analysis notebooks required to reproduce the findings presented in the manuscript.
 
@@ -12,6 +12,13 @@ We provide the complete source code, preprocessed datasets, training scripts, an
 <p align="center">
  <img width="700" height="800" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
 </p>
+
+## 🚀 Key Features
+- **Mechanism-Driven Architecture:** Combines E(n)-equivariant GNNs with dual attention to model "binding → allosteric propagation → activity"
+- **Functionally Critical Subgraphs:** Efficient 3D atomistic graph construction focusing on binding and allosteric sites.
+- **Reproducible Pipeline:** Fully automated workflow from raw PDB/Bioassay data to final evaluation.
+- **Bias-Aware Benchmarking:** Includes rigorous scaffold-based splits and re-implementations of SOTA baselines.
+
 
 ## 📋 Table of Contents
 - [Repository Structure](#repository-structure)
@@ -134,8 +141,16 @@ _Supplementary Validations_: PRS analysis, Sensitivity analysis, and Mutation st
 
 
 ## <a id="citation"></a>🎓 Citation
-Our manuscript is currently under review. If you use GPCRact in your research, we would appreciate it if you could cite our work upon its publication. 
+If you use GPCRact in your research, please cite the following paper:
 
+@article{son2025gpcract,
+  title={GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling},
+  author={Son, Hyojin and Yi, Gwan-Su},
+  journal={Briefings in Bioinformatics},
+  year={2025},
+  note={In Press},
+  doi={10.1093/bib/bbaf719}
+}
 
 ## <a id="contact"></a>📬 Contact
 For questions, bug reports, or feedback, please contact Hyojin Son at hyojin0912@kaist.ac.kr. 
