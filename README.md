@@ -151,8 +151,7 @@ If you use GPCRact in your research, please cite the following paper:
   number={1},
   pages={bbaf719},
   year={2026},
-  doi={10.1093/bib/bbaf719},
-  url={[https://doi.org/10.1093/bib/bbaf719](https://doi.org/10.1093/bib/bbaf719)}
+  doi={10.1093/bib/bbaf719}
 }
 ```
 
