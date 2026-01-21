@@ -4,7 +4,7 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Dataset](https://img.shields.io/badge/Dataset-GPCRactDB-green.svg)](data/)
 
-This repository serves as the official implementation and reproducibility package for the paper **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"** (*Briefings in Bioinformatics*).
+This repository serves as the official implementation and reproducibility package for the paper **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"**.
 
 We provide the complete source code, preprocessed datasets, training scripts, and analysis notebooks required to reproduce the findings presented in the manuscript.
 
