@@ -5,6 +5,7 @@
 [![Journal](https://img.shields.io/badge/Journal-Briefings%20in%20Bioinformatics-blue)](https://academic.oup.com/bib/article/27/1/bbaf719/8426121)
 
 This repository serves as the official implementation and reproducibility package for the paper **"GPCRact: a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling"**.
+
 👉 https://academic.oup.com/bib/article/27/1/bbaf719/8426121
 
 We provide the complete source code, preprocessed datasets, training scripts, and analysis notebooks required to reproduce the findings presented in the manuscript.
