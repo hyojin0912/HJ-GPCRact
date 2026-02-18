@@ -76,6 +76,24 @@ We recommend using **Conda** to manage the environment for full reproducibility.
     pip install -r requirements.txt
     ```
 
+## 🤖 Pretrained Models
+We provide the official pretrained weights used to generate the results in the paper.
+You can download the checkpoint file (`.pt`) from the **[Releases Page](https://github.com/hyojin0912/HJ-GPCRact/releases/tag/v1.0.0)**.
+
+### How to Load Weights
+```python
+import torch
+from src.model import GPCRact_Model
+
+# Initialize model (ensure config matches training)
+model = GPCRact_Model(...) 
+
+# Load weights
+checkpoint_path = "path/to/model.pt"
+state_dict = torch.load(checkpoint_path, map_location='cuda')
+model.load_state_dict(state_dict, strict=False)
+model.eval()
+
 ## <a id="reproducibility-workflow"></a>🔬 Reproducibility Workflow
 
 This section explicitly delineates the steps to reproduce the results reported in our study.
