@@ -58,7 +58,7 @@ seq_df = pd.read_csv(SEQUENCE_INFO_FILE)
 
 # Representative Apo structure map
 rep_apo_map = {}
-exp_apo_df = rep_apo_df[rep_apo_df['Binding_Coverage'] == 100.0].sort_values('Resolution').drop_duplicates('UniProt_ID')
+exp_apo_df = rep_apo_df[rep_apo_df['Binding_res_include'] == 1].sort_values('Resolution').drop_duplicates('UniProt_ID')
 for _, row in exp_apo_df.iterrows():
     rep_apo_map[row['UniProt_ID']] = {'id': row['PDB_ID'], 'type': 'PDB'}
 all_uniprot_ids = set(bs_df['UniProt_ID'].unique()).union(set(dr_df['uniprot_ac'].unique()))
