@@ -15,8 +15,10 @@ from scripts.train import evaluate # Reuse evaluate function
 def main(args):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
-    # Load Test Data
-    test_df = pd.read_csv(Path(args.data_dir) / "scaffold_test.csv")
+    # Load Query Data (Modified to use custom query_csv argument)
+    csv_path = Path(args.data_dir) / args.query_csv
+    test_df = pd.read_csv(csv_path)
+    
     valid_idx = get_valid_indices(test_df, args.protein_graph_dir, args.ligand_graph_dir)
     test_df = test_df[valid_idx].reset_index(drop=True)
     
@@ -56,13 +58,18 @@ def main(args):
     print(f"Test Balanced Accuracy: {bacc:.4f}")
     print(f"Test Binding Balanced Accuracy: {bind_bacc:.4f}")
     
-    save_path = Path(args.output_dir) / "predictions_test.csv"
+    # Dynamically set output filename based on input query_csv
+    input_stem = Path(args.query_csv).stem
+    save_path = Path(args.output_dir) / f"predictions_{input_stem}.csv"
     results_df.to_csv(save_path, index=False)
     print(f"Predictions saved to {save_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--data_dir", type=str, default="../data/splits")
+    # Added argument to handle custom user-provided CSV files
+    parser.add_argument("--query_csv", type=str, default="scaffold_test.csv", help="Filename of the query CSV located inside data_dir")
+    
     parser.add_argument("--protein_graph_dir", type=str, required=True)
     parser.add_argument("--ligand_graph_dir", type=str, required=True)
     parser.add_argument("--model_path", type=str, required=True, help="Path to .pt file")
