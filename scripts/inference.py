@@ -34,6 +34,14 @@ def main(args):
     p_dim_clean = p_s.x_float_clean.shape[1] + args.elem_emb_dim
     p_dim_full = p_s.x_float_full.shape[1] + args.elem_emb_dim
     l_dim = l_s.x.shape[1]
+
+    class_dict_path = Path(args.protein_graph_dir) / "class_to_id.json"
+    family_dict_path = Path(args.protein_graph_dir) / "family_to_id.json"
+    
+    with open(class_dict_path, "r") as f:
+        num_classes = len(json.load(f))
+    with open(family_dict_path, "r") as f:
+        num_families = len(json.load(f))
     
     model = GPCRact_Model(
         protein_in_dim_clean=p_dim_clean,
@@ -45,7 +53,9 @@ def main(args):
         element_embedding_dim=args.elem_emb_dim,
         n_attn_heads=args.attn_heads,
         dropout=args.dropout,
-        propagation_attention_layers=args.prop_attn_layers
+        propagation_attention_layers=args.prop_attn_layers,
+        num_classes=num_classes,
+        num_families=num_families
     ).to(device)
     
     # Load Weights
