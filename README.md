@@ -48,6 +48,7 @@ GPCRact/
 ├── data/               # Datasets
 │   ├── raw/            # Raw data files (GPCRactDB v1)
 │   ├── resources/      # Auxiliary bio-info files (PDB info, MSA, etc.)
+│   ├── protein_graphs/ # Preprocessed protein graphs (.pt) & Dictionary files (.json)
 │   └── splits/         # Exact Train/Val/Test scaffold splits used in the paper
 ├── preprocessing/      # Scripts to reconstruct the dataset from scratch
 ├── scripts/            # Executable scripts for Training, Inference, and HPO
