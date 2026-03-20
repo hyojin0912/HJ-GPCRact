@@ -55,8 +55,9 @@ def main(args):
         n_attn_heads=args.attn_heads,
         dropout=args.dropout,
         propagation_attention_layers=args.prop_attn_layers,
-        num_classes=num_classes,
-        num_families=num_families
+        use_gpcr_cf_embed=args.use_gpcr_cf_embed,
+        num_gpcr_classes=num_classes,
+        num_gpcr_families=num_families
     ).to(device)
     
     # Load Weights
