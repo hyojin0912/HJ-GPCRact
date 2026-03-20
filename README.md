@@ -127,11 +127,13 @@ For detailed arguments, see `scripts/README.md`.
 
 ### <a id="step-3-inference"></a>Step 3: Inference 🚀
 
+**⚠️ Important Note:** When running inference, **do not** execute preprocessing scripts that generate new dictionary files (e.g., `class_to_id.json`, `family_to_id.json`). Doing so will overwrite the dictionaries based on your test data and cause "size mismatch" errors with the pretrained weights. Please ensure you are using the original `.json` dictionary files provided in `data/protein_graphs/`.
+
 To predict the activity (Agonist/Antagonist/Non-binder) of novel GPCR-ligand pairs using a trained model:
 
 ```bash
 python scripts/inference.py \
-    --data_dir data/splits \
+    --data_dir data/protein_graphs/ \
     --model_path checkpoints/best_model.pt \
     --output_dir results/
 ```
