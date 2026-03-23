@@ -20,8 +20,8 @@ class GraphDataset(PyGDataset):
     def get(self, idx):
         row = self.df.iloc[idx]
         ikey, uniprot_id = row['Ikey'], row['AC']
-        binding_label = row['Binding']
-        activity_label = row['Activity']
+        binding_label = row.get('Binding', -1.0)
+        activity_label = row.get('Activity', -1.0)
         activity_label_tensor_val = activity_label if not np.isnan(activity_label) else -1.0
 
         try:
