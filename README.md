@@ -49,7 +49,9 @@ GPCRact/
 │   ├── raw/            # Raw data files (GPCRactDB v1)
 │   ├── resources/      # Auxiliary bio-info files (PDB info, MSA, etc.)
 │   ├── protein_graphs/ # Preprocessed protein graphs (.pt) & Dictionary files (.json)
-│   └── splits/         # Exact Train/Val/Test scaffold splits used in the paper
+│   ├── ligand_graphs/  # Processed ligand PyG graphs
+│   ├── splits/         # Exact Train/Val/Test scaffold splits used in the paper
+│   └── sample/         # Minimal toy dataset for quickstart and environment testing
 ├── preprocessing/      # Scripts to reconstruct the dataset from scratch
 ├── scripts/            # Executable scripts for Training, Inference, and HPO
 ├── src/                # Core library code (Model architecture, Layers, Dataloaders)
@@ -76,6 +78,20 @@ We recommend using **Conda** to manage the environment for full reproducibility.
     ```bash
     pip install -r requirements.txt
     ```
+## <a id="quickstart"></a>⚡ Quickstart (10-Second Inference)
+We provide a minimal toy dataset (data/sample/) so you can verify the environment and test the model immediately without downloading the massive full dataset.
+```bash
+# Run inference on the provided sample data (Agonist, Antagonist, Non-binder)
+python scripts/inference.py
+```
+
+## <a id="downloading-the-full-dataset"></a>📥 Downloading the Full Dataset
+Due to the large size of the 3D atomistic graphs (>150MB for 200,000+ interactions), the complete graph dataset is hosted remotely on Hugging Face. We provide a shell script to automate the download and extraction process directly into your pipeline.
+```bash
+# Fetch and extract ligand and protein graphs to the data/ directory
+bash scripts/download_full_data.sh
+```
+For detailed information about the dataset structure and curation, see `data/README.md`.
 
 ## 🤖 Pretrained Models
 We provide the official pretrained weights used to generate the results in the paper.
@@ -108,6 +124,7 @@ Users can reconstruct the GPCRactDB from raw public data or use the pre-generate
 jupyter notebook preprocessing/04_create_final_dataset.ipynb
 ```
 - Note: The exact scaffold-based split files (`scaffold_train.csv`, `scaffold_val.csv`, `scaffold_test.csv`) used in our study are already provided in `data/splits/` to ensure fair benchmarking.
+- Note: Generating 3D conformers for 200,000+ ligands is computationally expensive. We highly recommend using the `download_full_data.sh` script instead of running the preprocessing pipeline from scratch.
 
 ### <a id="step-2-training"></a>Step 2: Training the Model 🏋️‍♂️
 
@@ -120,12 +137,12 @@ To train the GPCRact model from scratch using the provided splits:
 python scripts/train.py \
     --data_dir data/splits \
     --save_dir checkpoints/ \
-    --epochs 100
+    --epochs 200
 ```
 For detailed arguments, see `scripts/README.md`.
 
 
-### <a id="step-3-inference"></a>Step 3: Inference 🚀
+### <a id="step-3-inference"></a>Step 3: Full Inference 🚀
 
 **⚠️ Important Note:** When running inference, **do not** execute preprocessing scripts that generate new dictionary files (e.g., `class_to_id.json`, `family_to_id.json`). Doing so will overwrite the dictionaries based on your test data and cause "size mismatch" errors with the pretrained weights. Please ensure you are using the original `.json` dictionary files provided in `data/protein_graphs/`.
 
