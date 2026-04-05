@@ -162,7 +162,7 @@ class EGNN(nn.Module):
     
     def forward(self, h, coord, edge_index, edge_attr=None):
         device = self.embedding_in.weight.device
-        h, coord, edge_index = h.to(device), coord.to(device), edge_index.to(device)
+        # h, coord, edge_index = h.to(device), coord.to(device), edge_index.to(device)
         if edge_attr is not None:
             edge_attr = edge_attr.to(device)
 
@@ -201,7 +201,7 @@ class EGNN_GlobalResidual(EGNN):
 class EGNN_Gated_GlobalResidual(EGNN_Gated):
     def forward(self, h, coord, edge_index, edge_attr=None):
         device = self.embedding_in.weight.device
-        h, coord, edge_index = h.to(device), coord.to(device), edge_index.to(device)
+        # h, coord, edge_index = h.to(device), coord.to(device), edge_index.to(device)
         if edge_attr is not None: edge_attr = edge_attr.to(device)
 
         h_initial = self.embedding_in(h)
