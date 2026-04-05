@@ -4,7 +4,7 @@ This directory contains the datasets, bio-informatic resources, and processed gr
 
 To ensure strict reproducibility and transparency, we provide everything from the raw text-mined ground truth (GPCRactDB) to the exact scaffold-based splits used in our *Briefings in Bioinformatics* paper.
 
-## 📁 Directory Structure
+## Directory Structure
 
 ```text
 data/
@@ -15,7 +15,7 @@ data/
 └── sample/              # Minimal dataset for quickstart and inference testing
 ```
 
-📄 Detailed Description
+## 📄 Detailed Description
 1. raw/ (Ground Truth & Activity Data)
 Contains the foundational interaction data before any graph processing.
 
