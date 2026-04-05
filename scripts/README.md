@@ -17,15 +17,16 @@ python scripts/inference.py
 To evaluate the model on the full test split after downloading the dataset:
 ```bash
 python scripts/inference.py \
-    --data_csv data/splits/scaffold_test.csv \
+    --data_dir data/splits \
+    --query_csv scaffold_test.csv \
     --model_path checkpoints/best_model.pt \
-    --protein_graph_dir data/protein_graphs/ \
-    --ligand_graph_dir data/ligand_graphs/ \
+    --protein_graph_dir data/protein_graphs \
+    --ligand_graph_dir data/ligand_graphs \
     --output_dir results/ \
     --batch_size 32
 ```
 ### Output
-The script will save a CSV file (e.g., `predictions_test.csv`) to the output_dir. The CSV includes:
+The script will save a CSV file (e.g., `predictions_scaffold_test.csv`) to the output_dir. The CSV includes:
 * `Ikey`, `UniProt`: Identifiers
 
 * `Binding_Prob`: Predicted probability of binding.
@@ -43,8 +44,8 @@ Use `train.py` to train the GPCRact model from scratch using the scaffold-based 
 ```bash
 python scripts/train.py \
     --data_dir data/splits \
-    --protein_graph_dir data/processed/protein_graphs \
-    --ligand_graph_dir data/processed/ligand_graphs \
+    --protein_graph_dir data/protein_graphs \
+    --ligand_graph_dir data/ligand_graphs \
     --save_dir checkpoints/ \
     --epochs 200 \
     --batch_size 16 \
