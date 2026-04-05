@@ -75,7 +75,7 @@ We recommend using **Conda** to manage the environment for full reproducibility.
     pip install -r requirements.txt
     ```
 ## <a id="quickstart"></a>⚡ Quickstart (10-Second Inference)
-We provide a minimal toy dataset (data/sample/) so you can verify the environment and test the model immediately without downloading the massive full dataset.
+We provide a minimal toy dataset (`data/sample/`) so you can verify the environment and test the model immediately without downloading the massive full dataset.
 ```bash
 # Run inference on the provided sample data (Agonist, Antagonist, Non-binder)
 python scripts/inference.py
