@@ -39,7 +39,10 @@ To rigorously evaluate model generalization to novel chemical spaces, we use Mur
 
 ### 4. `protein_graphs/` (Processed Inputs)
 Contains the final 3D atomistic graph objects ready to be ingested by the PyTorch Geometric data loaders.
-* **`*.pt` files** *(e.g., `Q13639.pt`)*: Precomputed node and edge features for individual GPCR targets. These graphs strictly encompass the functionally critical subgraphs (binding to allosteric sites) to prevent oversmoothing and reduce computational overhead.
+* **`*.pt` files**: Due to large file sizes (>150MB), the full set of 200,000+ ligand graphs and 300+ protein graphs are hosted on Hugging Face. **Do not generate them from scratch.** Please use the provided download script to fetch them:
+  ```bash
+  bash scripts/download_full_data.sh
+  ```
 * **`*_to_id.json`**: Dictionary mapping files for categorical encoding (e.g., family classes, amino acid types). *Note: Do not overwrite these files during inference to maintain index consistency with the pretrained weights.*
 
 ### 5. `sample/` (Quickstart)
