@@ -11,7 +11,8 @@ data/
 ├── raw/                 # Raw experimental data and text-mined interactions
 ├── resources/           # Auxiliary biological data (PDBs, MSAs, structural definitions)
 ├── splits/              # Exact dataset splits for reproducible benchmarking
-├── protein_graphs/      # Processed PyTorch Geometric (.pt) files
+├── protein_graphs/      # Processed protein PyTorch Geometric (.pt) files
+├── ligand_graphs/       # Processed ligand PyTorch Geometric (.pt) files
 └── sample/              # Minimal dataset for quickstart and inference testing
 ```
 
