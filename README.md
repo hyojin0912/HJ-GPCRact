@@ -9,10 +9,6 @@ This repository serves as the official implementation and reproducibility packag
 
 We provide the complete source code, preprocessed datasets, training scripts, and analysis notebooks required to reproduce the findings presented in the manuscript.
 
-<br>
-<p align="center">
- <img width="700" height="800" alt="Figure2" src="https://github.com/user-attachments/assets/8a06699a-bb01-4d01-923b-58bef0beb99a" />
-</p>
 
 ## 🚀 Key Features
 - **Mechanism-Driven Architecture:** Combines E(n)-equivariant GNNs with dual attention to model "binding → allosteric propagation → activity"
