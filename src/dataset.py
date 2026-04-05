@@ -6,7 +6,7 @@ from torch_geometric.data import Dataset as PyGDataset, Batch
 
 class GraphDataset(PyGDataset):
     """
-    Loads graph files with cleaned data structure.
+    Loads graph files with the CORRECT dual-graph feature slicing logic.
     """
     def __init__(self, root, df, protein_graph_dir, ligand_graph_dir):
         self.df = df.reset_index(drop=True)
@@ -20,8 +20,13 @@ class GraphDataset(PyGDataset):
     def get(self, idx):
         row = self.df.iloc[idx]
         ikey, uniprot_id = row['Ikey'], row['AC']
+        
+        # Safely extract labels
         binding_label = row.get('Binding', -1.0)
         activity_label = row.get('Activity', -1.0)
+        if isinstance(activity_label, str):
+            try: activity_label = float(activity_label)
+            except ValueError: activity_label = -1.0
         activity_label_tensor_val = activity_label if not np.isnan(activity_label) else -1.0
 
         try:
@@ -30,40 +35,42 @@ class GraphDataset(PyGDataset):
             
             original_x = protein_graph.x
             
-            # [AA(20) | BS(1) | ElemIdx(1) | RelPos(3) | DistFromCA(1) | RDKit(7)]
-            # Indices: 0-19     20          21           22-24          25            26-32
+            # ==========================================================
+            # 🌟 RESTORED CRITICAL SLICING LOGIC 🌟
+            # Separating features for the Dual-Graph Architecture
+            # ==========================================================
             h_res_type = original_x[:, :20]
-            protein_graph.x_elem = original_x[:, 21].long()
-            
-            h_rel_pos  = original_x[:, 22:25]
-            h_dist_ca  = original_x[:, 25:26]
-            h_rdkit    = original_x[:, 26:]
+            h_is_bs    = original_x[:, 20:21]
+            h_disp     = original_x[:, 21:23]
+            protein_graph.x_elem = original_x[:, 23].long()
+            h_rel_pos  = original_x[:, 24:27]
+            h_dist_ca  = original_x[:, 27:28]
+            h_rdkit    = original_x[:, 28:]
 
-            protein_graph.x_float_full = original_x.clone() # Keep full features if needed for other embeddings
-            
-            h_is_bs = original_x[:, 20:21]
-
+            # Full Graph (CA Backbone): Includes is_bs and disp (34 dims + 8 = 42)
             protein_graph.x_float_full = torch.cat([
-                h_res_type, h_is_bs, h_rel_pos, h_dist_ca, h_rdkit
+                h_res_type, h_is_bs, h_disp, h_rel_pos, h_dist_ca, h_rdkit
             ], dim=1)
 
+            # Clean Graph (Binding Site): Excludes is_bs and disp (31 dims + 8 = 39)
             protein_graph.x_float_clean = torch.cat([
                 h_res_type, h_rel_pos, h_dist_ca, h_rdkit
             ], dim=1)
             
             del protein_graph.x
+            
+            if hasattr(protein_graph, 'node_role'):
+                protein_graph.node_roles = protein_graph.node_role
+                del protein_graph.node_role
+            # ==========================================================
 
-            protein_graph.node_roles = protein_graph.node_role
-            del protein_graph.node_role
-
-            protein_graph.binding_label = torch.tensor([binding_label], dtype=torch.float)
             protein_graph.activity_label = torch.tensor([activity_label_tensor_val], dtype=torch.float)
             protein_graph.ikey = ikey
             protein_graph.uniprot_id = uniprot_id
 
             return protein_graph, ligand_graph
 
-        except FileNotFoundError:
+        except Exception:
             return None, None
 
 def get_valid_indices(df, protein_dir, ligand_dir):
@@ -96,10 +103,12 @@ def get_valid_indices(df, protein_dir, ligand_dir):
 
     tqdm.pandas(desc="Validating graph files")
     valid_mask = df.progress_apply(is_valid_pair, axis=1)
-    return valid_mask.to_numpy()
+    return valid_mask
 
 def collate_fn(data_list):
     valid_data = [item for item in data_list if item[0] is not None]
-    if not valid_data: return None, None
+    if not valid_data: return None
     p, l = zip(*valid_data)
-    return Batch.from_data_list(p), Batch.from_data_list(l)
+    protein_batch = Batch.from_data_list(p)
+    ligand_batch = Batch.from_data_list(l)
+    return protein_batch, ligand_batch
