@@ -24,10 +24,17 @@ class GraphDataset(PyGDataset):
         # Safely extract labels
         binding_label = row.get('Binding', -1.0)
         activity_label = row.get('Activity', -1.0)
+        
         if isinstance(activity_label, str):
             try: activity_label = float(activity_label)
             except ValueError: activity_label = -1.0
         activity_label_tensor_val = activity_label if not np.isnan(activity_label) else -1.0
+
+        # FIX: Also parse binding_label safely
+        if isinstance(binding_label, str):
+            try: binding_label = float(binding_label)
+            except ValueError: binding_label = -1.0
+        binding_label_tensor_val = binding_label if not np.isnan(binding_label) else -1.0
 
         try:
             protein_graph = torch.load(self.protein_graph_dir / f"{uniprot_id}.pt", map_location='cpu', weights_only=False)
@@ -35,10 +42,7 @@ class GraphDataset(PyGDataset):
             
             original_x = protein_graph.x
             
-            # ==========================================================
-            # 🌟 RESTORED CRITICAL SLICING LOGIC 🌟
-            # Separating features for the Dual-Graph Architecture
-            # ==========================================================
+            # Extract features for dual-graph architecture
             h_res_type = original_x[:, :20]
             h_is_bs    = original_x[:, 20:21]
             h_disp     = original_x[:, 21:23]
@@ -47,12 +51,12 @@ class GraphDataset(PyGDataset):
             h_dist_ca  = original_x[:, 27:28]
             h_rdkit    = original_x[:, 28:]
 
-            # Full Graph (CA Backbone): Includes is_bs and disp (34 dims + 8 = 42)
+            # Full Graph (CA Backbone)
             protein_graph.x_float_full = torch.cat([
                 h_res_type, h_is_bs, h_disp, h_rel_pos, h_dist_ca, h_rdkit
             ], dim=1)
 
-            # Clean Graph (Binding Site): Excludes is_bs and disp (31 dims + 8 = 39)
+            # Clean Graph (Binding Site)
             protein_graph.x_float_clean = torch.cat([
                 h_res_type, h_rel_pos, h_dist_ca, h_rdkit
             ], dim=1)
@@ -62,9 +66,10 @@ class GraphDataset(PyGDataset):
             if hasattr(protein_graph, 'node_role'):
                 protein_graph.node_roles = protein_graph.node_role
                 del protein_graph.node_role
-            # ==========================================================
 
+            # FIX: Assign BOTH labels to the graph object
             protein_graph.activity_label = torch.tensor([activity_label_tensor_val], dtype=torch.float)
+            protein_graph.binding_label = torch.tensor([binding_label_tensor_val], dtype=torch.float)
             protein_graph.ikey = ikey
             protein_graph.uniprot_id = uniprot_id
 
