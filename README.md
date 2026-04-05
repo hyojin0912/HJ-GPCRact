@@ -40,6 +40,7 @@ We have unified all resources into a single structured repository to facilitate 
 GPCRact/
 ├── analysis/           # Jupyter Notebooks for reproducing figures and statistical analyses
 ├── benchmarks/         # Implementation of baseline models (DeepREAL, AiGPro, 3D-GNN)
+├── checkpoints/        # Pretrained model weights (best_model.pt) included for quickstart
 ├── configs/            # Configuration files (YAML) for training and HPO
 ├── data/               # Datasets
 │   ├── raw/            # Raw data files (GPCRactDB v1)
@@ -90,8 +91,10 @@ bash scripts/download_full_data.sh
 For detailed information about the dataset structure and curation, see `data/README.md`.
 
 ## 🤖 Pretrained Models
-We provide the official pretrained weights used to generate the results in the paper.
-You can download the checkpoint file (`.pt`) from the **[Releases Page](https://github.com/hyojin0912/HJ-GPCRact/releases/tag/v1.0.0)**.
+We provide the official pretrained weights used to generate the results in the paper. 
+The default model weight (`best_model.pt`) is **already included** in the `checkpoints/` directory, allowing you to run inference immediately without manual downloads. 
+
+*(You can also find the checkpoint file on the **[Releases Page](https://github.com/hyojin0912/HJ-GPCRact/releases/tag/v1.0.0)** if needed.)*
 
 ### How to Load Weights
 ```python
@@ -146,7 +149,10 @@ To predict the activity (Agonist/Antagonist/Non-binder) of novel GPCR-ligand pai
 
 ```bash
 python scripts/inference.py \
-    --data_dir data/protein_graphs/ \
+    --data_dir data/splits/ \
+    --query_csv scaffold_test.csv \
+    --protein_graph_dir data/protein_graphs/ \
+    --ligand_graph_dir data/ligand_graphs/ \
     --model_path checkpoints/best_model.pt \
     --output_dir results/
 ```
