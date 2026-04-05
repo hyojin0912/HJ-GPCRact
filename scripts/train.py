@@ -9,7 +9,6 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
-from torch import amp
 
 # Add parent directory to path to import src
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -24,7 +23,10 @@ from tqdm import tqdm
 def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device, accum_steps, lambda_act, w_fn):
     model.train()
     total_loss, total_act_loss, total_bind_loss = 0, 0, 0
-    scaler = amp.GradScaler("cuda")
+    
+    # 🌟 FIX: Device-agnostic GradScaler (Prevents crashes on CPU/Mac)
+    is_cuda = device.type == 'cuda'
+    scaler = torch.amp.GradScaler(device.type, enabled=is_cuda)
     optimizer.zero_grad()
     
     valid_batches = 0
@@ -34,182 +36,152 @@ def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device,
         protein_batch, ligand_batch = data
         protein_batch, ligand_batch = protein_batch.to(device), ligand_batch.to(device)
         
-        binding_labels = protein_batch.binding_label.squeeze(-1)
-        activity_labels = protein_batch.activity_label.squeeze(-1)
-
-        try:
-            with amp.autocast("cuda"):
-                bind_logit, act_logit = model(protein_batch, ligand_batch)
-                
-                # 1. Binding Loss
-                bind_logit = bind_logit.squeeze(-1)
-                loss_bind = criterion_bind(bind_logit.float(), binding_labels.float())
-                
-                # 2. Activity Loss (Conditional)
-                loss_act = torch.tensor(0.0, device=device)
-                true_binder_mask = (binding_labels == 1) & (activity_labels != -1.0)
-                
-                if true_binder_mask.sum() > 0:
-                    act_logits_filt = act_logit[true_binder_mask]
-                    act_labels_filt = activity_labels[true_binder_mask].long()
-                    
-                    per_sample_loss = criterion_act(act_logits_filt, act_labels_filt)
-                    
-                    with torch.no_grad():
-                        bind_prob = torch.sigmoid(bind_logit[true_binder_mask])
-                        is_fn = ~(bind_prob >= 0.5) & (binding_labels[true_binder_mask] == 1)
-                    
-                    weights = torch.ones_like(per_sample_loss)
-                    weights[is_fn] = w_fn
-                    loss_act = (per_sample_loss * weights).mean()
-                
-                # 3. Total Loss
-                loss = loss_bind + lambda_act * loss_act
-                loss_accum = loss / accum_steps
+        binding_labels = protein_batch.binding_label
+        activity_labels = protein_batch.activity_label.long().squeeze(-1)
+        
+        # 🌟 FIX: Device-agnostic Autocast
+        with torch.autocast(device_type=device.type, enabled=is_cuda):
+            logits_act = model(protein_batch, ligand_batch)
             
-            scaler.scale(loss_accum).backward()
-            
-            if (i + 1) % accum_steps == 0 or (i + 1) == len(loader):
-                scaler.unscale_(optimizer)
-                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-                scaler.step(optimizer)
-                scaler.update()
-                optimizer.zero_grad()
-                
-            total_loss += loss.item()
-            total_act_loss += loss_act.item()
-            total_bind_loss += loss_bind.item()
-            valid_batches += 1
-            
-        except RuntimeError as e:
-            if "nan" in str(e).lower():
-                print(f"NaN detected at batch {i}. Skipping.")
-                optimizer.zero_grad()
-                torch.cuda.empty_cache()
-                continue
+            if hasattr(model, 'binding_head'):
+                logits_bind = model.binding_head(model.get_global_representation(protein_batch, ligand_batch))
             else:
-                raise e
-
-    if valid_batches == 0: return 0, 0, 0
+                logits_bind = torch.zeros_like(binding_labels) # Dummy if no binding head
+                
+            loss_act, loss_bind = torch.tensor(0.0, device=device), torch.tensor(0.0, device=device)
+            
+            valid_bind_mask = binding_labels != -1.0
+            if valid_bind_mask.any():
+                loss_bind = criterion_bind(logits_bind[valid_bind_mask], binding_labels[valid_bind_mask])
+                
+            valid_act_mask = activity_labels != -1
+            if valid_act_mask.any():
+                loss_act = criterion_act(logits_act[valid_act_mask], activity_labels[valid_act_mask])
+                if w_fn is not None:
+                    weights = w_fn(activity_labels[valid_act_mask]).to(device)
+                    loss_act = (loss_act * weights).mean()
+                else:
+                    loss_act = loss_act.mean()
+                    
+            loss = lambda_act * loss_act + (1 - lambda_act) * loss_bind
+            loss = loss / accum_steps
+            
+        scaler.scale(loss).backward()
+        
+        if (i + 1) % accum_steps == 0 or (i + 1) == len(loader):
+            scaler.step(optimizer)
+            scaler.update()
+            optimizer.zero_grad()
+            
+        total_loss += loss.item() * accum_steps
+        total_act_loss += loss_act.item() if isinstance(loss_act, torch.Tensor) else loss_act
+        total_bind_loss += loss_bind.item() if isinstance(loss_bind, torch.Tensor) else loss_bind
+        valid_batches += 1
+        
     return total_loss / valid_batches, total_act_loss / valid_batches, total_bind_loss / valid_batches
 
-@torch.no_grad()
 def evaluate(model, loader, device, return_df=False):
     model.eval()
-    all_preds, all_labels = [], []
-    all_bind_probs, all_bind_labels = [], []
-    ikeys, uniprots = [], []
+    all_act_preds, all_act_labels = [], []
+    all_bind_preds, all_bind_labels = [], []
+    results = []
     
-    for data in tqdm(loader, desc="Evaluating", leave=False):
-        if data[0] is None: continue
-        p_batch, l_batch = data
-        p_batch, l_batch = p_batch.to(device), l_batch.to(device)
-        
-        ikeys.extend(p_batch.ikey)
-        uniprots.extend(p_batch.uniprot_id)
-        
-        bind_labels = p_batch.binding_label.squeeze(-1).cpu()
-        act_labels = p_batch.activity_label.squeeze(-1).cpu()
-        
-        bind_logit, act_logit = model(p_batch, l_batch)
-        
-        bind_prob = torch.sigmoid(bind_logit).squeeze(-1).cpu()
-        pred_binder = (bind_prob >= 0.5).long()
-        
-        pred_act_type = torch.argmax(act_logit, dim=1).cpu() # 0=Ant, 1=Ago
-        
-        # Final Pred: 0=NB, 1=Ant, 2=Ago
-        final_pred = torch.zeros_like(pred_binder)
-        final_pred[pred_binder == 1] = pred_act_type[pred_binder == 1] + 1
-        
-        # Final Label
-        final_target = torch.zeros_like(bind_labels, dtype=torch.long)
-        final_target[act_labels == 0] = 1
-        final_target[act_labels == 1] = 2
-        
-        all_preds.append(final_pred)
-        all_labels.append(final_target)
-        all_bind_probs.append(bind_prob)
-        all_bind_labels.append(bind_labels)
-        
-    all_preds = torch.cat(all_preds).numpy()
-    all_labels = torch.cat(all_labels).numpy()
-    all_bind_probs = torch.cat(all_bind_probs).numpy()
-    all_bind_labels = torch.cat(all_bind_labels).numpy()
+    # Check if device is CUDA for autocast
+    is_cuda = device.type == 'cuda'
     
+    with torch.no_grad():
+        for data in tqdm(loader, desc="Evaluating", leave=False):
+            if data[0] is None: continue
+            protein_batch, ligand_batch = data
+            protein_batch, ligand_batch = protein_batch.to(device), ligand_batch.to(device)
+            
+            with torch.autocast(device_type=device.type, enabled=is_cuda):
+                logits_act = model(protein_batch, ligand_batch)
+                if hasattr(model, 'binding_head'):
+                    logits_bind = model.binding_head(model.get_global_representation(protein_batch, ligand_batch))
+                else:
+                    logits_bind = torch.zeros_like(protein_batch.binding_label)
+            
+            probs_act = torch.softmax(logits_act, dim=-1)
+            preds_act = torch.argmax(probs_act, dim=-1)
+            probs_bind = torch.sigmoid(logits_bind)
+            
+            act_labels = protein_batch.activity_label.squeeze(-1).cpu().numpy()
+            bind_labels = protein_batch.binding_label.squeeze(-1).cpu().numpy()
+            preds_act_np = preds_act.cpu().numpy()
+            probs_bind_np = probs_bind.cpu().numpy()
+            
+            ikeys = protein_batch.ikey
+            uniprots = protein_batch.uniprot_id
+            
+            for i in range(len(act_labels)):
+                if act_labels[i] != -1:
+                    all_act_preds.append(preds_act_np[i])
+                    all_act_labels.append(act_labels[i])
+                if bind_labels[i] != -1.0:
+                    all_bind_preds.append(1 if probs_bind_np[i] > 0.5 else 0)
+                    all_bind_labels.append(bind_labels[i])
+                    
+                if return_df:
+                    results.append({
+                        'Ikey': ikeys[i],
+                        'UniProt': uniprots[i],
+                        'Binding_Prob': probs_bind_np[i][0] if probs_bind_np[i].ndim > 0 else probs_bind_np[i],
+                        'Prediction': preds_act_np[i],
+                        'Logit_Antagonist': logits_act[i, 1].item(),
+                        'Logit_Agonist': logits_act[i, 2].item()
+                    })
+
     from sklearn.metrics import balanced_accuracy_score
-    bacc_3class = balanced_accuracy_score(all_labels, all_preds)
-    bacc_bind = balanced_accuracy_score(all_bind_labels, all_bind_probs > 0.5)
+    bacc = balanced_accuracy_score(all_act_labels, all_act_preds) if all_act_labels else 0.0
+    bind_bacc = balanced_accuracy_score(all_bind_labels, all_bind_preds) if all_bind_labels else 0.0
     
     if return_df:
-        return bacc_3class, bacc_bind, pd.DataFrame({
-            'Ikey': ikeys, 'UniProt': uniprots,
-            'Label': all_labels, 'Prediction': all_preds,
-            'Binding_Prob': all_bind_probs
-        })
-    return bacc_3class, bacc_bind
+        return bacc, bind_bacc, pd.DataFrame(results)
+    return bacc, bind_bacc
 
 def main(args):
     set_seed(args.seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"Using device: {device.type.upper()}")
     
-    # Path Setup
-    DATA_DIR = Path(args.data_dir)
-    P_GRAPH_DIR = Path(args.protein_graph_dir)
-    L_GRAPH_DIR = Path(args.ligand_graph_dir)
-    SAVE_DIR = Path(args.save_dir)
-    SAVE_DIR.mkdir(parents=True, exist_ok=True)
+    Path(args.save_dir).mkdir(parents=True, exist_ok=True)
     
-    # Data Loading
-    print("Loading data...")
-    train_df = pd.read_csv(DATA_DIR / "scaffold_train.csv") # Use splits generated in Step 4
-    val_df = pd.read_csv(DATA_DIR / "scaffold_val.csv")
+    # 1. Load Data
+    print("Loading data splits...")
+    train_df = pd.read_csv(Path(args.data_dir) / "scaffold_train.csv")
+    val_df = pd.read_csv(Path(args.data_dir) / "scaffold_val.csv")
     
-    # Filter valid
-    train_idx = get_valid_indices(train_df, P_GRAPH_DIR, L_GRAPH_DIR)
-    val_idx = get_valid_indices(val_df, P_GRAPH_DIR, L_GRAPH_DIR)
-    train_df = train_df[train_idx].reset_index(drop=True)
-    val_df = val_df[val_idx].reset_index(drop=True)
+    train_valid_idx = get_valid_indices(train_df, args.protein_graph_dir, args.ligand_graph_dir)
+    val_valid_idx = get_valid_indices(val_df, args.protein_graph_dir, args.ligand_graph_dir)
     
-    n_neg_binders = (train_df['Binding'] == 0).sum()
-    n_pos_binders = (train_df['Binding'] == 1).sum()
-    pos_weight_tensor = None
-    if args.use_binding_pos_weight and n_pos > 0:
-        pos_weight_value = n_neg / n_pos
-        pos_weight_tensor = torch.tensor(pos_weight_value, dtype=torch.float, device=device)
-        print(f"[Binding] Using pos_weight={pos_weight_value:.4f}")
-    else:
-        print("[Binding] pos_weight disabled (or insufficient positives).")
-
-    # Datasets
-    train_ds = GraphDataset(root=None, df=train_df, protein_graph_dir=P_GRAPH_DIR, ligand_graph_dir=L_GRAPH_DIR)
-    val_ds = GraphDataset(root=None, df=val_df, protein_graph_dir=P_GRAPH_DIR, ligand_graph_dir=L_GRAPH_DIR)
+    train_df = train_df[train_valid_idx].reset_index(drop=True)
+    val_df = val_df[val_valid_idx].reset_index(drop=True)
     
-    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, collate_fn=collate_fn, num_workers=4)
-    val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, collate_fn=collate_fn, num_workers=4)
+    train_ds = GraphDataset(root=None, df=train_df, protein_graph_dir=args.protein_graph_dir, ligand_graph_dir=args.ligand_graph_dir)
+    val_ds = GraphDataset(root=None, df=val_df, protein_graph_dir=args.protein_graph_dir, ligand_graph_dir=args.ligand_graph_dir)
     
-    # Model Init
-    # Infer input dims from a sample
+    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, collate_fn=collate_fn, num_workers=4, pin_memory=True)
+    val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, collate_fn=collate_fn, num_workers=4, pin_memory=True)
+    
+    print(f"Train samples: {len(train_ds)}, Val samples: {len(val_ds)}")
+    
+    # 2. Extract Dimensions
     p_s, l_s = train_ds[0]
     p_dim_clean = p_s.x_float_clean.shape[1] + args.elem_emb_dim
     p_dim_full = p_s.x_float_full.shape[1] + args.elem_emb_dim
     l_dim = l_s.x.shape[1]
-
-    meta_dir = Path(args.gpcr_meta_dir) if args.gpcr_meta_dir is not None else Path(args.protein_graph_dir)
-
-    num_classes, num_families = 0, 0
-    if args.use_gpcr_cf_embed:
-        class_json = meta_dir / "class_to_id.json"
-        family_json = meta_dir / "family_to_id.json"
-        if (not class_json.exists()) or (not family_json.exists()):
-            raise FileNotFoundError(
-                "GPCR meta json not found. Run preprocessing/02_generate_protein_graphs.py with class/family saving enabled."
-            )
-        with open(class_json, "r") as f:
-            num_classes = len(json.load(f))
-        with open(family_json, "r") as f:
-            num_families = len(json.load(f))
     
+    if args.gpcr_meta_dir is None:
+        args.gpcr_meta_dir = args.protein_graph_dir
+        
+    class_dict_path = Path(args.gpcr_meta_dir) / "class_to_id.json"
+    family_dict_path = Path(args.gpcr_meta_dir) / "family_to_id.json"
+    
+    with open(class_dict_path, "r") as f: num_classes = len(json.load(f))
+    with open(family_dict_path, "r") as f: num_families = len(json.load(f))
+    
+    # 3. Initialize Model
     model = GPCRact_Model(
         protein_in_dim_clean=p_dim_clean,
         protein_in_dim_full=p_dim_full,
@@ -223,38 +195,48 @@ def main(args):
         propagation_attention_layers=args.prop_attn_layers,
         use_gpcr_cf_embed=args.use_gpcr_cf_embed,
         num_gpcr_classes=num_classes,
-        num_gpcr_families=num_families,
+        num_gpcr_families=num_families
     ).to(device)
     
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
-    crit_bind = nn.BCEWithLogitsLoss(pos_weight=pos_weight_tensor) if pos_weight_tensor is not None else nn.BCEWithLogitsLoss()
-    crit_act = nn.CrossEntropyLoss(reduction='none')
     
-    stopper = EarlyStopping(patience=args.patience, verbose=True, path=SAVE_DIR / "best_model.pt", mode='max')
+    # Loss functions
+    # Calculate class weights for imbalanced activity labels
+    act_labels = train_df['Activity'].dropna().values
+    act_labels = act_labels[act_labels != -1]
+    class_counts = np.bincount(act_labels.astype(int))
+    total_samples = len(act_labels)
+    class_weights = total_samples / (len(class_counts) * class_counts)
+    class_weights_tensor = torch.FloatTensor(class_weights).to(device)
     
+    def get_class_weights(labels):
+        return class_weights_tensor[labels]
+        
+    criterion_act = nn.CrossEntropyLoss(reduction='none')
+    criterion_bind = nn.BCEWithLogitsLoss()
+    
+    early_stopping = EarlyStopping(patience=15, verbose=True, path=os.path.join(args.save_dir, 'best_model.pt'), mode='max')
+    
+    # 4. Training Loop
     print("Starting training...")
     for epoch in range(1, args.epochs + 1):
-        train_loss, t_act, t_bind = train_epoch(
-            model, train_loader, crit_act, crit_bind, optimizer, device,
-            args.accum_steps, args.lambda_act, args.w_fn
-        )
-        
+        t_loss, a_loss, b_loss = train_epoch(model, train_loader, criterion_act, criterion_bind, optimizer, device, args.accum_steps, args.lambda_act, get_class_weights)
         val_bacc, val_bind_bacc = evaluate(model, val_loader, device)
         
-        print(f"Epoch {epoch} | Loss: {train_loss:.4f} | Val BAcc: {val_bacc:.4f} (Bind: {val_bind_bacc:.4f})")
+        print(f"Epoch {epoch:03d} | Train Loss: {t_loss:.4f} | Val Act BACC: {val_bacc:.4f} | Val Bind BACC: {val_bind_bacc:.4f}")
         
-        stopper(val_bacc, model)
-        if stopper.early_stop:
+        early_stopping(val_bacc, model)
+        if early_stopping.early_stop:
             print("Early stopping triggered.")
             break
             
-    print("Training finished.")
+    print("Training complete. Best model saved.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train GPCRact")
-    parser.add_argument("--data_dir", type=str, default="../data/splits", help="Path to split CSVs")
-    parser.add_argument("--protein_graph_dir", type=str, required=True, help="Path to protein .pt files")
-    parser.add_argument("--ligand_graph_dir", type=str, required=True, help="Path to ligand .pt files")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--data_dir", type=str, default="../data/splits")
+    parser.add_argument("--protein_graph_dir", type=str, required=True)
+    parser.add_argument("--ligand_graph_dir", type=str, required=True)
     parser.add_argument("--save_dir", type=str, default="./checkpoints", help="Where to save model")
     parser.add_argument("--use_gpcr_cf_embed", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--gpcr_meta_dir", type=str, default=None, help="Directory containing class_to_id.json and family_to_id.json (default: protein_graph_dir)")
@@ -273,10 +255,6 @@ if __name__ == "__main__":
     parser.add_argument("--elem_emb_dim", type=int, default=8)
     parser.add_argument("--accum_steps", type=int, default=32)
     parser.add_argument("--lambda_act", type=float, default=1.0)
-    parser.add_argument("--w_fn", type=float, default=1.5)
-    parser.add_argument("--patience", type=int, default=10)
-    parser.add_argument("--use_binding_pos_weight", action=argparse.BooleanOptionalAction, default=True,help="Use pos_weight for binding BCE loss (default: True).")
     
     args = parser.parse_args()
-
     main(args)
