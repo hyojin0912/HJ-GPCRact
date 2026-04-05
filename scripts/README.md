@@ -53,10 +53,15 @@ python scripts/train.py \
 
 #### Key Arguments
 `--data_dir` Path to the directory containing `scaffold_train.csv` and `scaffold_val.csv`
+
 `--protein_graph_dir` Path to the directory containing protein graph tensors `.pt`
+
 `--ligand_graph_dir` Path to the directory containing ligand graph tensors `.pt`
+
 `--save_dir` Directory to save model checkpoints.
+
 `--enc_layers` Number of layers for the EGNN encoder.
+
 `--prop_attn_layers` Number of layers for the Global Attention module.
 
 
