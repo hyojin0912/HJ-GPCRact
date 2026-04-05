@@ -1,10 +1,10 @@
-# 📂 GPCRact Data Directory
+# GPCRact Data Directory
 
 This directory contains the datasets, bio-informatic resources, and processed graph representations required to train, evaluate, and benchmark the **GPCRact** model.
 
 To ensure strict reproducibility and transparency, we provide everything from the raw text-mined ground truth (GPCRactDB) to the exact scaffold-based splits used in our *Briefings in Bioinformatics* paper.
 
-## Directory Structure
+## 📂 Directory Structure
 
 ```text
 data/
@@ -16,43 +16,31 @@ data/
 ```
 
 ## 📄 Detailed Description
-1. raw/ (Ground Truth & Activity Data)
+
+### 1. `raw/` (Ground Truth & Activity Data)
 Contains the foundational interaction data before any graph processing.
+* **`GPCRactDB_v1.csv`**: The core dataset of our study. Contains over 200,000 curated GPCR-ligand interactions with definitive mode-of-action labels (Agonist/Antagonist/Non-binder), assembled via text mining from bioassay literature.
 
-GPCRactDB_v1.csv: The core dataset of our study. Contains over 200,000 curated GPCR-ligand interactions with definitive mode-of-action labels (Agonist/Antagonist/Non-binder), assembled via text mining from bioassay literature.
-
-tb_aid_act_gpcr.csv: Supplementary bioassay mapping data used during the curation pipeline.
-
-2. resources/ (Biological & Structural Context)
+### 2. `resources/` (Biological & Structural Context)
 Contains the domain-specific biological metadata required to build the mechanistically aware graphs (identifying binding sites and allosteric pathways).
+* **`Binding_Sites_Heavy_Atom_based.csv`**: Explicit atom-level definitions of ligand binding pockets for each GPCR.
+* **`Differential_Residues_Heavy_Atom_based.csv`**: Identification of critical residues driving conformational changes between inactive and active states.
+* **`MSA_DF.csv`**: Multiple Sequence Alignment (MSA) features capturing the evolutionary conservation context of the receptors.
+* **`Human_GPCR_PDB_Info.csv` & `GPCR_PDB_classification.csv`**: Comprehensive metadata and classification for all utilized human GPCR crystal/cryo-EM structures.
+* **`Representative_Apo_Structures_v2.csv` & `Rep_GPCR_chain.csv`**: Mappings for the representative unbound (Apo) base structures used when modeling ligand-induced state transitions.
+* **`ChEMBL_GPCR_Info.csv`**: Standardized compound information cross-referenced from the ChEMBL database.
+* **`tb_aid_act_gpcr.csv`**: Supplementary bioassay mapping data used during the curation pipeline.
 
-Binding_Sites_Heavy_Atom_based.csv: Explicit atom-level definitions of ligand binding pockets for each GPCR.
-
-Differential_Residues_Heavy_Atom_based.csv: Identification of critical residues driving conformational changes between inactive and active states.
-
-MSA_DF.csv: Multiple Sequence Alignment (MSA) features capturing the evolutionary conservation context of the receptors.
-
-Human_GPCR_PDB_Info.csv & GPCR_PDB_classification.csv: Comprehensive metadata and classification for all utilized human GPCR crystal/cryo-EM structures.
-
-Representative_Apo_Structures_v2.csv & Rep_GPCR_chain.csv: Mappings for the representative unbound (Apo) base structures used when modeling ligand-induced state transitions.
-
-ChEMBL_GPCR_Info.csv: Standardized compound information cross-referenced from the ChEMBL database.
-
-3. splits/ (Benchmarking Splits)
+### 3. `splits/` (Benchmarking Splits)
 To rigorously evaluate model generalization to novel chemical spaces, we use Murcko scaffold-based splitting. Using these exact files ensures fair comparison against our baseline.
+* **`scaffold_train.csv`**: Training set.
+* **`scaffold_val.csv`**: Validation set for hyperparameter tuning and early stopping.
+* **`scaffold_test.csv`**: Hold-out test set containing functionally active/inactive compounds with unseen chemical scaffolds.
 
-scaffold_train.csv: Training set.
-
-scaffold_val.csv: Validation set for hyperparameter tuning and early stopping.
-
-scaffold_test.csv: Hold-out test set containing functionally active/inactive compounds with unseen chemical scaffolds.
-
-4. protein_graphs/ (Processed Inputs)
+### 4. `protein_graphs/` (Processed Inputs)
 Contains the final 3D atomistic graph objects ready to be ingested by the PyTorch Geometric data loaders.
+* **`*.pt` files** *(e.g., `Q13639.pt`)*: Precomputed node and edge features for individual GPCR targets. These graphs strictly encompass the functionally critical subgraphs (binding to allosteric sites) to prevent oversmoothing and reduce computational overhead.
+* **`*_to_id.json`**: Dictionary mapping files for categorical encoding (e.g., family classes, amino acid types). *Note: Do not overwrite these files during inference to maintain index consistency with the pretrained weights.*
 
-*.pt files (e.g., Q13639.pt): Precomputed node and edge features for individual GPCR targets. These graphs strictly encompass the functionally critical subgraphs (binding to allosteric sites) to prevent oversmoothing and reduce computational overhead.
-
-*_to_id.json: Dictionary mapping files for categorical encoding (e.g., family classes, amino acid types). Note: Do not overwrite these files during inference to maintain index consistency with the pretrained weights.
-
-5. sample/ (Quickstart)
-A minimal subset of .pt files and a toy .csv manifest designed strictly to verify that the environment and inference.py scripts are working correctly.
+### 5. `sample/` (Quickstart)
+A minimal subset of `.pt` files and a toy `.csv` manifest designed strictly to verify that the environment and `inference.py` scripts are working correctly.
