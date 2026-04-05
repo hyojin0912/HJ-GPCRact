@@ -38,7 +38,7 @@ To rigorously evaluate model generalization to novel chemical spaces, we use Mur
 * **`scaffold_val.csv`**: Validation set for hyperparameter tuning and early stopping.
 * **`scaffold_test.csv`**: Hold-out test set containing functionally active/inactive compounds with unseen chemical scaffolds.
 
-### 4. `protein_graphs/` (Processed Inputs)
+### 4. Processed Graph Inputs (`protein_graphs/` & `ligand_graphs/`)
 Contains the final 3D atomistic graph objects ready to be ingested by the PyTorch Geometric data loaders.
 * **`*.pt` files**: Due to large file sizes (>150MB), the full set of 200,000+ ligand graphs and 300+ protein graphs are hosted on Hugging Face. **Do not generate them from scratch.** Please use the provided download script to fetch them:
   ```bash
