@@ -1,11 +1,43 @@
-# Model Training & Inference Scripts
+# 🚀 Model Training & Inference Scripts
 
 This directory contains the executable scripts to train the GPCRact model, perform inference on new data, and run hyperparameter optimization (HPO).
 
+## 1. Run Inference (Quickstart & Evaluation)
 
-## 1. Train the Model
+Use `inference.py` to evaluate a trained model checkpoint on a test set. It generates a CSV file with predicted probabilities for Agonism, Antagonism, and Non-binding.
 
-Use `train.py` to train the GPCRact model from scratch using the preprocessed data splits.
+### ⚡ Quickstart (Toy Sample)
+By default, the script is configured to run on a minimal toy dataset. You can run it directly without any arguments:
+```bash
+python scripts/inference.py
+```
+(This will read from `data/sample/` and output predictions to `results/predictions.csv`)
+
+### 🧪 Full Evaluation
+To evaluate the model on the full test split after downloading the dataset:
+```bash
+python scripts/inference.py \
+    --data_csv data/splits/scaffold_test.csv \
+    --model_path checkpoints/best_model.pt \
+    --protein_graph_dir data/protein_graphs/ \
+    --ligand_graph_dir data/ligand_graphs/ \
+    --output_dir results/ \
+    --batch_size 32
+```
+### Output
+The script will save a CSV file (e.g., `predictions_test.csv`) to the output_dir. The CSV includes:
+* `Ikey`, `UniProt`: Identifiers
+
+* `Binding_Prob`: Predicted probability of binding.
+
+* `Prediction`: Final class prediction (0: Non-binder, 1: Antagonist, 2: Agonist).
+
+* `Logit_Antagonist`, `Logit_Agonist`: Raw model outputs.
+
+
+## 2. Train the Model
+
+Use `train.py` to train the GPCRact model from scratch using the scaffold-based data splits.
 
 ### Usage
 ```bash
@@ -26,32 +58,6 @@ python scripts/train.py \
 `--save_dir` Directory to save model checkpoints.
 `--enc_layers` Number of layers for the EGNN encoder.
 `--prop_attn_layers` Number of layers for the Global Attention module.
-
-
-## 2. Run Inference
-
-Use `inference.py` to evaluate a trained model checkpoint on a test set (or any dataset provided in a CSV). It generates a CSV file with predicted probabilities for Binding, Antagonism, and Agonism.
-
-### Usage
-```bash
-python scripts/inference.py \
-    --data_dir data/splits \
-    --model_path checkpoints/best_model.pt \
-    --protein_graph_dir data/processed/protein_graphs \
-    --ligand_graph_dir data/processed/ligand_graphs \
-    --output_dir results/ \
-    --batch_size 32
-```
-
-#### Output
-The script will save a CSV file (e.g., `predictions_test.csv`) to the output_dir. The CSV includes:
-* `Ikey`, `UniProt`: Identifiers
-
-* `Binding_Prob`: Predicted probability of binding.
-
-* `Prediction`: Final class prediction (0: Non-binder, 1: Antagonist, 2: Agonist).
-
-* `Logit_Antagonist`, `Logit_Agonist`: Raw model outputs.
 
 
 ## 3. Hyperparameter Optimization
