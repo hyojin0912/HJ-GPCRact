@@ -34,7 +34,7 @@ def main(args):
     try:
         test_df = pd.read_csv(csv_path)
         valid_idx = get_valid_indices(test_df, args.protein_graph_dir, args.ligand_graph_dir)
-        test_df = test_df.iloc[valid_idx].reset_index(drop=True)
+        test_df = test_df[valid_idx].reset_index(drop=True)
         
         # Guard against empty datasets
         if test_df.empty:
