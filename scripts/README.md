@@ -4,14 +4,14 @@ This directory contains the executable scripts to train the GPCRact model, perfo
 
 ## 1. Run Inference (Quickstart & Evaluation)
 
-Use `inference.py` to evaluate a trained model checkpoint on a test set. It generates a CSV file with predicted probabilities for Agonism, Antagonism, and Non-binding.
+Use `inference.py` to run a trained model checkpoint on a query CSV. By default it saves the raw Stage-1 binding probability, Stage-2 activity prediction, and both activity logits; adding `--apply_rescue` also writes the paper-matched three-class label via the confidence-based rescue rule.
 
 ### Quickstart (Toy Sample)
 By default, the script is configured to run on a minimal toy dataset. You can run it directly without any arguments:
 ```bash
 python scripts/inference.py
 ```
-(This will read from `data/sample/` and output predictions to `results/predictions.csv`)
+(Reads from `data/sample/` and saves to `results/predictions_toy_dataset.csv`.)
 
 ### Full Evaluation
 To evaluate the model on the full test split after downloading the dataset:
@@ -76,6 +76,10 @@ python scripts/train.py \
 `--enc_layers` Number of layers for the EGNN encoder.
 
 `--prop_attn_layers` Number of layers for the Global Attention module.
+
+`--lambda_act` Weight for Stage-2 activity loss (Supplementary Table S5: 1.0).
+
+`--binding_fn_penalty` BCE pos_weight applied to Stage-1 binder class (Supplementary Table S5: 1.5).
 
 
 ## 3. Hyperparameter Optimization
