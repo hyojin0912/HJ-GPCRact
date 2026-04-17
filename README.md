@@ -16,6 +16,22 @@ We provide the complete source code, preprocessed datasets, training scripts, an
 - **Reproducible Pipeline:** Fully automated workflow from raw PDB/Bioassay data to final evaluation.
 - **Bias-Aware Benchmarking:** Includes rigorous scaffold-based splits and re-implementations of SOTA baselines.
 
+## 🎯 Task Formulation
+GPCRact decomposes ligand-induced GPCR activity prediction into **two conditional binary tasks**, each handled by a dedicated prediction head:
+
+| Stage | Task            | Classes                        | Training scope              |
+|-------|-----------------|--------------------------------|-----------------------------|
+| 1     | Binding         | non-binder (0) / binder (1)    | all samples                 |
+| 2     | Activity type   | antagonist (0) / agonist (1)   | binder-labeled samples only |
+
+The raw `Label` column in `data/splits/*.csv` contains three string values — `nonbinder`, `antagonist`, `agonist` — which `src/dataset.GraphDataset` decomposes into `(binding_label, activity_label)` pairs at load time via its `LABEL_MAP`. Non-binders receive `activity_label = -1`, which is masked from the Stage-2 loss.
+
+At inference time, the two stage outputs can be recombined into the original three-class schema:
+```
+P(nonbinder)  = 1 − σ(binding_logit)
+P(antagonist) = σ(binding_logit) × softmax(activity_logit)[0]
+P(agonist)    = σ(binding_logit) × softmax(activity_logit)[1]
+```
 
 ## 📋 Table of Contents
 - [Repository Structure](#repository-structure)
