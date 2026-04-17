@@ -30,23 +30,23 @@ class GraphDataset(PyGDataset):
         return len(self.df)
 
     def get(self, idx):
-            row = self.df.iloc[idx]
-            ikey, uniprot_id = row['Ikey'], row['AC']
-    
-            # Parse the string Label column and decompose it into binary targets
-            # for the two-stage architecture (see LABEL_MAP).
-            label_str = str(row.get('Label', '')).strip().lower()
-            binding_label_tensor_val, activity_label_tensor_val = self.LABEL_MAP.get(
-                label_str, (-1.0, -1.0)
-            )
+        row = self.df.iloc[idx]
+        ikey, uniprot_id = row['Ikey'], row['AC']
+
+        # Parse the string Label column and decompose it into binary targets
+        # for the two-stage architecture (see LABEL_MAP).
+        label_str = str(row.get('Label', '')).strip().lower()
+        binding_label_tensor_val, activity_label_tensor_val = self.LABEL_MAP.get(
+            label_str, (-1.0, -1.0)
+        )
 
         try:
             protein_graph = torch.load(self.protein_graph_dir / f"{uniprot_id}.pt", map_location='cpu', weights_only=False)
             ligand_graph = torch.load(self.ligand_graph_dir / f"{ikey}.pt", map_location='cpu', weights_only=False)
-            
+
             original_x = protein_graph.x
-            
-            # Extract features for dual-graph architecture
+
+            # Extract features for dual-graph architecture.
             h_res_type = original_x[:, :20]
             h_is_bs    = original_x[:, 20:21]
             h_disp     = original_x[:, 21:23]
@@ -55,25 +55,25 @@ class GraphDataset(PyGDataset):
             h_dist_ca  = original_x[:, 27:28]
             h_rdkit    = original_x[:, 28:]
 
-            # Full Graph (CA Backbone)
+            # Full graph (Cα backbone view).
             protein_graph.x_float_full = torch.cat([
                 h_res_type, h_is_bs, h_disp, h_rel_pos, h_dist_ca, h_rdkit
             ], dim=1)
 
-            # Clean Graph (Binding Site)
+            # Clean graph (binding-site view).
             protein_graph.x_float_clean = torch.cat([
                 h_res_type, h_rel_pos, h_dist_ca, h_rdkit
             ], dim=1)
-            
+
             del protein_graph.x
-            
+
             if hasattr(protein_graph, 'node_role'):
                 protein_graph.node_roles = protein_graph.node_role
                 del protein_graph.node_role
 
-            # FIX: Assign BOTH labels to the graph object
+            # Attach both stage targets to the graph object.
             protein_graph.activity_label = torch.tensor([activity_label_tensor_val], dtype=torch.float)
-            protein_graph.binding_label = torch.tensor([binding_label_tensor_val], dtype=torch.float)
+            protein_graph.binding_label  = torch.tensor([binding_label_tensor_val],  dtype=torch.float)
             protein_graph.ikey = ikey
             protein_graph.uniprot_id = uniprot_id
 
