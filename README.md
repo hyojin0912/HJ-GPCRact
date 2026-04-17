@@ -33,6 +33,10 @@ P(antagonist) = σ(binding_logit) × softmax(activity_logit)[0]
 P(agonist)    = σ(binding_logit) × softmax(activity_logit)[1]
 ```
 
+## 🔧 Design Note — Binding-Gated Allosteric Propagation
+
+The Stage-1 binding probability is used to gate ligand signal injection into the local EGNN propagation block, but the gate is **detached** (`torch.no_grad()`) before use. This stop-gradient keeps the two stages cleanly separable: Stage 1 is learned exclusively from binding supervision, while Stage 2 conditions on Stage 1's output without perturbing it. Sharing a single interaction encoder between the two heads is what makes this separation meaningful — both stages consume a shared geometric representation, but their supervision signals never cross.
+
 ## 📋 Table of Contents
 - [Repository Structure](#repository-structure)
 - [Installation](#installation)
