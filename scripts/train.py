@@ -198,12 +198,13 @@ def main(args):
     
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
     
-    # Loss functions
-    # Calculate class weights for imbalanced activity labels
-    act_labels = train_df['Activity'].dropna().values
-    act_labels = act_labels[act_labels != -1]
-    class_counts = np.bincount(act_labels.astype(int))
-    total_samples = len(act_labels)
+    # Compute class weights for Stage-2 (activity) loss from the raw Label column.
+    # Only binder-labeled rows contribute; LABEL_MAP: antagonist=0, agonist=1.
+    label_to_act = {k: v[1] for k, v in GraphDataset.LABEL_MAP.items() if v[1] >= 0}
+    act_series = train_df['Label'].astype(str).str.strip().str.lower().map(label_to_act)
+    act_labels_np = act_series.dropna().astype(int).values
+    class_counts = np.bincount(act_labels_np, minlength=2)
+    total_samples = len(act_labels_np)
     class_weights = total_samples / (len(class_counts) * class_counts)
     class_weights_tensor = torch.FloatTensor(class_weights).to(device)
     
