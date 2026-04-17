@@ -1,6 +1,7 @@
 import sys
 import os
 import argparse
+import numpy as np
 import pandas as pd
 import torch
 import logging
@@ -15,12 +16,64 @@ from src.model import GPCRact_Model
 from src.dataset import GraphDataset, collate_fn, get_valid_indices
 from scripts.train import evaluate
 
-# Confidence-based rescue logic
-# After Stage 1 + Stage 2 logits are computed:
-# prob_bind = sigmoid(binding_logit), prob_act = softmax(activity_logit)
-# 1) Primary decision at threshold 0.5
-# 2) If prob_bind in [0.4, 0.5] and max(prob_act) > 0.95 -> promote to "binder"
-# 3) Final 3-class label = argmax over {nonbinder, antagonist, agonist}
+def apply_confidence_rescue(df, lower_bind_thresh=0.4, upper_bind_thresh=0.5,
+                            activity_conf_thresh=0.95):
+    """
+    Confidence-based rescue logic (Supplementary Table S5 / Figure S9).
+
+    Recombines the two per-sample stage outputs into the original three-class prediction {0: non-binder, 1: antagonist, 2: agonist},
+    with an optional rescue step that promotes low-confidence binders to the class predicted by a highly confident activity head.
+
+    Rule:
+      1. Hard-threshold binding at `upper_bind_thresh` (paper: 0.5).
+      2. For samples with `binding_prob` in the uncertainty window
+         (`lower_bind_thresh`, `upper_bind_thresh`) (paper: (0.4, 0.5)),
+         if the activity head's max softmax probability exceeds
+         `activity_conf_thresh` (paper: 0.95), promote the sample to
+         a binder and assign the activity-head-predicted class.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        Output of `evaluate(..., return_df=True)` with columns
+        `Binding_Prob`, `Logit_Antagonist`, `Logit_Agonist`.
+    lower_bind_thresh, upper_bind_thresh : float
+        Bounds of the binding-probability uncertainty window.
+    activity_conf_thresh : float
+        Minimum activity-head softmax probability required to rescue a
+        sample from the uncertainty window.
+
+    Returns
+    -------
+    np.ndarray
+        Integer array of shape (len(df),) with final class labels
+        (0: non-binder, 1: antagonist, 2: agonist).
+    """
+    binding_prob = df['Binding_Prob'].values
+
+    # Numerically stable softmax over activity logits.
+    activity_logits = df[['Logit_Antagonist', 'Logit_Agonist']].values
+    exp_logits = np.exp(activity_logits - np.max(activity_logits, axis=1, keepdims=True))
+    activity_probs = exp_logits / exp_logits.sum(axis=1, keepdims=True)
+
+    predicted_as_binder = (binding_prob >= upper_bind_thresh).astype(int)
+    predicted_activity_type = np.argmax(activity_probs, axis=1)  # 0: ant, 1: ago
+
+    # Primary decision: 0 = non-binder, shift activity {0,1} -> {1,2} for binders.
+    final_preds = np.zeros(len(df), dtype=int)
+    binder_mask = (predicted_as_binder == 1)
+    final_preds[binder_mask] = predicted_activity_type[binder_mask] + 1
+
+    # Rescue: uncertain binding + high-confidence activity -> promote to binder.
+    grey_area_mask = (binding_prob > lower_bind_thresh) & (binding_prob < upper_bind_thresh)
+    activity_max_prob = np.max(activity_probs, axis=1)
+    high_confidence_mask = (activity_max_prob > activity_conf_thresh)
+    rescue_mask = grey_area_mask & high_confidence_mask
+
+    if rescue_mask.any():
+        final_preds[rescue_mask] = predicted_activity_type[rescue_mask] + 1
+
+    return final_preds
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
@@ -102,7 +155,22 @@ def main(args):
         bacc, bind_bacc, results_df = evaluate(model, test_loader, device, return_df=True)
         logger.info(f"Test Balanced Accuracy: {bacc:.4f}")
         logger.info(f"Test Binding Balanced Accuracy: {bind_bacc:.4f}")
-        
+
+        # Optional post-hoc rescue logic (Supplementary Table S5).
+        if args.apply_rescue:
+            final_pred = apply_confidence_rescue(
+                results_df,
+                lower_bind_thresh=args.rescue_lower,
+                upper_bind_thresh=args.rescue_upper,
+                activity_conf_thresh=args.rescue_conf,
+            )
+            results_df['Final_Pred'] = final_pred  # 0: NB, 1: Antagonist, 2: Agonist
+            logger.info(
+                f"Applied rescue logic with (lower={args.rescue_lower}, "
+                f"upper={args.rescue_upper}, conf={args.rescue_conf}); "
+                f"added 'Final_Pred' column."
+            )
+
         input_stem = Path(args.query_csv).stem
         save_path = Path(args.output_dir) / f"predictions_{input_stem}.csv"
         results_df.to_csv(save_path, index=False)
@@ -127,6 +195,15 @@ if __name__ == "__main__":
     parser.add_argument("--elem_emb_dim", type=int, default=8)
     parser.add_argument("--dropout", type=float, default=0.4)
     parser.add_argument("--batch_size", type=int, default=32)
+    # Confidence-based rescue logic (Supplementary Table S5).
+    parser.add_argument("--apply_rescue", action="store_true",
+                        help="Apply post-hoc confidence-based rescue logic to produce a final 3-class prediction column (Final_Pred).")
+    parser.add_argument("--rescue_lower", type=float, default=0.4,
+                        help="Lower bound of binding-probability uncertainty window.")
+    parser.add_argument("--rescue_upper", type=float, default=0.5,
+                        help="Upper bound of binding-probability uncertainty window (also serves as the primary binder threshold).")
+    parser.add_argument("--rescue_conf", type=float, default=0.95,
+                        help="Activity-head confidence threshold for rescue.")
     
     args = parser.parse_args()
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
