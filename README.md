@@ -145,7 +145,7 @@ jupyter notebook preprocessing/04_create_final_dataset.ipynb
 - Note: The exact scaffold-based split files (`scaffold_train.csv`, `scaffold_val.csv`, `scaffold_test.csv`) used in our study are already provided in `data/splits/` to ensure fair benchmarking.
 - Note: Generating 3D conformers for 200,000+ ligands is computationally expensive. We highly recommend using the `download_full_data.sh` script instead of running the preprocessing pipeline from scratch.
 
-### <a id="step-2-training"></a>Step 2: Training the Model 🏋️‍♂️
+### <a id="step-2-training"></a>Step 2: Training the Model
 
 To train the GPCRact model from scratch using the provided splits:
 
@@ -161,7 +161,7 @@ python scripts/train.py \
 For detailed arguments, see `scripts/README.md`.
 
 
-### <a id="step-3-inference"></a>Step 3: Full Inference 🚀
+### <a id="step-3-inference"></a>Step 3: Full Inference
 
 **⚠️ Important Note:** When running inference, **do not** execute preprocessing scripts that generate new dictionary files (e.g., `class_to_id.json`, `family_to_id.json`). Doing so will overwrite the dictionaries based on your test data and cause "size mismatch" errors with the pretrained weights. Please ensure you are using the original `.json` dictionary files provided in `data/protein_graphs/`.
 
@@ -180,7 +180,7 @@ python scripts/inference.py \
 The `--apply_rescue` flag adds a `Final_Pred` column to the output CSV with the paper-matched three-class label (0: non-binder, 1: antagonist, 2: agonist) produced by the confidence-based rescue rule (Supplementary Table S5). 
 Without this flag the script only saves the raw Stage-1 probability and the Stage-2 binary prediction.
 
-### <a id="step-4-benchmarking"></a>Step 4: Benchmarking 📊
+### <a id="step-4-benchmarking"></a>Step 4: Benchmarking
 
 We provide the full source code and execution scripts for the baseline models compared in the manuscript (**DeepREAL**, **AiGPro**, **3D-GNN**). All baselines were retrained on the identical GPCRact dataset.
 * **DeepREAL**: See `benchmarks/DeepREAL/`
@@ -190,7 +190,7 @@ We provide the full source code and execution scripts for the baseline models co
 * **3D-GNN Baseline**: See `benchmarks/3D-GNN/`
 
 
-### <a id="step-5-analysis"></a>Step 5: Analysis & Figure Generation 📉
+### <a id="step-5-analysis"></a>Step 5: Analysis & Figure Generation
 
 To reproduce the statistical analyses, mechanistic interpretations, and main figures (Fig 1, 3, 4, 7), run the notebooks in the `analysis/` directory.
 
