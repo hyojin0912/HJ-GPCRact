@@ -83,7 +83,7 @@ python scripts/inference.py
 ```
 
 ## <a id="downloading-the-full-dataset"></a>📥 Downloading the Full Dataset
-Due to the large size of the 3D atomistic graphs (>150MB for 200,000+ interactions), the complete graph dataset is hosted remotely on Hugging Face(https://huggingface.co/datasets/hyojin0912/GPCRact/tree/main). We provide a shell script to automate the download and extraction process directly into your pipeline.
+Due to the large size of the 3D atomistic graphs (>150MB for 200,000+ interactions), the complete graph dataset is hosted remotely on [Hugging Face](https://huggingface.co/datasets/hyojin0912/GPCRact/tree/main). We provide a shell script to automate the download and extraction process directly into your pipeline.
 ```bash
 # Fetch and extract ligand and protein graphs to the data/ directory
 bash scripts/download_full_data.sh
