@@ -147,10 +147,14 @@ def main(args):
     
     Path(args.save_dir).mkdir(parents=True, exist_ok=True)
     
-    # 1. Load Data
+    # 1. Load Data. Custom CSV paths override the data_dir defaults.
     print("Loading data splits...")
-    train_df = pd.read_csv(Path(args.data_dir) / "scaffold_train.csv")
-    val_df = pd.read_csv(Path(args.data_dir) / "scaffold_val.csv")
+    train_csv_path = Path(args.train_csv) if args.train_csv else Path(args.data_dir) / "scaffold_train.csv"
+    val_csv_path   = Path(args.val_csv)   if args.val_csv   else Path(args.data_dir) / "scaffold_val.csv"
+    train_df = pd.read_csv(train_csv_path)
+    val_df   = pd.read_csv(val_csv_path)
+    print(f"  Train CSV: {train_csv_path} ({len(train_df)} rows)")
+    print(f"  Val CSV:   {val_csv_path} ({len(val_df)} rows)")
     
     train_valid_idx = get_valid_indices(train_df, args.protein_graph_dir, args.ligand_graph_dir)
     val_valid_idx = get_valid_indices(val_df, args.protein_graph_dir, args.ligand_graph_dir)
@@ -165,6 +169,15 @@ def main(args):
     val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, collate_fn=collate_fn, num_workers=4, pin_memory=True)
     
     print(f"Train samples: {len(train_ds)}, Val samples: {len(val_ds)}")
+    if len(train_ds) == 0 or len(val_ds) == 0:
+        raise RuntimeError(
+            f"No valid samples found after filtering. "
+            f"Each CSV row requires its protein graph "
+            f"({args.protein_graph_dir}/<AC>.pt) and ligand graph "
+            f"({args.ligand_graph_dir}/<Ikey>.pt) to exist on disk."
+        )
+
+    # 2. Extract Dimensions
     
     # 2. Extract Dimensions
     p_s, l_s = train_ds[0]
@@ -236,7 +249,12 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_dir", type=str, default="../data/splits")
+    parser.add_argument("--data_dir", type=str, default="../data/splits",
+                        help="Default location for scaffold_train.csv and scaffold_val.csv (used when --train_csv / --val_csv are not provided).")
+    parser.add_argument("--train_csv", type=str, default=None,
+                        help="Path to a custom training CSV. Overrides --data_dir.")
+    parser.add_argument("--val_csv", type=str, default=None,
+                        help="Path to a custom validation CSV. Overrides --data_dir.")
     parser.add_argument("--protein_graph_dir", type=str, required=True)
     parser.add_argument("--ligand_graph_dir", type=str, required=True)
     parser.add_argument("--save_dir", type=str, default="./checkpoints", help="Where to save model")
