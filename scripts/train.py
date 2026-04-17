@@ -172,10 +172,7 @@ def main(args):
     p_dim_clean = p_s.x_float_clean.shape[1] + args.elem_emb_dim
     p_dim_full = p_s.x_float_full.shape[1] + args.elem_emb_dim
     l_dim = l_s.x.shape[1]
-    
-    if args.gpcr_meta_dir is None:
-        args.gpcr_meta_dir = args.protein_graph_dir
-        
+           
     class_dict_path = Path(args.protein_graph_dir) / "class_to_id.json"
     family_dict_path = Path(args.protein_graph_dir) / "family_to_id.json"
     
