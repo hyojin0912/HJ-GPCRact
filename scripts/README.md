@@ -81,6 +81,17 @@ python scripts/train.py \
 
 `--binding_fn_penalty` BCE pos_weight applied to Stage-1 binder class (Supplementary Table S5: 1.5).
 
+### Smoke Test (No Full Dataset Required)
+To verify the training pipeline end-to-end without downloading the full graph dataset (~150 MB), reuse the bundled toy CSV. This runs two epochs on 5 samples — metrics are meaningless but all forward/backward paths are exercised:
+```bash
+python scripts/train.py \
+    --protein_graph_dir data/sample/protein_graphs \
+    --ligand_graph_dir data/sample/ligand_graphs \
+    --train_csv data/sample/toy_dataset.csv \
+    --val_csv data/sample/toy_dataset.csv \
+    --epochs 2 --batch_size 2 --accum_steps 1
+```
+
 
 ## 3. Hyperparameter Optimization
 
