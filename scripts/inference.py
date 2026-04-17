@@ -186,7 +186,6 @@ if __name__ == "__main__":
     parser.add_argument("--ligand_graph_dir", type=str, default="data/sample/ligand_graphs")
     parser.add_argument("--model_path", type=str, default="checkpoints/best_model.pt")
     parser.add_argument("--output_dir", type=str, default="results")
-    parser.add_argument("--gpcr_meta_dir", type=str, default=None)
     parser.add_argument("--use_gpcr_cf_embed", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--hidden_dim", type=int, default=128)
     parser.add_argument("--enc_layers", type=int, default=4)
