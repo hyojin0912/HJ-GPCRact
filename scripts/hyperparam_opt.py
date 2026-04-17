@@ -96,13 +96,14 @@ def run_trial():
     ).to(device)
     
     optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.learning_rate, weight_decay=cfg.weight_decay)
-    crit_bind = nn.BCEWithLogitsLoss()
-    crit_act = nn.CrossEntropyLoss(reduction='none')
+    crit_bind = nn.BCEWithLogitsLoss(pos_weight=torch.tensor([1.5], device=device))
+    crit_act  = nn.CrossEntropyLoss(reduction='none')
     
     # Train Loop
     for epoch in range(1, cfg.epochs + 1):
-        loss, _, _ = train_epoch(model, train_loader, crit_act, crit_bind, optimizer, device, 
-                                 32, 1.0, 1.5)
+        # No activity-class weighting for HPO sweeps (keeps the search space smaller).
+        loss, _, _ = train_epoch(model, train_loader, crit_act, crit_bind, optimizer, device,
+                                 accum_steps=32, lambda_act=1.0, w_fn=None)
         
         val_bacc, _ = evaluate(model, val_loader, device)
         
