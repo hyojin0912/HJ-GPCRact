@@ -6,8 +6,20 @@ from torch_geometric.data import Dataset as PyGDataset, Batch
 
 class GraphDataset(PyGDataset):
     """
-    Loads graph files with the CORRECT dual-graph feature slicing logic.
+    Loads graph files with the dual-graph feature slicing logic,
+    and decomposes the raw string `Label` column into two-stage binary targets.
+
+    Stage 1 (binding head):   0 = non-binder, 1 = binder
+    Stage 2 (activity head):  0 = antagonist, 1 = agonist, -1 = masked (non-binder)
     """
+    # Decompose 3-class string label into (binding_label, activity_label).
+    # -1 masks the target from the corresponding loss.
+    LABEL_MAP = {
+        "nonbinder":  (0.0, -1.0),
+        "antagonist": (1.0,  0.0),
+        "agonist":    (1.0,  1.0),
+    }
+
     def __init__(self, root, df, protein_graph_dir, ligand_graph_dir):
         self.df = df.reset_index(drop=True)
         self.protein_graph_dir = Path(protein_graph_dir)
@@ -18,23 +30,15 @@ class GraphDataset(PyGDataset):
         return len(self.df)
 
     def get(self, idx):
-        row = self.df.iloc[idx]
-        ikey, uniprot_id = row['Ikey'], row['AC']
-        
-        # Safely extract labels
-        binding_label = row.get('Binding', -1.0)
-        activity_label = row.get('Activity', -1.0)
-        
-        if isinstance(activity_label, str):
-            try: activity_label = float(activity_label)
-            except ValueError: activity_label = -1.0
-        activity_label_tensor_val = activity_label if not np.isnan(activity_label) else -1.0
-
-        # FIX: Also parse binding_label safely
-        if isinstance(binding_label, str):
-            try: binding_label = float(binding_label)
-            except ValueError: binding_label = -1.0
-        binding_label_tensor_val = binding_label if not np.isnan(binding_label) else -1.0
+            row = self.df.iloc[idx]
+            ikey, uniprot_id = row['Ikey'], row['AC']
+    
+            # Parse the string Label column and decompose it into binary targets
+            # for the two-stage architecture (see LABEL_MAP).
+            label_str = str(row.get('Label', '')).strip().lower()
+            binding_label_tensor_val, activity_label_tensor_val = self.LABEL_MAP.get(
+                label_str, (-1.0, -1.0)
+            )
 
         try:
             protein_graph = torch.load(self.protein_graph_dir / f"{uniprot_id}.pt", map_location='cpu', weights_only=False)
