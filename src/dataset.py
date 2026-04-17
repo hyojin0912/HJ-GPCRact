@@ -55,7 +55,7 @@ class GraphDataset(PyGDataset):
             h_dist_ca  = original_x[:, 27:28]
             h_rdkit    = original_x[:, 28:]
 
-            # Full graph (Cα backbone view).
+            # Full graph (C-alpha backbone view).
             protein_graph.x_float_full = torch.cat([
                 h_res_type, h_is_bs, h_disp, h_rel_pos, h_dist_ca, h_rdkit
             ], dim=1)
