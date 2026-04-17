@@ -15,6 +15,13 @@ from src.model import GPCRact_Model
 from src.dataset import GraphDataset, collate_fn, get_valid_indices
 from scripts.train import evaluate
 
+# Confidence-based rescue logic
+# After Stage 1 + Stage 2 logits are computed:
+# prob_bind = sigmoid(binding_logit), prob_act = softmax(activity_logit)
+# 1) Primary decision at threshold 0.5
+# 2) If prob_bind in [0.4, 0.5] and max(prob_act) > 0.95 -> promote to "binder"
+# 3) Final 3-class label = argmax over {nonbinder, antagonist, agonist}
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 logger = logging.getLogger(__name__)
