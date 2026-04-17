@@ -38,10 +38,15 @@ def run_trial():
 
     # Load Data (Using a subset for speed in HPO)
     full_df = pd.read_csv(DATA_DIR / "scaffold_train.csv")
-    # Sample 20% for HPO efficiency
-    _, subset_df = train_test_split(full_df, test_size=0.2, random_state=42, stratify=full_df['Binding'])
-    
-    train_df, val_df = train_test_split(subset_df, test_size=0.2, random_state=42, stratify=subset_df['Binding'])
+    # Stratify using the raw Label column (binder vs non-binder).
+    full_df['_strat'] = (full_df['Label'].astype(str).str.strip().str.lower() != 'nonbinder').astype(int)
+    _, subset_df = train_test_split(full_df, test_size=0.2, random_state=42,
+                                    stratify=full_df['_strat'])
+    train_df, val_df = train_test_split(subset_df, test_size=0.2, random_state=42,
+                                        stratify=subset_df['_strat'])
+    # Drop helper column before passing to dataset.
+    train_df = train_df.drop(columns=['_strat']).reset_index(drop=True)
+    val_df   = val_df.drop(columns=['_strat']).reset_index(drop=True)
     
     # Filter Valid
     train_idx = get_valid_indices(train_df, P_GRAPH_DIR, L_GRAPH_DIR)
