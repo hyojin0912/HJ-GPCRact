@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import balanced_accuracy_score
 
 # Add parent directory to path to import src
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -24,7 +25,7 @@ def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device,
     model.train()
     total_loss, total_act_loss, total_bind_loss = 0, 0, 0
     
-    # 🌟 FIX: Device-agnostic GradScaler (Prevents crashes on CPU/Mac)
+    # Device-agnostic GradScaler: only enable AMP scaling on CUDA.
     is_cuda = device.type == 'cuda'
     scaler = torch.amp.GradScaler(device.type, enabled=is_cuda)
     optimizer.zero_grad()
@@ -32,21 +33,20 @@ def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device,
     valid_batches = 0
     
     for i, data in enumerate(tqdm(loader, desc="Training", leave=False)):
-        if data[0] is None: continue
+        # collate_fn may return None itself when the whole mini-batch is invalid.
+        if data is None or data[0] is None: continue
         protein_batch, ligand_batch = data
         protein_batch, ligand_batch = protein_batch.to(device), ligand_batch.to(device)
         
-        binding_labels = protein_batch.binding_label
+        # Flatten label tensors from [B, 1] -> [B] so they align with logits.
+        binding_labels = protein_batch.binding_label.squeeze(-1)
         activity_labels = protein_batch.activity_label.long().squeeze(-1)
-        
-        # 🌟 FIX: Device-agnostic Autocast
+
+        # Device-agnostic autocast: mixed precision only on CUDA.
         with torch.autocast(device_type=device.type, enabled=is_cuda):
-            logits_act = model(protein_batch, ligand_batch)
-            
-            if hasattr(model, 'binding_head'):
-                logits_bind = model.binding_head(model.get_global_representation(protein_batch, ligand_batch))
-            else:
-                logits_bind = torch.zeros_like(binding_labels) # Dummy if no binding head
+            # Model returns (binding_logit, activity_type_logit). See src/model.py.
+            binding_logit, logits_act = model(protein_batch, ligand_batch)
+            logits_bind = binding_logit.squeeze(-1)  # [B, 1] -> [B]
                 
             loss_act, loss_bind = torch.tensor(0.0, device=device), torch.tensor(0.0, device=device)
             
@@ -91,16 +91,13 @@ def evaluate(model, loader, device, return_df=False):
     
     with torch.no_grad():
         for data in tqdm(loader, desc="Evaluating", leave=False):
-            if data[0] is None: continue
+            if data is None or data[0] is None: continue
             protein_batch, ligand_batch = data
             protein_batch, ligand_batch = protein_batch.to(device), ligand_batch.to(device)
             
             with torch.autocast(device_type=device.type, enabled=is_cuda):
-                logits_act = model(protein_batch, ligand_batch)
-                if hasattr(model, 'binding_head'):
-                    logits_bind = model.binding_head(model.get_global_representation(protein_batch, ligand_batch))
-                else:
-                    logits_bind = torch.zeros_like(protein_batch.binding_label)
+                binding_logit, logits_act = model(protein_batch, ligand_batch)
+                logits_bind = binding_logit.squeeze(-1)  # [B, 1] -> [B]
             
             probs_act = torch.softmax(logits_act, dim=-1)
             preds_act = torch.argmax(probs_act, dim=-1)
@@ -119,20 +116,21 @@ def evaluate(model, loader, device, return_df=False):
                     all_act_preds.append(preds_act_np[i])
                     all_act_labels.append(act_labels[i])
                 if bind_labels[i] != -1.0:
-                    all_bind_preds.append(1 if probs_bind_np[i] > 0.5 else 0)
+                    all_bind_preds.append(1 if float(probs_bind_np[i]) > 0.5 else 0)
                     all_bind_labels.append(bind_labels[i])
-                    
+
                 if return_df:
+                    # Stage 1: probability of being a binder.
+                    # Stage 2: class 0 = antagonist, class 1 = agonist (binder-only).
                     results.append({
                         'Ikey': ikeys[i],
                         'UniProt': uniprots[i],
-                        'Binding_Prob': probs_bind_np[i][0] if probs_bind_np[i].ndim > 0 else probs_bind_np[i],
-                        'Prediction': preds_act_np[i],
-                        'Logit_Antagonist': logits_act[i, 1].item(),
-                        'Logit_Agonist': logits_act[i, 2].item()
+                        'Binding_Prob': float(probs_bind_np[i]),
+                        'Activity_Pred': int(preds_act_np[i]),
+                        'Logit_Antagonist': float(logits_act[i, 0].item()),
+                        'Logit_Agonist':    float(logits_act[i, 1].item()),
                     })
 
-    from sklearn.metrics import balanced_accuracy_score
     bacc = balanced_accuracy_score(all_act_labels, all_act_preds) if all_act_labels else 0.0
     bind_bacc = balanced_accuracy_score(all_bind_labels, all_bind_preds) if all_bind_labels else 0.0
     
