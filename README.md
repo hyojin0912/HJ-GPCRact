@@ -127,7 +127,7 @@ model = GPCRact_Model(...)
 # Load weights
 checkpoint_path = "path/to/model.pt"
 state_dict = torch.load(checkpoint_path, map_location='cuda')
-model.load_state_dict(state_dict, strict=False)
+model.load_state_dict(state_dict, strict=True)
 model.eval()
 ```
 
