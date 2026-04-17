@@ -1,4 +1,4 @@
-# 🚀 Model Training & Inference Scripts
+# Model Training & Inference Scripts
 
 This directory contains the executable scripts to train the GPCRact model, perform inference on new data, and run hyperparameter optimization (HPO).
 
@@ -6,14 +6,14 @@ This directory contains the executable scripts to train the GPCRact model, perfo
 
 Use `inference.py` to evaluate a trained model checkpoint on a test set. It generates a CSV file with predicted probabilities for Agonism, Antagonism, and Non-binding.
 
-### ⚡ Quickstart (Toy Sample)
+### Quickstart (Toy Sample)
 By default, the script is configured to run on a minimal toy dataset. You can run it directly without any arguments:
 ```bash
 python scripts/inference.py
 ```
 (This will read from `data/sample/` and output predictions to `results/predictions.csv`)
 
-### 🧪 Full Evaluation
+### Full Evaluation
 To evaluate the model on the full test split after downloading the dataset:
 ```bash
 python scripts/inference.py \
