@@ -67,15 +67,17 @@ class GPCRact_Model(nn.Module):
 
         self.final_norm = nn.LayerNorm(hidden_dim)
 
-        # --- Module 4: Prediction Heads ---
-        # Auxiliary Task: Binding Prediction
+        # --- Module 4: Prediction Heads (hierarchical two-stage) ---
+        # Stage 1: binary binding (non-binder vs binder); used as the
+        # gatekeeper for Stage 2 and as a gate on allosteric propagation.
         self.binding_head = nn.Sequential(
             nn.Linear(hidden_dim * 2, hidden_dim),
             nn.ReLU(),
             nn.Dropout(dropout),
             nn.Linear(hidden_dim, 1)
         )
-        # Primary Task: Activity Type Prediction (Antagonist vs Agonist)
+        # Stage 2: binary activity type (antagonist vs agonist);
+        # trained on binder-labeled samples only.
         self.activity_type_head = nn.Sequential(
             nn.Linear(hidden_dim * 2, hidden_dim),
             nn.ReLU(),
