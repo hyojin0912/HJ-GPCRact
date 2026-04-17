@@ -174,8 +174,11 @@ python scripts/inference.py \
     --protein_graph_dir data/protein_graphs/ \
     --ligand_graph_dir data/ligand_graphs/ \
     --model_path checkpoints/best_model.pt \
-    --output_dir results/
+    --output_dir results/ \
+    --apply_rescue
 ```
+The `--apply_rescue` flag adds a `Final_Pred` column to the output CSV with the paper-matched three-class label (0: non-binder, 1: antagonist, 2: agonist) produced by the confidence-based rescue rule (Supplementary Table S5). 
+Without this flag the script only saves the raw Stage-1 probability and the Stage-2 binary prediction.
 
 ### <a id="step-4-benchmarking"></a>Step 4: Benchmarking 📊
 
