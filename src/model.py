@@ -118,7 +118,8 @@ class GPCRact_Model(nn.Module):
 
         # 2. Propagation Stage
         with torch.no_grad():
-            gate_weight = torch.sigmoid(binding_logit).squeeze(-1)
+            # reshape(-1) is robust for B=1 (squeeze(-1) would 0-dim collapse an already-1D tensor).
+            gate_weight = torch.sigmoid(binding_logit).reshape(-1)
             node_gate_weight = gate_weight[protein_batch.batch].unsqueeze(-1)
         
         gated_ligand_signal = ligand_signal * node_gate_weight[bs_mask]
