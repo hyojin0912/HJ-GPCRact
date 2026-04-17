@@ -63,7 +63,10 @@ def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device,
                 else:
                     loss_act = loss_act.mean()
                     
-            loss = lambda_act * loss_act + (1 - lambda_act) * loss_bind
+            # Independent multi-task weighting (see Supplementary Table S5):
+            # lambda_act scales the Stage-2 activity loss.
+            # Stage-1 binding loss keeps unit weight; its class imbalance is handled via pos_weight in the BCE criterion (FN penalty = 1.5).
+            loss = lambda_act * loss_act + loss_bind
             loss = loss / accum_steps
             
         scaler.scale(loss).backward()
@@ -211,8 +214,12 @@ def main(args):
     def get_class_weights(labels):
         return class_weights_tensor[labels]
         
-    criterion_act = nn.CrossEntropyLoss(reduction='none')
-    criterion_bind = nn.BCEWithLogitsLoss()
+    criterion_act  = nn.CrossEntropyLoss(reduction='none')
+    # Binding false-negative penalty = 1.5 (Supplementary Table S5):
+    # pos_weight up-weights the positive class (binder=1) in BCE-with-logits.
+    criterion_bind = nn.BCEWithLogitsLoss(
+        pos_weight=torch.tensor([args.binding_fn_penalty], device=device)
+    )
     
     early_stopping = EarlyStopping(patience=15, verbose=True, path=os.path.join(args.save_dir, 'best_model.pt'), mode='max')
     
@@ -253,7 +260,10 @@ if __name__ == "__main__":
     parser.add_argument("--attn_heads", type=int, default=4)
     parser.add_argument("--elem_emb_dim", type=int, default=8)
     parser.add_argument("--accum_steps", type=int, default=32)
-    parser.add_argument("--lambda_act", type=float, default=1.0)
+    parser.add_argument("--lambda_act", type=float, default=1.0,
+                        help="Weight for Stage-2 activity loss (Table S5: 1.0).")
+    parser.add_argument("--binding_fn_penalty", type=float, default=1.5,
+                        help="BCE pos_weight for Stage-1 binding loss (Table S5: 1.5).")
     
     args = parser.parse_args()
     main(args)
