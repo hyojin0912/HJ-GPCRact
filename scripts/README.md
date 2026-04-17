@@ -19,6 +19,10 @@ To evaluate the model on the full test split after downloading the dataset:
 python scripts/inference.py \
     --data_dir data/splits \
     --query_csv scaffold_test.csv \
+    --apply_rescue True \
+    --rescue_lower 0.4 \
+    --rescue_upper 0.5 \
+    --rescue_conf 0.95 \
     --model_path checkpoints/best_model.pt \
     --protein_graph_dir data/protein_graphs \
     --ligand_graph_dir data/ligand_graphs \
