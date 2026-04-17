@@ -106,7 +106,7 @@ def main(args):
         input_stem = Path(args.query_csv).stem
         save_path = Path(args.output_dir) / f"predictions_{input_stem}.csv"
         results_df.to_csv(save_path, index=False)
-        logger.info(f"✅ Predictions successfully saved to {save_path}")
+        logger.info(f"Predictions successfully saved to {save_path}")
     except Exception as e:
         logger.error(f"Inference failed during evaluation: {e}")
 
