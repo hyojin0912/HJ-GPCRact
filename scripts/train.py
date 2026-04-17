@@ -37,9 +37,12 @@ def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device,
         protein_batch, ligand_batch = data
         protein_batch, ligand_batch = protein_batch.to(device), ligand_batch.to(device)
         
-        # Flatten label tensors from [B, 1] -> [B] so they align with logits.
-        binding_labels = protein_batch.binding_label.squeeze(-1)
-        activity_labels = protein_batch.activity_label.long().squeeze(-1)
+        # Flatten label tensors to 1D so they align with logits for any batch size.
+        # Note: .squeeze(-1) is unsafe because label tensors can already be [B]
+        # (from PyG cat-batching of [1] per-graph tensors); squeezing a [1] yields
+        # a 0-dim scalar and breaks downstream mask indexing on B=1 mini-batches.
+        binding_labels  = protein_batch.binding_label.reshape(-1)
+        activity_labels = protein_batch.activity_label.reshape(-1).long()
 
         # Device-agnostic autocast: mixed precision only on CUDA.
         with torch.autocast(device_type=device.type, enabled=is_cuda):
