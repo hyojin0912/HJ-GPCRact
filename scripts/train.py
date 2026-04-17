@@ -48,7 +48,7 @@ def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device,
         with torch.autocast(device_type=device.type, enabled=is_cuda):
             # Model returns (binding_logit, activity_type_logit). See src/model.py.
             binding_logit, logits_act = model(protein_batch, ligand_batch)
-            logits_bind = binding_logit.squeeze(-1)  # [B, 1] -> [B]
+            logits_bind = binding_logit.reshape(-1)  # [B, 1] -> [B], safe for B=1.
                 
             loss_act, loss_bind = torch.tensor(0.0, device=device), torch.tensor(0.0, device=device)
             
@@ -102,15 +102,15 @@ def evaluate(model, loader, device, return_df=False):
             
             with torch.autocast(device_type=device.type, enabled=is_cuda):
                 binding_logit, logits_act = model(protein_batch, ligand_batch)
-                logits_bind = binding_logit.squeeze(-1)  # [B, 1] -> [B]
+                logits_bind = binding_logit.reshape(-1)  # [B, 1] -> [B], safe for B=1.
             
             probs_act = torch.softmax(logits_act, dim=-1)
             preds_act = torch.argmax(probs_act, dim=-1)
             probs_bind = torch.sigmoid(logits_bind)
             
-            act_labels = protein_batch.activity_label.squeeze(-1).cpu().numpy()
-            bind_labels = protein_batch.binding_label.squeeze(-1).cpu().numpy()
-            preds_act_np = preds_act.cpu().numpy()
+            act_labels  = protein_batch.activity_label.reshape(-1).cpu().numpy()
+            bind_labels = protein_batch.binding_label.reshape(-1).cpu().numpy()
+            preds_act_np  = preds_act.cpu().numpy()
             probs_bind_np = probs_bind.cpu().numpy()
             
             ikeys = protein_batch.ikey
