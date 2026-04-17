@@ -173,8 +173,8 @@ def main(args):
     if args.gpcr_meta_dir is None:
         args.gpcr_meta_dir = args.protein_graph_dir
         
-    class_dict_path = Path(args.gpcr_meta_dir) / "class_to_id.json"
-    family_dict_path = Path(args.gpcr_meta_dir) / "family_to_id.json"
+    class_dict_path = Path(args.protein_graph_dir) / "class_to_id.json"
+    family_dict_path = Path(args.protein_graph_dir) / "family_to_id.json"
     
     with open(class_dict_path, "r") as f: num_classes = len(json.load(f))
     with open(family_dict_path, "r") as f: num_families = len(json.load(f))
