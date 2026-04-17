@@ -8,7 +8,6 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import balanced_accuracy_score
 
 # Add parent directory to path to import src
@@ -242,7 +241,6 @@ if __name__ == "__main__":
     parser.add_argument("--ligand_graph_dir", type=str, required=True)
     parser.add_argument("--save_dir", type=str, default="./checkpoints", help="Where to save model")
     parser.add_argument("--use_gpcr_cf_embed", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--gpcr_meta_dir", type=str, default=None, help="Directory containing class_to_id.json and family_to_id.json (default: protein_graph_dir)")
     
     # Hparams
     parser.add_argument("--seed", type=int, default=42)
