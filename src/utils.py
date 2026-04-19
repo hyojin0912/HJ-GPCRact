@@ -3,6 +3,7 @@ import random
 import numpy as np
 import torch
 
+
 def set_seed(seed: int, deterministic: bool = True) -> None:
     """Set global random seeds for reproducibility.
 
@@ -10,10 +11,10 @@ def set_seed(seed: int, deterministic: bool = True) -> None:
         seed: Integer seed value.
         deterministic: If True, forces deterministic CUDA ops and disables
             cuDNN auto-tuning. Slightly slower but fully reproducible.
-            Set to False only for production throughput benchmarking.
+            Set False only for production throughput benchmarking.
     """
     os.environ["PYTHONHASHSEED"] = str(seed)
-    # CUBLAS workspace config required for torch.use_deterministic_algorithms
+    # Required when torch.use_deterministic_algorithms is enabled.
     os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
 
     random.seed(seed)
@@ -25,25 +26,30 @@ def set_seed(seed: int, deterministic: bool = True) -> None:
         torch.cuda.manual_seed_all(seed)
 
     if deterministic:
-        torch.backends.cudnn.benchmark = False       # disable auto-tuner
-        torch.backends.cudnn.deterministic = True    # force deterministic kernels
-        # warn_only=True: logs warnings instead of raising errors for ops
-        # that lack a deterministic implementation (e.g., scatter on older GPUs).
+        torch.backends.cudnn.benchmark = False       # disable fastest-kernel auto-search
+        torch.backends.cudnn.deterministic = True    # force deterministic cuDNN kernels
+        # warn_only=True: log warnings instead of raising errors for ops
+        # that lack a deterministic CUDA kernel (e.g. scatter on older GPUs).
         torch.use_deterministic_algorithms(True, warn_only=True)
     else:
-        # Speed-optimised: non-deterministic but faster
+        # Speed-optimised mode: non-deterministic but faster.
         torch.backends.cudnn.benchmark = True
+
 
 def get_worker_init_fn(base_seed: int):
     """Return a DataLoader worker_init_fn that seeds each worker process.
 
-    Each worker receives a unique seed derived from base_seed and its worker_id,
-    preventing correlated augmentation/sampling across workers.
+    Each worker receives a unique but deterministic seed (base_seed + worker_id),
+    preventing correlated sampling across workers while keeping runs reproducible.
 
     Usage:
-        loader = DataLoader(...,
-                            worker_init_fn=get_worker_init_fn(args.seed),
-                            generator=torch.Generator().manual_seed(args.seed))
+        g = torch.Generator()
+        g.manual_seed(args.seed)
+        loader = DataLoader(
+            dataset,
+            worker_init_fn=get_worker_init_fn(args.seed),
+            generator=g,
+        )
     """
     def worker_init_fn(worker_id: int) -> None:
         worker_seed = base_seed + worker_id
@@ -53,9 +59,25 @@ def get_worker_init_fn(base_seed: int):
 
     return worker_init_fn
 
+
 class EarlyStopping:
-    """Early stops the training if validation score doesn't improve after a given patience."""
-    def __init__(self, patience=10, verbose=False, delta=0, path='checkpoint.pt', mode='min'):
+    """Early stops training if validation score does not improve after patience epochs.
+
+    Saves a full checkpoint including model, optimizer, scaler, epoch, args,
+    and RNG states so that training can be resumed exactly from the best epoch.
+    """
+
+    def __init__(self, patience: int = 10, verbose: bool = False,
+                 delta: float = 0.0, path: str = 'checkpoint.pt',
+                 mode: str = 'min'):
+        """
+        Args:
+            patience: Number of epochs with no improvement before stopping.
+            verbose: Print a message when validation score improves.
+            delta: Minimum change to qualify as an improvement.
+            path: Filepath to save the best checkpoint.
+            mode: 'min' to minimise (e.g. loss) or 'max' to maximise (e.g. BACC).
+        """
         self.patience = patience
         self.verbose = verbose
         self.counter = 0
@@ -66,18 +88,26 @@ class EarlyStopping:
         self.path = path
         self.mode = mode
 
-    def __call__(self, score, model):
-        if self.mode == 'min':
-            current_score = -score
-            best_score_comp = -self.val_score_best
-        else: 
-            current_score = score
-            best_score_comp = self.val_score_best
+    def __call__(self, score: float, model: torch.nn.Module,
+                 optimizer=None, scaler=None,
+                 epoch: int = None, args=None) -> None:
+        """Evaluate score and save checkpoint if improved.
+
+        Args:
+            score: Current validation metric value.
+            model: Model whose state_dict will be saved.
+            optimizer: Optional optimizer for resumable checkpoints.
+            scaler: Optional AMP GradScaler for resumable checkpoints.
+            epoch: Current epoch number (stored in checkpoint).
+            args: Parsed argparse namespace (stored in checkpoint).
+        """
+        current_score = score if self.mode == 'max' else -score
+        best_comp = self.val_score_best if self.mode == 'max' else -self.val_score_best
 
         if self.best_score is None:
             self.best_score = current_score
-            self.save_checkpoint(score, model)
-        elif current_score < best_score_comp + self.delta:
+            self._save_checkpoint(score, model, optimizer, scaler, epoch, args)
+        elif current_score < best_comp + self.delta:
             self.counter += 1
             if self.verbose:
                 print(f'EarlyStopping counter: {self.counter} out of {self.patience}')
@@ -85,11 +115,41 @@ class EarlyStopping:
                 self.early_stop = True
         else:
             self.best_score = current_score
-            self.save_checkpoint(score, model)
+            self._save_checkpoint(score, model, optimizer, scaler, epoch, args)
             self.counter = 0
 
-    def save_checkpoint(self, score, model):
+    def _save_checkpoint(self, score: float, model: torch.nn.Module,
+                         optimizer=None, scaler=None,
+                         epoch: int = None, args=None) -> None:
+        """Save a full training checkpoint to self.path."""
         if self.verbose:
-            print(f'Validation score improved ({self.val_score_best:.6f} --> {score:.6f}). Saving model...')
-        torch.save(model.state_dict(), self.path)
+            print(
+                f'Validation score improved '
+                f'({self.val_score_best:.6f} --> {score:.6f}). Saving model...'
+            )
+
+        checkpoint = {
+            "model_state_dict": model.state_dict(),
+            "val_score": score,
+            # RNG states: allows exact bit-for-bit resume from this epoch.
+            "rng_states": {
+                "python": random.getstate(),
+                "numpy": np.random.get_state(),
+                "torch": torch.get_rng_state(),
+                "cuda": (
+                    torch.cuda.get_rng_state_all()
+                    if torch.cuda.is_available() else None
+                ),
+            },
+        }
+        if optimizer is not None:
+            checkpoint["optimizer_state_dict"] = optimizer.state_dict()
+        if scaler is not None:
+            checkpoint["scaler_state_dict"] = scaler.state_dict()
+        if epoch is not None:
+            checkpoint["epoch"] = epoch
+        if args is not None:
+            checkpoint["args"] = vars(args)
+
+        torch.save(checkpoint, self.path)
         self.val_score_best = score
