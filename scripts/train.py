@@ -15,7 +15,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.model import GPCRact_Model
 from src.dataset import GraphDataset, collate_fn, get_valid_indices
-from src.utils import set_seed, EarlyStopping
+from src.utils import set_seed, EarlyStopping, get_worker_init_fn
 
 # Tqdm needs to be imported here to work in script
 from tqdm import tqdm
@@ -167,9 +167,11 @@ def main(args):
     
     train_ds = GraphDataset(root=None, df=train_df, protein_graph_dir=args.protein_graph_dir, ligand_graph_dir=args.ligand_graph_dir)
     val_ds = GraphDataset(root=None, df=val_df, protein_graph_dir=args.protein_graph_dir, ligand_graph_dir=args.ligand_graph_dir)
-    
-    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, collate_fn=collate_fn, num_workers=4, pin_memory=True)
-    val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, collate_fn=collate_fn, num_workers=4, pin_memory=True)
+
+    g = torch.Generator()
+    g.manual_seed(args.seed)
+    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, collate_fn=collate_fn, num_workers=4, pin_memory=(device.type == "cuda"), worker_init_fn=get_worker_init_fn(args.seed), generator=g, persistent_workers=True)
+    val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, collate_fn=collate_fn, num_workers=4, pin_memory=(device.type == "cuda"), worker_init_fn=get_worker_init_fn(args.seed), generator=g, persistent_workers=True)
     
     print(f"Train samples: {len(train_ds)}, Val samples: {len(val_ds)}")
     if len(train_ds) == 0 or len(val_ds) == 0:
