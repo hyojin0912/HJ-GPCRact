@@ -1,5 +1,5 @@
 # --- Experiment Setup ---
-SEED: 0
+SEED: 42
 DEVICE: "cuda"  # "cuda" if torch.cuda.is_available() else "cpu"
 PROTEIN_GRAPH_TYPE: "ca_furthest_enhanced"
 EPOCHS: 100 # Max epochs, will be stopped by EarlyStopping
