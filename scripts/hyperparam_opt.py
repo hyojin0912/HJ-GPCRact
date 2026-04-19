@@ -20,7 +20,8 @@ def run_trial():
     run = wandb.init()
     cfg = wandb.config
     
-    set_seed(42)
+    SWEEP_SEED = 42
+    set_seed(SWEEP_SEED)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     # NOTE: You must adjust these paths to match your local environment for reproduction
