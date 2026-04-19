@@ -16,17 +16,15 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.model import GPCRact_Model
 from src.dataset import GraphDataset, collate_fn, get_valid_indices
 from src.utils import set_seed, EarlyStopping, get_worker_init_fn
-
-# Tqdm needs to be imported here to work in script
 from tqdm import tqdm
+
+# Device-agnostic GradScaler: only enable AMP scaling on CUDA.
+is_cuda = device.type == 'cuda'
+scaler = torch.amp.GradScaler(device.type, enabled=is_cuda)
 
 def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device, accum_steps, lambda_act, w_fn):
     model.train()
     total_loss, total_act_loss, total_bind_loss = 0, 0, 0
-    
-    # Device-agnostic GradScaler: only enable AMP scaling on CUDA.
-    is_cuda = device.type == 'cuda'
-    scaler = torch.amp.GradScaler(device.type, enabled=is_cuda)
     optimizer.zero_grad()
     
     valid_batches = 0
