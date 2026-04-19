@@ -18,12 +18,10 @@ from src.dataset import GraphDataset, collate_fn, get_valid_indices
 from src.utils import set_seed, EarlyStopping, get_worker_init_fn
 from tqdm import tqdm
 
-# Device-agnostic GradScaler: only enable AMP scaling on CUDA.
-is_cuda = device.type == 'cuda'
 scaler = torch.amp.GradScaler(device.type, enabled=is_cuda)
-
-def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, device, accum_steps, lambda_act, w_fn):
+def train_epoch(model, loader, criterion_act, criterion_bind, optimizer, scaler, device, accum_steps, lambda_act, w_fn):
     model.train()
+    is_cuda = device.type == "cuda"
     total_loss, total_act_loss, total_bind_loss = 0, 0, 0
     optimizer.zero_grad()
     
@@ -145,7 +143,9 @@ def main(args):
     set_seed(args.seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device.type.upper()}")
-    
+    is_cuda = device.type == "cuda"
+    scaler = torch.amp.GradScaler(device.type, enabled=is_cuda)
+        
     Path(args.save_dir).mkdir(parents=True, exist_ok=True)
     
     # 1. Load Data. Custom CSV paths override the data_dir defaults.
@@ -166,10 +166,12 @@ def main(args):
     train_ds = GraphDataset(root=None, df=train_df, protein_graph_dir=args.protein_graph_dir, ligand_graph_dir=args.ligand_graph_dir)
     val_ds = GraphDataset(root=None, df=val_df, protein_graph_dir=args.protein_graph_dir, ligand_graph_dir=args.ligand_graph_dir)
 
-    g = torch.Generator()
-    g.manual_seed(args.seed)
-    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, collate_fn=collate_fn, num_workers=4, pin_memory=(device.type == "cuda"), worker_init_fn=get_worker_init_fn(args.seed), generator=g, persistent_workers=True)
-    val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, collate_fn=collate_fn, num_workers=4, pin_memory=(device.type == "cuda"), worker_init_fn=get_worker_init_fn(args.seed), generator=g, persistent_workers=True)
+    train_g = torch.Generator()
+    train_g.manual_seed(args.seed)
+    val_g = torch.Generator()
+    val_g.manual_seed(args.seed)
+    train_loader = DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, collate_fn=collate_fn, num_workers=4, pin_memory=is_cuda, worker_init_fn=get_worker_init_fn(args.seed), generator=train_g, persistent_workers=True)
+    val_loader = DataLoader(val_ds, batch_size=args.batch_size, shuffle=False, collate_fn=collate_fn, num_workers=4, pin_memory=is_cuda, worker_init_fn=get_worker_init_fn(args.seed), generator=val_g, persistent_workers=True)
     
     print(f"Train samples: {len(train_ds)}, Val samples: {len(val_ds)}")
     if len(train_ds) == 0 or len(val_ds) == 0:
@@ -238,7 +240,7 @@ def main(args):
     # 4. Training Loop
     print("Starting training...")
     for epoch in range(1, args.epochs + 1):
-        t_loss, a_loss, b_loss = train_epoch(model, train_loader, criterion_act, criterion_bind, optimizer, device, args.accum_steps, args.lambda_act, get_class_weights)
+        t_loss, a_loss, b_loss = train_epoch(model, train_loader, criterion_act, criterion_bind, optimizer, scaler, device, args.accum_steps, args.lambda_act, get_class_weights)
         val_bacc, val_bind_bacc = evaluate(model, val_loader, device)
         
         print(f"Epoch {epoch:03d} | Train Loss: {t_loss:.4f} | Val Act BACC: {val_bacc:.4f} | Val Bind BACC: {val_bind_bacc:.4f}")
