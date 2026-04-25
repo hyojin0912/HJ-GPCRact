@@ -35,7 +35,10 @@ P(agonist)    = σ(binding_logit) × softmax(activity_logit)[1]
 
 ## 🔧 Design Note — Binding-Gated Allosteric Propagation
 
-The Stage-1 binding probability is used to gate ligand signal injection into the local EGNN propagation block, but the gate is **detached** (`torch.no_grad()`) before use. This stop-gradient keeps the two stages cleanly separable: Stage 1 is learned exclusively from binding supervision, while Stage 2 conditions on Stage 1's output without perturbing it. Sharing a single interaction encoder between the two heads is what makes this separation meaningful — both stages consume a shared geometric representation, but their supervision signals never cross.
+The Stage-1 binding logit is converted to a gate weight via sigmoid and **detached** (`torch.no_grad()`) before being used
+to scale the ligand-conditioned protein signal injected at each EGNN layer. This stop-gradient ensures Stage 2's activity loss cannot backpropagate through the gate to distort the binding probability calibration. 
+Both stages share the same interaction encoder and are jointly optimized via a combined loss. The architectural separation is narrower but precise: Stage 2 cannot influence *how binding probability is estimated*, because the gate is the only pathway from Stage 1's output into Stage 2's signal, and that pathway is explicitly cut.
+
 
 ## 📋 Table of Contents
 - [Repository Structure](#repository-structure)
