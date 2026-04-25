@@ -185,7 +185,8 @@ Without this flag the script only saves the raw Stage-1 probability and the Stag
 
 ### <a id="step-4-benchmarking"></a>Step 4: Benchmarking
 
-We provide the full source code and execution scripts for the baseline models compared in the manuscript (**DeepREAL**, **AiGPro**, **3D-GNN**). All baselines were retrained on the identical GPCRact dataset.
+We provide the full source code and execution scripts for the baseline models compared in the manuscript (**[DeepREAL](https://academic.oup.com/bioinformatics/article/38/9/2561/6547052)**, **[AiGPro](https://link.springer.com/article/10.1186/s13321-024-00945-7)**, **3D-GNN**). All baselines were retrained on the identical GPCRact dataset.
+
 * **DeepREAL**: See `benchmarks/DeepREAL/`
 
 * **AiGPro**: See `benchmarks/AiGPro/` (Docker support included)
