@@ -49,6 +49,7 @@ Both stages share the same interaction encoder and are jointly optimized via a c
   - [Step 3: Inference](#step-3-inference)
   - [Step 4: Benchmarking](#step-4-benchmarking)
   - [Step 5: Analysis & Figure Generation](#step-5-analysis)
+- [License](#license)
 - [Citation](#citation)
 - [Contact](#contact)
 
