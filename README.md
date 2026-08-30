@@ -1,5 +1,5 @@
 # GPCRact
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: PolyForm Noncommercial 1.0.0](https://img.shields.io/badge/License-PolyForm--NC--1.0.0-orange.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Dataset](https://img.shields.io/badge/Dataset-GPCRactDB-green.svg)](data/)
 [![Journal](https://img.shields.io/badge/Journal-Briefings%20in%20Bioinformatics-blue)](https://academic.oup.com/bib/article/27/1/bbaf719/8426121)
