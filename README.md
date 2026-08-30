@@ -209,6 +209,20 @@ To reproduce the statistical analyses, mechanistic interpretations, and main fig
 _Supplementary Validations_: PRS analysis, Sensitivity analysis, and Mutation studies are also included.
 
 
+## <a id="license"></a>📜 License
+This repository is released under the **[PolyForm Noncommercial License 1.0.0](LICENSE)**.
+Use for academic research, education, and other noncommercial purposes is
+freely permitted, including reproduction of the results reported in the
+associated manuscript.
+
+Certain methods implemented in this repository are the subject of a pending
+Korean patent application (KAIST, Application No. 10-2026-0028634, filed
+12 February 2026). No rights are granted under this license for commercial
+use of the software or the underlying methods. Organizations interested in
+commercial or industry-research use should contact KAIST's Technology
+Licensing Office to discuss a separate license agreement.
+
+
 ## <a id="citation"></a>🎓 Citation
 If you use GPCRact in your research, please cite the following paper:
 ```bibtex
