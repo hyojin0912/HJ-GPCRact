@@ -86,3 +86,6 @@ Before running any benchmarks, please ensure that:
 2. Docker is installed (for AiGPro).
 3. The Preprocessing Pipeline has been completed, and the processed datasets (`train.csv`, `test.csv`, etc.) are located in the `data/` directory.
 
+
+## License
+The `DeepREAL/` and `AiGPro/` directories contain modified third-party code and remain under their original licences: [CC BY-NC 4.0](DeepREAL/LICENSE) and [AGPL-3.0](AiGPro/LICENSE), respectively. The `3D-GNN/` baseline is part of GPCRact and is licensed under MIT. Modifications are described in the repository [NOTICE](../NOTICE).

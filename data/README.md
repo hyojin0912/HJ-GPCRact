@@ -48,3 +48,6 @@ Contains the final 3D atomistic graph objects ready to be ingested by the PyTorc
 
 ### 5. `sample/` (Quickstart)
 A minimal subset of `.pt` files and a toy `.csv` manifest designed strictly to verify that the environment and `inference.py` scripts are working correctly.
+
+## 📜 License
+The contents of this directory and the graph archives hosted on [Hugging Face](https://huggingface.co/datasets/hyojin0912/GPCRact) are licensed under [CC BY-NC-SA 4.0](LICENSE). The data are derived from public resources including PubChem BioAssay, ChEMBL (CC BY-SA 3.0), BindingDB, DrugBank (CC BY-NC 4.0) and the RCSB PDB; please also respect the terms of these upstream resources.
