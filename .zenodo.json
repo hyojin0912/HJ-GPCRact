@@ -1,15 +1,37 @@
 {
   "title": "GPCRact: hierarchical prediction of ligand-induced GPCR activity (software, weights and data)",
   "upload_type": "software",
-  "description": "<p>Source code, trained model weights and data for GPCRact, a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling (Son and Yi, Briefings in Bioinformatics 2026, doi:10.1093/bib/bbaf719).</p><p>Licences: source code MIT; trained weights (checkpoints/) CC BY-NC 4.0; data (data/) CC BY-NC-SA 4.0; modified third-party baselines retain their original licences (benchmarks/DeepREAL CC BY-NC 4.0, benchmarks/AiGPro AGPL-3.0). See NOTICE in the archive.</p>",
+  "description": "<p>Source code, trained model weights and data for GPCRact, a hierarchical framework for predicting ligand-induced GPCR activity via allosteric communication modeling (Son and Yi, Briefings in Bioinformatics 2026, doi:10.1093/bib/bbaf719).</p><p>Licences: code MIT; model weights and data CC BY-NC-SA 4.0 (LICENSE-DATA).</p>",
   "creators": [
-    {"name": "Son, Hyojin", "affiliation": "Korea Advanced Institute of Science and Technology (KAIST)"},
-    {"name": "Yi, Gwan-Su", "affiliation": "Korea Advanced Institute of Science and Technology (KAIST)"}
+    {
+      "name": "Son, Hyojin",
+      "affiliation": "Korea Advanced Institute of Science and Technology (KAIST)"
+    },
+    {
+      "name": "Yi, Gwan-Su",
+      "affiliation": "Korea Advanced Institute of Science and Technology (KAIST)"
+    }
   ],
   "license": "MIT",
-  "keywords": ["GPCR", "functional selectivity", "graph neural network", "drug discovery", "cheminformatics"],
+  "keywords": [
+    "GPCR",
+    "functional selectivity",
+    "graph neural network",
+    "drug discovery",
+    "cheminformatics"
+  ],
   "related_identifiers": [
-    {"identifier": "10.1093/bib/bbaf719", "relation": "isSupplementTo", "scheme": "doi", "resource_type": "publication-article"},
-    {"identifier": "https://huggingface.co/datasets/hyojin0912/GPCRact", "relation": "isSupplementedBy", "scheme": "url", "resource_type": "dataset"}
+    {
+      "identifier": "10.1093/bib/bbaf719",
+      "relation": "isSupplementTo",
+      "scheme": "doi",
+      "resource_type": "publication-article"
+    },
+    {
+      "identifier": "https://huggingface.co/datasets/hyojin0912/GPCRact",
+      "relation": "isSupplementedBy",
+      "scheme": "url",
+      "resource_type": "dataset"
+    }
   ]
 }

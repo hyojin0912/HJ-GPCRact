@@ -1,7 +1,6 @@
 # GPCRact
 [![Code License: MIT](https://img.shields.io/badge/Code%20License-MIT-yellow.svg)](LICENSE)
-[![Weights: CC BY-NC 4.0](https://img.shields.io/badge/Weights-CC%20BY--NC%204.0-lightgrey.svg)](checkpoints/LICENSE)
-[![Data: CC BY-NC-SA 4.0](https://img.shields.io/badge/Data-CC%20BY--NC--SA%204.0-lightgrey.svg)](data/LICENSE)
+[![Data & Weights: CC BY-NC-SA 4.0](https://img.shields.io/badge/Data%20%26%20Weights-CC%20BY--NC--SA%204.0-lightgrey.svg)](LICENSE-DATA)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Dataset](https://img.shields.io/badge/Dataset-GPCRactDB-green.svg)](data/)
 [![Journal](https://img.shields.io/badge/Journal-Briefings%20in%20Bioinformatics-blue)](https://academic.oup.com/bib/article/27/1/bbaf719/8426121)
@@ -213,21 +212,11 @@ _Supplementary Validations_: PRS analysis, Sensitivity analysis, and Mutation st
 
 
 ## <a id="license"></a>📜 License
-This repository contains material under several licences. See [NOTICE](NOTICE) for the full statement.
+- Code: MIT — see [`LICENSE`](LICENSE).
+- Model weights (`checkpoints/`) and data (`data/` and the [Hugging Face dataset](https://huggingface.co/datasets/hyojin0912/GPCRact)): CC BY-NC-SA 4.0 — see [`LICENSE-DATA`](LICENSE-DATA).
+- `benchmarks/DeepREAL/` and `benchmarks/AiGPro/` contain modified third-party code under their original licences (CC BY-NC 4.0 and AGPL-3.0).
 
-| Component | Path | Licence |
-|---|---|---|
-| GPCRact source code, scripts, configs, notebooks | everything not listed below | [MIT](LICENSE) |
-| Trained model weights | `checkpoints/` | [CC BY-NC 4.0](checkpoints/LICENSE) |
-| Datasets, resources and graphs (including the [Hugging Face dataset](https://huggingface.co/datasets/hyojin0912/GPCRact)) | `data/` | [CC BY-NC-SA 4.0](data/LICENSE) |
-| DeepREAL baseline (third-party, modified) | `benchmarks/DeepREAL/` | [CC BY-NC 4.0](benchmarks/DeepREAL/LICENSE) |
-| AiGPro baseline (third-party, modified) | `benchmarks/AiGPro/` | [AGPL-3.0](benchmarks/AiGPro/LICENSE) |
-
-All components can be downloaded without registration. The trained weights can be regenerated from the MIT-licensed code and the released data with `scripts/train.py`.
-
-Certain methods implemented in this repository are the subject of a pending Korean patent application (KAIST, Application No. 10-2026-0028634). This notice is for information only and does not modify the licences above; see [NOTICE](NOTICE).
-
-Versions up to and including commit `4293b62` (30 August 2026) were distributed under the PolyForm Noncommercial License 1.0.0.
+Versions up to commit `4293b62` were distributed under the PolyForm Noncommercial License 1.0.0.
 
 
 ## <a id="citation"></a>🎓 Citation

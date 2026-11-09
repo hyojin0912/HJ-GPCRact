@@ -88,4 +88,4 @@ Before running any benchmarks, please ensure that:
 
 
 ## License
-The `DeepREAL/` and `AiGPro/` directories contain modified third-party code and remain under their original licences: [CC BY-NC 4.0](DeepREAL/LICENSE) and [AGPL-3.0](AiGPro/LICENSE), respectively. The `3D-GNN/` baseline is part of GPCRact and is licensed under MIT. Modifications are described in the repository [NOTICE](../NOTICE).
+`DeepREAL/` and `AiGPro/` contain third-party code, modified in November 2025 to train and evaluate on the GPCRact dataset and splits (AiGPro: three-class classification head). They remain under their original licences: [CC BY-NC 4.0](DeepREAL/LICENSE) and [AGPL-3.0](AiGPro/LICENSE). `3D-GNN/` is licensed under MIT with the rest of GPCRact.
